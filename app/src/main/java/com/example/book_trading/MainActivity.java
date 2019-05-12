@@ -11,37 +11,51 @@ import android.widget.Button;
  * und Start der App
  */
 
-public class MainActivity extends AppCompatActivity {
-    private Button loginBtn;
-    private Button registrierenBtn;
+public class MainActivity extends AppCompatActivity implements LoginFragment.OnLoginFormActivityListener{
+
+    public static PrefConfig prefConfig;
+    public static ApiInterface apiInterface;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        this.loginBtn = (Button) findViewById(R.id.login);
-        this.registrierenBtn = (Button) findViewById(R.id.registrieren);
-        registrierenBtn.setEnabled(false);
-        login();
+
+        prefConfig = new PrefConfig(this);
+        apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
+
+
+        if(findViewById(R.id.fragment_container)!=null){    //wenn User bereits eingelogt dann zeige Startseite ansonsten erst anmelden
+
+            if(savedInstanceState!=null){
+
+                return;
+            }
+
+            //Zeigt immer das LogIn im Hauptfenster an
+            getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, new LoginFragment()).commit();
+
+            if(prefConfig.readLoginStatus()){   //wenn user ist eingelogt
+
+                Intent myIntent = new Intent(MainActivity.this, ProfilActivity.class);
+                MainActivity.this.startActivity(myIntent);
+            }
+        }
     }
 
-    public void login(){
-        loginBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent profil = new Intent(MainActivity.this, ProfilActivity.class);
-                startActivity(profil);
-            }
-        });
+    @Override
+    public void performRegister() { //wenn User auf TextView klickt zum Registrieren geht die neue Activity auf
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                new RegistrationFragment()).addToBackStack(null).commit();
     }
 
-    public void registrieren(){
-        registrierenBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+    @Override
+    public void performLogin(String name) {
 
-            }
-        });
+        prefConfig.writeName(name);
+
+        Intent myIntent = new Intent(MainActivity.this, ProfilActivity.class);
+        MainActivity.this.startActivity(myIntent);
     }
 
 }
