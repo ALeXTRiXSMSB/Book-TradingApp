@@ -7,12 +7,18 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import java.security.MessageDigest;
+
+import javax.crypto.Cipher;
+import javax.crypto.spec.SecretKeySpec;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -28,6 +34,9 @@ public class LoginFragment extends Fragment {
     private EditText UserName, Userpassword;
     private Button LoginBn;
     OnLoginFormActivityListener loginFormActivityListener;
+
+    private String outputString;
+
 
     public interface OnLoginFormActivityListener{
 
@@ -51,9 +60,17 @@ public class LoginFragment extends Fragment {
         Userpassword = view.findViewById(R.id.user_password);
         LoginBn = view.findViewById(R.id.login_bn);
 
+
+
         LoginBn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                try {
+                    outputString = HashHelper.encrypt(Userpassword.getText().toString()); //verschlüsseln des Textes
+                    Userpassword.setText(outputString);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 performLogin();
             }
         });
@@ -105,4 +122,5 @@ public class LoginFragment extends Fragment {
         Userpassword.setText("");
 
     }
+
 }

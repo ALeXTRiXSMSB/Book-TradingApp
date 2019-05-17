@@ -5,11 +5,18 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
+
+import java.security.MessageDigest;
+
+import javax.crypto.Cipher;
+import javax.crypto.spec.SecretKeySpec;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -23,6 +30,10 @@ public class RegistrationFragment extends Fragment {    //Registrierung
 
     private EditText Name, UserName, UserPassword;
     private Button BnRegister;
+    private String AES = "AES";
+    private String outputString;
+
+
 
 
     public RegistrationFragment() {
@@ -40,19 +51,39 @@ public class RegistrationFragment extends Fragment {    //Registrierung
         UserPassword = view.findViewById(R.id.txt_password);
         BnRegister = view.findViewById(R.id.bn_register);
 
+
+
         BnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                    performRegistration();
+
+                performRegistration();
             }
         });
+
         return view;
+
+
+
+
     }
 
     public void performRegistration(){
         String name = Name.getText().toString();
-        String username = UserName.getText().toString();
+        final String username = UserName.getText().toString();
         String password = UserPassword.getText().toString();
+
+        try {
+            password = HashHelper.encrypt(password); //verschlüsseln des Textes
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+        if (name.length()==0 || username.length()==0 || password.length()==0){
+            MainActivity.prefConfig.displayToast("Leereingaben sind ungültig!");
+            return;
+        }
 
         Call<User> call = MainActivity.apiInterface.performRegistration(name,username,password);// alles ab hier nach unten
         call.enqueue(new Callback<User>() {
@@ -62,6 +93,11 @@ public class RegistrationFragment extends Fragment {    //Registrierung
 
                     MainActivity.prefConfig.displayToast("Registration success...");    //Registrierung hat funktioniert
 
+                    //springe zurück
+
+                    closefragment();
+
+
                  }else if(response.body().getResponse().equals("exist")){
 
                      MainActivity.prefConfig.displayToast("User already exist..."); //Es gibt bereits einen User mit gleichem Username
@@ -70,7 +106,12 @@ public class RegistrationFragment extends Fragment {    //Registrierung
 
                      MainActivity.prefConfig.displayToast("Something went wrong...");   //Es ist ein fehler aufgetreten, vorgang wiederholen
                  }
+
+
+
             }
+
+
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
@@ -83,5 +124,13 @@ public class RegistrationFragment extends Fragment {    //Registrierung
 
     }
 
-
+    private void closefragment(){
+        getFragmentManager().popBackStack();
     }
+
+
+
+
+
+
+}
