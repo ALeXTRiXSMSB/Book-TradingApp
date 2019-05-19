@@ -29,7 +29,7 @@ public class ProfilActivity extends AppCompatActivity {
         this.logoutBtn = (Button) findViewById(R.id.bn_logout);
 
         TextView user = (TextView) findViewById(R.id.txt_name_info);
-        user.setText("Hello " + MainActivity.prefConfig.readName());
+        user.setText("Hello " + LoginActivity.prefConfig.readName());
 
         logout();
         nachrichten();
@@ -40,8 +40,8 @@ public class ProfilActivity extends AppCompatActivity {
         logoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MainActivity.prefConfig.writeLoginStatus(false);
-                MainActivity.prefConfig.writeName("User");
+                LoginActivity.prefConfig.writeLoginStatus(false);
+                LoginActivity.prefConfig.writeName("User");
                 finish();
             }
         });
