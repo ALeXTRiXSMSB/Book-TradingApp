@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="match_parent"
     android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="com.example.book_trading.MainActivity"
     android:background="@color/graylight">
 
     <RelativeLayout
@@ -35,11 +33,7 @@
                 android:textStyle="bold"
                 android:text="Hello User"
                 android:textColor="@android:color/black"
-                android:textAlignment="center"
-                />
-
-
-
+                android:textAlignment="center" />
         </LinearLayout>
 
         <androidx.cardview.widget.CardView
@@ -123,17 +117,15 @@
                         android:textStyle="bold" />
                 </LinearLayout>
             </LinearLayout>
-
         </androidx.cardview.widget.CardView>
     </RelativeLayout>
-
 
     <LinearLayout
         android:layout_width="360dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_gravity="center"
-        android:layout_marginTop="45dp">
+        android:layout_marginTop="20sp">
 
         <LinearLayout
             android:orientation="horizontal"
@@ -196,39 +188,21 @@
                 android:paddingLeft="20dp"
                 android:text="Physik- und Geschichtsbücher"/>
         </LinearLayout>
-
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="30dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-        <Button
-            android:id="@+id/nachrichtenBtn"
-            android:layout_width="wrap_content"
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottom_navigation"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Nachrichten"
-            android:textColor="@android:color/black" />
-
-        <Button
-            android:layout_marginLeft="15dp"
-            android:id="@+id/forumBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Forum"
-            android:textColor="@android:color/black" />
-
-        <Button
-            android:layout_marginLeft="15dp"
-            android:id="@+id/bn_logout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="LogOut" />
-
-    </LinearLayout>
-
-
-
+            android:layout_gravity="bottom"
+            android:background="@android:color/holo_blue_bright"
+            app:itemIconTint="@android:color/holo_orange_light"
+            app:itemTextColor="@android:color/black"
+            app:menu="@menu/navigation" />
+    </FrameLayout>
 </LinearLayout>

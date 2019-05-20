@@ -7,8 +7,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 /**
  * Activity-Klasse für das Profil anderer Personen
@@ -21,7 +22,6 @@ public class ProfilFremdActivity extends AppCompatActivity {
     private Button positivBtn;
     private Button negativBtn;
     private Button nachrichtBtn;
-    private Button forumBtn;
     private int bewertungCounter;
     private int positivAnzahl;
     private int negativAnzahl;
@@ -36,11 +36,30 @@ public class ProfilFremdActivity extends AppCompatActivity {
         this.positivBtn = (Button)findViewById(R.id.positivBtn);
         this.negativBtn = (Button)findViewById(R.id.negativBtn);
         this.nachrichtBtn = (Button)findViewById(R.id.nachrichtBtn);
-        this.forumBtn = (Button)findViewById(R.id.forumBtn);
+        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.bottom_navigation);
+        navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.navigateNachrichten:
+                        Intent a = new Intent(ProfilFremdActivity.this, NachrichtenActivity.class);
+                        startActivity(a);
+                        break;
+                    case R.id.navigateProfil:
+                        Intent b = new Intent(ProfilFremdActivity.this, ProfilActivity.class);
+                        startActivity(b);
+                        break;
+                    case R.id.navigateForum:
+                        Intent c = new Intent(ProfilFremdActivity.this, ForumActivity.class);
+                        startActivity(c);
+                        break;
+                }
+                return false;
+            }
+        });
         positivBtn();
         negativBtn();
         nachrichtBtn();
-        forumBtn();
     }
 
     @Override
@@ -52,9 +71,9 @@ public class ProfilFremdActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.profil:
-                Intent profil = new Intent(this, ProfilActivity.class);
-                startActivity(profil);
+            case R.id.logout:
+                Intent logout = new Intent(this, LoginActivity.class);
+                startActivity(logout);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -87,16 +106,6 @@ public class ProfilFremdActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent chat = new Intent(ProfilFremdActivity.this, ChatActivity.class);
                 startActivity(chat);
-            }
-        });
-    }
-
-    public void forumBtn(){
-        forumBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent forum = new Intent(ProfilFremdActivity.this, ForumActivity.class);
-                startActivity(forum);
             }
         });
     }

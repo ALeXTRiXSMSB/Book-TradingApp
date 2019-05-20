@@ -19,11 +19,9 @@
         <activity android:name=".LoginActivity" >
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />
-
             <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter>
         </activity>
-
         <activity
             android:name=".ProfilActivity"
             android:label="Profil" />
@@ -45,9 +43,6 @@
         <activity
             android:name=".ChatActivity"
             android:label="Chat" />
-        <activity android:name=".MainActivity">
-
-        </activity>
     </application>
 
 </manifest>

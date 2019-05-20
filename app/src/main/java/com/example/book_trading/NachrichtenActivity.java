@@ -8,7 +8,9 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 /**
  * Activity-Klasse für die erhaltenden Nachrichten
@@ -23,6 +25,29 @@ public class NachrichtenActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.nachrichten_layout);
         this.lv = (ListView)findViewById(R.id.listView);
+
+        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.bottom_navigation);
+        navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.navigateNachrichten:
+                        // Intent a = new Intent(NachrichtenActivity.this, NachrichtenActivity.class);
+                        // startActivity(a);
+                        break;
+                    case R.id.navigateProfil:
+                        Intent b = new Intent(NachrichtenActivity.this, ProfilActivity.class);
+                        startActivity(b);
+                        break;
+                    case R.id.navigateForum:
+                        Intent c = new Intent(NachrichtenActivity.this, ForumActivity.class);
+                        startActivity(c);
+                        break;
+                }
+                return false;
+            }
+        });
+
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1);
         lv.setAdapter(adapter);
         test();
@@ -44,9 +69,9 @@ public class NachrichtenActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.profil:
-                Intent profil = new Intent(this, ProfilActivity.class);
-                startActivity(profil);
+            case R.id.logout:
+                Intent logout = new Intent(this, LoginActivity.class);
+                startActivity(logout);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

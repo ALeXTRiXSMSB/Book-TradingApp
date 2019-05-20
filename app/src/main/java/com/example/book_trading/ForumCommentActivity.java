@@ -10,7 +10,9 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 /**
  * Activity-Klasse für Kommentierung im Forum
@@ -29,6 +31,29 @@ public class ForumCommentActivity extends AppCompatActivity {
         this.lv = (ListView)findViewById(R.id.listView);
         this.textEingabe = (EditText)findViewById(R.id.textEingabe);
         this.sendenBtn = (Button)findViewById(R.id.eingabeSenden);
+
+        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.bottom_navigation);
+        navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.navigateNachrichten:
+                        Intent a = new Intent(ForumCommentActivity.this, NachrichtenActivity.class);
+                        startActivity(a);
+                        break;
+                    case R.id.navigateProfil:
+                        Intent b = new Intent(ForumCommentActivity.this, ProfilActivity.class);
+                        startActivity(b);
+                        break;
+                    case R.id.navigateForum:
+                        Intent c = new Intent(ForumCommentActivity.this, ForumActivity.class);
+                        startActivity(c);
+                        break;
+                }
+                return false;
+            }
+        });
+
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1);
         lv.setAdapter(adapter);
         test();
@@ -60,9 +85,9 @@ public class ForumCommentActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.profil:
-                Intent profil = new Intent(this, ProfilActivity.class);
-                startActivity(profil);
+            case R.id.logout:
+                Intent logout = new Intent(this, LoginActivity.class);
+                startActivity(logout);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -71,10 +96,8 @@ public class ForumCommentActivity extends AppCompatActivity {
 
     public void test(){
         adapter.add("Test-Profil1");
-        adapter.add("Test-Profil3");
+        adapter.add("Test-Profil2");
         adapter.add("Test-Profil3");
     }
-
-
 
 }

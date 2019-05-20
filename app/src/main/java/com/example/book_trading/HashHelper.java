@@ -1,14 +1,11 @@
 package com.example.book_trading;
 
 import android.util.Base64;
-
 import java.security.MessageDigest;
-
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
 
 public class HashHelper {
-
     private static String AES = "AES";
 
     public static String encrypt(String password) throws Exception{  //Verschlüsseln

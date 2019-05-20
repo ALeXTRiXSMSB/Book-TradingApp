@@ -5,7 +5,6 @@ import android.content.SharedPreferences;
 import android.widget.Toast;
 
 public class PrefConfig {   //Loginstatus
-
     private SharedPreferences sharedPreferences;
     private Context context;
 
@@ -21,7 +20,6 @@ public class PrefConfig {   //Loginstatus
     }
 
     public boolean readLoginStatus(){   //ließt den Login status aus von sharedPreferences
-
         return sharedPreferences.getBoolean(context.getString(R.string.pref_login_status),false);
     }
 
@@ -38,4 +36,5 @@ public class PrefConfig {   //Loginstatus
     public void displayToast(String message){
         Toast.makeText(context,message, Toast.LENGTH_SHORT).show();
     }
+
 }

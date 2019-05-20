@@ -6,8 +6,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 /**
  * Activity-Klasse für den Forum Eintrag
@@ -23,6 +24,29 @@ public class ForumEintragActivity extends AppCompatActivity {
         setContentView(R.layout.forum_eintrag_layout);
         this.abbruchBtn = (Button)findViewById(R.id.abbruchBtn);
         this.verfassenBtn = (Button)findViewById(R.id.verfassenBtn);
+
+        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.bottom_navigation);
+        navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.navigateNachrichten:
+                        Intent a = new Intent(ForumEintragActivity.this, NachrichtenActivity.class);
+                        startActivity(a);
+                        break;
+                    case R.id.navigateProfil:
+                        Intent b = new Intent(ForumEintragActivity.this, ProfilActivity.class);
+                        startActivity(b);
+                        break;
+                    case R.id.navigateForum:
+                        Intent c = new Intent(ForumEintragActivity.this, ForumActivity.class);
+                        startActivity(c);
+                        break;
+                }
+                return false;
+            }
+        });
+
         abbruchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -46,9 +70,9 @@ public class ForumEintragActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.profil:
-                Intent profil = new Intent(this, ProfilActivity.class);
-                startActivity(profil);
+            case R.id.logout:
+                Intent logout = new Intent(this, LoginActivity.class);
+                startActivity(logout);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigateNachrichten"
+        android:icon="@android:drawable/btn_star_big_on"
+        android:title="Nachrichten"/>
+
+    <item
+        android:id="@+id/navigateProfil"
+        android:icon="@android:drawable/btn_star_big_on"
+        android:title="Profil"/>
+
+    <item
+        android:id="@+id/navigateForum"
+        android:icon="@android:drawable/btn_star_big_on"
+        android:title="Forum"/>
+</menu>
