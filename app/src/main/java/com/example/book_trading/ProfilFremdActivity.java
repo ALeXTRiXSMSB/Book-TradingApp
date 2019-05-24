@@ -6,6 +6,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,12 +17,14 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
  */
 
 public class ProfilFremdActivity extends AppCompatActivity {
-    private TextView profilName;
-    private TextView positiv;
-    private TextView negativ;
-    private Button positivBtn;
-    private Button negativBtn;
-    private Button nachrichtBtn;
+
+
+    private TextView positivklick;
+    private TextView positivZahl;
+
+    private TextView nachrichtBtn;
+
+
     private int bewertungCounter;
     private int positivAnzahl;
     private int negativAnzahl;
@@ -30,12 +33,21 @@ public class ProfilFremdActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profil_fremd_layout);
-        this.profilName = (TextView)findViewById(R.id.profilName);
-        this.positiv = (TextView)findViewById(R.id.positiv);
-        this.negativ = (TextView)findViewById(R.id.negativ);
-        this.positivBtn = (Button)findViewById(R.id.positivBtn);
-        this.negativBtn = (Button)findViewById(R.id.negativBtn);
-        this.nachrichtBtn = (Button)findViewById(R.id.nachrichtBtn);
+
+        positivklick = (TextView) findViewById(R.id.positivklick);
+        positivZahl = (TextView) findViewById(R.id.positiv);
+        nachrichtBtn = (TextView) findViewById(R.id.nachrichtsenden);
+
+
+        positivklick.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                likeklicken();
+            }
+        });
+
+
+
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.bottom_navigation);
         navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -57,9 +69,16 @@ public class ProfilFremdActivity extends AppCompatActivity {
                 return false;
             }
         });
-        positivBtn();
-        negativBtn();
+       // positivBtn();
+
         nachrichtBtn();
+    }
+
+    //Setzen der Zahl unter dem like auf 1
+    private void likeklicken() {
+
+        positivZahl.setText("1");
+
     }
 
     @Override
@@ -68,7 +87,7 @@ public class ProfilFremdActivity extends AppCompatActivity {
         return true;
     }
 
-    @Override
+    @Override   //Ausloggen
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.logout:
@@ -80,26 +99,9 @@ public class ProfilFremdActivity extends AppCompatActivity {
         }
     }
 
-    public void positivBtn(){
-        positivBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                negativ.setText("0");
-                positiv.setText("1");
-            }
-        });
-    }
 
-    public void negativBtn(){
-        negativBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                positiv.setText("0");
-                negativ.setText("1");
-            }
-        });
-    }
 
+            //auf Nachricht schreiben klicken
     public void nachrichtBtn(){
         nachrichtBtn.setOnClickListener(new View.OnClickListener() {
             @Override
