@@ -48,31 +48,9 @@
                 android:orientation="horizontal"
                 android:weightSum="3">
 
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Books"
-                        android:textSize="20sp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingTop="10dp"
-                        android:text="15"
-                        android:textColor="@color/startblue"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
-                </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="0dp"
+                    android:layout_width="170dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
@@ -95,7 +73,7 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="0dp"
+                    android:layout_width="160dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
@@ -139,6 +117,7 @@
                 android:src="@drawable/ic_info"/>
 
             <TextView
+                android:id="@+id/textView_Info"
                 android:textStyle="bold"
                 android:layout_gravity="center_vertical"
                 android:layout_width="wrap_content"
@@ -160,6 +139,7 @@
                 android:src="@drawable/ic_mail"/>
 
             <TextView
+                android:id="@+id/textView_Mail"
                 android:textStyle="bold"
                 android:layout_gravity="center_vertical"
                 android:layout_width="wrap_content"
@@ -181,6 +161,7 @@
                 android:src="@drawable/ic_book"/>
 
             <TextView
+                android:id="@+id/textView_Buch"
                 android:textStyle="bold"
                 android:layout_gravity="center_vertical"
                 android:layout_width="wrap_content"
@@ -203,6 +184,7 @@
             android:background="@android:color/holo_blue_bright"
             app:itemIconTint="@android:color/holo_orange_light"
             app:itemTextColor="@android:color/black"
-            app:menu="@menu/navigation" />
+            app:menu="@menu/navigation"
+            />
     </FrameLayout>
 </LinearLayout>

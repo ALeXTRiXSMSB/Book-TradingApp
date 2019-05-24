@@ -3,16 +3,16 @@
 
     <item
         android:id="@+id/navigateNachrichten"
-        android:icon="@android:drawable/btn_star_big_on"
+        android:icon="@drawable/ic_message"
         android:title="Nachrichten"/>
 
     <item
         android:id="@+id/navigateProfil"
-        android:icon="@android:drawable/btn_star_big_on"
+        android:icon="@drawable/ic_user"
         android:title="Profil"/>
 
     <item
         android:id="@+id/navigateForum"
-        android:icon="@android:drawable/btn_star_big_on"
+        android:icon="@drawable/ic_forum"
         android:title="Forum"/>
 </menu>

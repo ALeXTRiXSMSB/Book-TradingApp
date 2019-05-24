@@ -4,16 +4,21 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import org.w3c.dom.Text;
+
 /**
  * Activity-Klasse für das eigene Profil
  */
 
-public class ProfilActivity extends AppCompatActivity {
+public class ProfilActivity extends AppCompatActivity implements ExampleDialog.ExampleDialogListener {
+
+    private TextView textViewInfo, textViewMail, textViewBuch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +26,18 @@ public class ProfilActivity extends AppCompatActivity {
         setContentView(R.layout.profil_layout);
         TextView user = (TextView) findViewById(R.id.txt_name_info);
         user.setText("Hello " + LoginActivity.prefConfig.readName());
+
+
+        textViewInfo = (TextView) findViewById(R.id.textView_Info);
+        textViewMail = (TextView) findViewById(R.id.textView_Mail);
+        textViewBuch = (TextView) findViewById(R.id.textView_Buch);
+
+        textViewInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openDialog();
+            }
+        });
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.bottom_navigation);
         navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -45,12 +62,15 @@ public class ProfilActivity extends AppCompatActivity {
         });
     }
 
+
+    //menu-Bar anlegen
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_layout, menu);
         return true;
     }
 
+    //Menu-Barklicken
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -61,6 +81,21 @@ public class ProfilActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    //Dialogfensteröffnen
+    private void openDialog() {
+
+        ExampleDialog exampleDialog = new ExampleDialog();
+        exampleDialog.show(getSupportFragmentManager(), "example dialog");
+    }
+
+    //Dialog
+    @Override
+    public void applyTexts(String info, String mail, String buch) {
+        textViewInfo.setText(info);
+        textViewMail.setText(mail);
+        textViewBuch.setText(buch);
     }
 
 }
