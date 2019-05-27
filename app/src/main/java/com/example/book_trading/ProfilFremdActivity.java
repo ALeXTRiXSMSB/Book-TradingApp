@@ -36,7 +36,7 @@ public class ProfilFremdActivity extends AppCompatActivity {
 
         positivklick = (TextView) findViewById(R.id.positivklick);
         positivZahl = (TextView) findViewById(R.id.positiv);
-        nachrichtBtn = (TextView) findViewById(R.id.nachrichtsenden);
+        nachrichtBtn = (TextView) findViewById(R.id.textView_Mail);
 
 
         positivklick.setOnClickListener(new View.OnClickListener() {

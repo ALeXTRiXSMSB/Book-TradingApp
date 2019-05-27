@@ -72,29 +72,6 @@
                 </LinearLayout>
 
 
-                <LinearLayout
-
-                    android:layout_width="170dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/nachrichtsenden"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Nachricht"
-                        android:textSize="20sp" />
-
-                    <TextView
-
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingTop="10dp"
-                        android:text="schreiben"
-                        android:textSize="20sp" />
-                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="160dp"
@@ -207,10 +184,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            android:background="@android:color/holo_blue_bright"
-            app:itemIconTint="@android:color/holo_orange_light"
+            android:background="#F3EFEF"
+            app:itemIconTint="#0A0A0A"
             app:itemTextColor="@android:color/black"
-            app:menu="@menu/navigation"
-            />
+            app:menu="@menu/navigation" />
+
+
+
     </FrameLayout>
 </LinearLayout>
