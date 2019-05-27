@@ -10,14 +10,14 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class RegisterActivity extends AppCompatActivity {
-    private EditText Name, UserName, UserPassword;
+    private EditText  UserName, UserPassword;
     private Button BnRegister;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        Name = (EditText) findViewById(R.id.txt_name);
+
         UserName = (EditText) findViewById(R.id.txt_user_name);
         UserPassword = (EditText) findViewById(R.id.txt_password);
         final Button RegBtn = (Button) findViewById(R.id.bn_register);
@@ -30,7 +30,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     public void performRegistration(){
-        String name = Name.getText().toString();
+
         String username = UserName.getText().toString();
         String password = UserPassword.getText().toString();
         try {
@@ -38,11 +38,11 @@ public class RegisterActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        if (name.length()==0 || username.length()==0 || password.length()==0){
+        if (username.length()==0 || password.length()==0){
             LoginActivity.prefConfig.displayToast("Leereingaben sind ungültig!");
             return;
         }
-        Call<User> call = LoginActivity.apiInterface.performRegistration(name,username,password);// alles ab hier nach unten
+        Call<User> call = LoginActivity.apiInterface.performRegistration(username,password);// alles ab hier nach unten
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
@@ -59,7 +59,7 @@ public class RegisterActivity extends AppCompatActivity {
             public void onFailure(Call<User> call, Throwable t) {
             }
         });
-        Name.setText("");   //Nach dem anmelden werden die Felder wieder geleert und es können neue Inhalte eingetragen werden
+          //Nach dem anmelden werden die Felder wieder geleert und es können neue Inhalte eingetragen werden
         UserPassword.setText("");
         UserName.setText("");
     }
