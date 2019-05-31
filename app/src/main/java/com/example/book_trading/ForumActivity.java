@@ -2,16 +2,22 @@ package com.example.book_trading;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import java.util.ArrayList;
 
 /**
  * Activity-Klasse für das Forum
@@ -20,15 +26,23 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 public class ForumActivity extends AppCompatActivity {
     private ListView lv;
     private ArrayAdapter<String> adapter = null;
-    private Button eintragBtn;
+    //private Button eintragBtn;
+    private ItemData selectedData;
+    private static final String TAG = "MainActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.forum_layout);
         this.lv = (ListView)findViewById(R.id.listView);
-        this.eintragBtn = (Button)findViewById(R.id.neuerEintrag);
+        EditText theFilter = (EditText) findViewById(R.id.searchFilter);
+        //this.eintragBtn = (Button)findViewById(R.id.neuerEintrag);
 
+        FloatingActionButton floatingActionButton = findViewById(R.id.fab_1);   //Fab_Button
+
+        ArrayList<String> names = new ArrayList<>();
+
+        //Navigation am Display ende
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.bottom_navigation);
         navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -51,9 +65,28 @@ public class ForumActivity extends AppCompatActivity {
             }
         });
 
-        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1);
+        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,names);
         lv.setAdapter(adapter);
         test();
+
+        theFilter.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                (ForumActivity.this).adapter.getFilter().filter(s);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        //klicken der einträge
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -61,13 +94,34 @@ public class ForumActivity extends AppCompatActivity {
                 startActivity(comment);
             }
         });
-        eintragBtn.setOnClickListener(new View.OnClickListener() {
+
+
+        //klicken des kleinen Plus
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent neintrag = new Intent(ForumActivity.this, ForumEintragActivity.class);
-                startActivity(neintrag);
+
+                AddNewItem();
+
+
+                /*Intent neintrag = new Intent(ForumActivity.this, ForumEintragActivity.class);
+                startActivity(neintrag);*/
             }
         });
+    }
+
+
+    private void AddNewItem(){
+
+        Intent getDetailIntent = new Intent(this,
+                ForumEintragActivity.class);
+
+        final int result = 1;
+
+        selectedData = null;
+        getDetailIntent.putExtra("data", selectedData);
+
+        startActivityForResult(getDetailIntent, result);
     }
 
     @Override
@@ -89,10 +143,14 @@ public class ForumActivity extends AppCompatActivity {
     }
 
     public void test(){
-        adapter.add("Test-Eintrag1");
-        adapter.add("Test-Eintrag2");
-        adapter.add("Test-Eintrag3");
-        adapter.add("Test-Eintrag4");
+        adapter.add("Buch 1");
+        adapter.add("Buch 2");
+        adapter.add("Buch 3");
+        adapter.add("Zeitschrift 1");
+        adapter.add("Zeitschrift 2");
+        adapter.add("Zeitschrift 3");
+        adapter.add("Das Buch 1");
+        adapter.add("Das Buch 2");
     }
 
 }

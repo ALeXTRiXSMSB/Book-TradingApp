@@ -10,15 +10,14 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import org.w3c.dom.Text;
-
 /**
  * Activity-Klasse für das eigene Profil
  */
 
 public class ProfilActivity extends AppCompatActivity implements ExampleDialog.ExampleDialogListener {
 
-    private TextView textViewInfo, textViewMail, textViewBuch;
+    private TextView textViewInfo, textViewMail, textViewBuch, textViewForum,textViewBearbeiten;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,11 +30,25 @@ public class ProfilActivity extends AppCompatActivity implements ExampleDialog.E
         textViewInfo = (TextView) findViewById(R.id.textView_Info);
         textViewMail = (TextView) findViewById(R.id.textView_Mail);
         textViewBuch = (TextView) findViewById(R.id.textView_Buch);
+        textViewForum = (TextView) findViewById(R.id.textView_Forum);
+        textViewBearbeiten = (TextView) findViewById(R.id.textView_Bearbeiten);
 
-        textViewInfo.setOnClickListener(new View.OnClickListener() {
+        //beim klicken auf die bearbeiten um seine Profildaten zu bearbeiten
+        textViewBearbeiten.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 openDialog();
+            }
+        });
+
+
+        //Klicken auf Forum um zu seinen eigenen Forum Produkten zu kommen
+        textViewForum.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(ProfilActivity.this, my_forum.class);
+                startActivity(intent);
             }
         });
 

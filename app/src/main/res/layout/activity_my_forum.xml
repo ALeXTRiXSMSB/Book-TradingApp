@@ -6,26 +6,20 @@
     android:layout_height="match_parent">
 
 
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:id="@+id/searchFilter"/>
-
-
     <ListView
         android:id="@+id/listView"
         android:layout_width="match_parent"
-        android:layout_height="395dp">
+        android:layout_height="453dp">
 
 
     </ListView>
 
+
+
+
     <Space
         android:layout_width="match_parent"
         android:layout_height="20sp" />
-
-
 
 
 
@@ -38,7 +32,7 @@
 
         <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"
-            android:layout_height="153dp">
+            android:layout_height="257dp">
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/fab_1"
@@ -53,6 +47,9 @@
 
 
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
+
 
 
         <com.google.android.material.bottomnavigation.BottomNavigationView

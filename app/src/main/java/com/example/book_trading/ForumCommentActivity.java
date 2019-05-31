@@ -13,24 +13,34 @@ import android.widget.ListView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 /**
  * Activity-Klasse für Kommentierung im Forum
  */
 
 public class ForumCommentActivity extends AppCompatActivity {
-    private ListView lv;
+
     private ArrayAdapter<String> adapter = null;
-    private EditText textEingabe;
-    private Button sendenBtn;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.forum_comment_layout);
-        this.lv = (ListView)findViewById(R.id.listView);
-        this.textEingabe = (EditText)findViewById(R.id.textEingabe);
-        this.sendenBtn = (Button)findViewById(R.id.eingabeSenden);
+
+
+
+        FloatingActionButton floatingActionButton = findViewById(R.id.fab_2);
+
+        //beim klicken auf den Flieger kann man dem besitzer eine Message schreiben
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ForumCommentActivity.this, ChatActivity.class);
+                startActivity(intent);
+            }
+        });
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.bottom_navigation);
         navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -54,26 +64,8 @@ public class ForumCommentActivity extends AppCompatActivity {
             }
         });
 
-        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1);
-        lv.setAdapter(adapter);
-        test();
-        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent fprofil = new Intent(view.getContext(), ProfilFremdActivity.class);
-                startActivity(fprofil);
-            }
-        });
-        sendenBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (textEingabe.getText().toString() != null) {
-                    adapter.add(textEingabe.getText().toString());
-                    textEingabe.setText("");
-                } else {
-                }
-            }
-        });
+
+
     }
 
     @Override
@@ -94,10 +86,10 @@ public class ForumCommentActivity extends AppCompatActivity {
         }
     }
 
-    public void test(){
+    /*public void test(){
         adapter.add("Test-Profil1");
         adapter.add("Test-Profil2");
         adapter.add("Test-Profil3");
-    }
+    }*/
 
 }
