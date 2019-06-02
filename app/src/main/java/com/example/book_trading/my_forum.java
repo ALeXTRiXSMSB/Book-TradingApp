@@ -23,21 +23,11 @@ import java.util.ArrayList;
 
 public class my_forum extends AppCompatActivity implements AdapterView.OnItemClickListener{
 
-
     //private ArrayAdapter<String> adapter = null;
     private ListView itemsListView;
     private ArrayList<ItemData> itemArray;
     private ArrayAdapter<ItemData> adapter;
-
     private ItemData selectedData;
-
-
-
-
-
-
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

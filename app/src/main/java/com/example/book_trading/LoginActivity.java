@@ -69,7 +69,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onResponse(Call<User> call, retrofit2.Response<User> response) {//Prüfen des Status beim einloggen
                 if(response.body().getResponse().equals("ok")){ //Status Ok es kann sich eingeloggt werden
                     LoginActivity.prefConfig.writeLoginStatus(true); //LoginStatus auf true setzen um sich ein zu loggen
-                    LoginActivity.prefConfig.writeName(response.body().getName());
+                    LoginActivity.prefConfig.writeName(response.body().getU_name());
 
                     Intent registerIntent = new Intent(LoginActivity.this, ProfilActivity.class);
                     LoginActivity.this.startActivity(registerIntent);   //von der LoginActivity geht es weiter zum Profil bzw. der Startseite
