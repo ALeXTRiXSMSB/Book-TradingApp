@@ -46,13 +46,11 @@ public class RegisterActivity extends AppCompatActivity {
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
-                if(response.body().getResponse().equals("ok")){
-                    LoginActivity.prefConfig.displayToast("Registration success...");    //Registrierung hat funktioniert
+                if(response.body().getResponse().equals("success")){
+                    LoginActivity.prefConfig.displayToast("Alles Richtig");    //Registrierung hat funktioniert
                     //springe zurück
-                }else if(response.body().getResponse().equals("exist")){
+                }else if(response.body().getResponse().equals("user exists")) {
                     LoginActivity.prefConfig.displayToast("User already exist..."); //Es gibt bereits einen User mit gleichem Username
-                }else if(response.body().getResponse().equals("error")){
-                    LoginActivity.prefConfig.displayToast("Something went wrong...");   //Es ist ein fehler aufgetreten, vorgang wiederholen
                 }
             }
             @Override
@@ -60,8 +58,8 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
           //Nach dem anmelden werden die Felder wieder geleert und es können neue Inhalte eingetragen werden
-        UserPassword.setText("");
-        UserName.setText("");
+        //UserPassword.setText("");
+        //UserName.setText("");
     }
 
 }

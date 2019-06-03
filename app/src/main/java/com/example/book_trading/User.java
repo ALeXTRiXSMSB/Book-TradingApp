@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 public class User {
 
     @SerializedName("response")
-    private String Response;
+    private String response;
 
     @SerializedName("u_id")
     private int u_id;
@@ -23,11 +23,11 @@ public class User {
     private int u_like;
 
     public String getResponse() {
-        return Response;
+        return response;
     }
 
     public void setResponse(String response) {
-        Response = response;
+        response = response;
     }
 
     public int getU_id() {

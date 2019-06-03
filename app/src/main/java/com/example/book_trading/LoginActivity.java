@@ -39,11 +39,11 @@ public class LoginActivity extends AppCompatActivity {
 
                  // auskommentiert zum Testen für mich
 
-                //performLogin();
+                performLogin();
 
                 // Test
-                Intent registerIntent = new Intent(LoginActivity.this, ProfilActivity.class);
-               LoginActivity.this.startActivity(registerIntent);
+                //Intent registerIntent = new Intent(LoginActivity.this, ProfilActivity.class);
+               //LoginActivity.this.startActivity(registerIntent);
                 // Test Ende
             }
         });
@@ -67,15 +67,21 @@ public class LoginActivity extends AppCompatActivity {
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, retrofit2.Response<User> response) {//Prüfen des Status beim einloggen
-                if(response.body().getResponse().equals("ok")){ //Status Ok es kann sich eingeloggt werden
+                if(response.body().getResponse().equals("success")){ //Status Ok es kann sich eingeloggt werden
                     LoginActivity.prefConfig.writeLoginStatus(true); //LoginStatus auf true setzen um sich ein zu loggen
                     LoginActivity.prefConfig.writeName(response.body().getU_name());
 
                     Intent registerIntent = new Intent(LoginActivity.this, ProfilActivity.class);
                     LoginActivity.this.startActivity(registerIntent);   //von der LoginActivity geht es weiter zum Profil bzw. der Startseite
                 }
-                else if(response.body().getResponse().equals("failed")){    //Status Fehler ein einloggen ist nicht möglich
-                    LoginActivity.prefConfig.displayToast("Login Failed. Please try again...");
+                else if(response.body().getResponse().equals("no data")){    //Status Fehler ein einloggen ist nicht möglich
+                    LoginActivity.prefConfig.displayToast("User name oder Passwort ist falsch");
+                }
+                else if(response.body().getResponse().equals("missing argument")){
+                    LoginActivity.prefConfig.displayToast("Beide felder müssen uasgefüllt sein");
+                }
+                else if(response.body().getResponse().equals("wrong request method")){
+                    LoginActivity.prefConfig.displayToast("Fehlerhafter request debugging message");
                 }
             }
             @Override
