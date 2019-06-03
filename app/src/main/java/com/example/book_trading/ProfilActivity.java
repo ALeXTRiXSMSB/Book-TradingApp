@@ -94,7 +94,6 @@ public class ProfilActivity extends AppCompatActivity implements ExampleDialog.E
 
     //Dialogfensteröffnen
     private void openDialog() {
-
         ExampleDialog exampleDialog = new ExampleDialog();
         exampleDialog.show(getSupportFragmentManager(), "example dialog");
     }

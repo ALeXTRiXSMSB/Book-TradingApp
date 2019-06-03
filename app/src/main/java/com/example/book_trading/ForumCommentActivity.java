@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -16,19 +15,27 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
  */
 
 public class ForumCommentActivity extends AppCompatActivity {
-
-    private ArrayAdapter<String> adapter = null;
-
+    FloatingActionButton btnFremdProfil;
+    FloatingActionButton btnChat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.forum_comment_layout);
 
-        FloatingActionButton floatingActionButton = findViewById(R.id.fab_2);
+        btnFremdProfil = findViewById(R.id.profilFremd);
+        btnChat = findViewById(R.id.chat);
+
+        btnFremdProfil.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ForumCommentActivity.this, ProfilFremdActivity.class);
+                startActivity(intent);
+            }
+        });
 
         //beim klicken auf den Flieger kann man dem besitzer eine Message schreiben
-        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+        btnChat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ForumCommentActivity.this, ChatActivity.class);
@@ -71,6 +78,7 @@ public class ForumCommentActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.logout:
                 Intent logout = new Intent(this, LoginActivity.class);
+                LoginActivity.prefConfig.writeLoginStatus(false);
                 startActivity(logout);
                 return true;
             default:

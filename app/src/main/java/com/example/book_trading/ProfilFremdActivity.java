@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 /**
  * Activity-Klasse für das Profil anderer Personen
@@ -23,6 +24,7 @@ public class ProfilFremdActivity extends AppCompatActivity {
     private int bewertungCounter;
     private int positivAnzahl;
     private int negativAnzahl;
+    FloatingActionButton direktChat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +33,7 @@ public class ProfilFremdActivity extends AppCompatActivity {
 
         positivklick = (TextView) findViewById(R.id.positivklick);
         positivZahl = (TextView) findViewById(R.id.positiv);
-        nachrichtBtn = (TextView) findViewById(R.id.textView_Mail);
+        direktChat = findViewById(R.id.chat);
 
         positivklick.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,8 +63,14 @@ public class ProfilFremdActivity extends AppCompatActivity {
                 return false;
             }
         });
-       // positivBtn();
-        nachrichtBtn();
+
+        direktChat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ProfilFremdActivity.this, ChatActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     //Setzen der Zahl unter dem like auf 1
@@ -87,17 +95,6 @@ public class ProfilFremdActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
-    }
-
-    //auf Nachricht schreiben klicken
-    public void nachrichtBtn(){
-        nachrichtBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent chat = new Intent(ProfilFremdActivity.this, ChatActivity.class);
-                startActivity(chat);
-            }
-        });
     }
 
 }
