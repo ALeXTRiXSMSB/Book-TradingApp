@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
-
 import androidx.appcompat.app.AppCompatDialogFragment;
 
 public class ExampleDialog extends AppCompatDialogFragment {
@@ -23,8 +22,6 @@ public class ExampleDialog extends AppCompatDialogFragment {
 
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.layout_dialog, null);
-
-
 
         builder.setView(view)
                 .setTitle("Bearbeiten")
@@ -51,8 +48,6 @@ public class ExampleDialog extends AppCompatDialogFragment {
         editTextBuch = view.findViewById(R.id.Buch);
 
         return builder.create();
-
-
     }
 
     public interface  ExampleDialogListener{
@@ -63,7 +58,6 @@ public class ExampleDialog extends AppCompatDialogFragment {
     public void onAttach(Context context) {
         super.onAttach(context);
 
-
         try {
             listener = (ExampleDialogListener) context;
         } catch (ClassCastException e) {
@@ -71,4 +65,5 @@ public class ExampleDialog extends AppCompatDialogFragment {
                     "must implement Example Dialog");
         }
     }
+
 }

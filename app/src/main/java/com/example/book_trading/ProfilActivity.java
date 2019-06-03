@@ -18,14 +18,12 @@ public class ProfilActivity extends AppCompatActivity implements ExampleDialog.E
 
     private TextView textViewInfo, textViewMail, textViewBuch, textViewForum,textViewBearbeiten;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profil_layout);
         TextView user = (TextView) findViewById(R.id.txt_name_info);
         user.setText("Hello " + LoginActivity.prefConfig.readName());
-
 
         textViewInfo = (TextView) findViewById(R.id.textView_Info);
         textViewMail = (TextView) findViewById(R.id.textView_Mail);
@@ -41,12 +39,10 @@ public class ProfilActivity extends AppCompatActivity implements ExampleDialog.E
             }
         });
 
-
         //Klicken auf Forum um zu seinen eigenen Forum Produkten zu kommen
         textViewForum.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Intent intent = new Intent(ProfilActivity.this, my_forum.class);
                 startActivity(intent);
             }
@@ -74,7 +70,6 @@ public class ProfilActivity extends AppCompatActivity implements ExampleDialog.E
             }
         });
     }
-
 
     //menu-Bar anlegen
     @Override

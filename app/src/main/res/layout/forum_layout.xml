@@ -5,19 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
-
     <EditText
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:id="@+id/searchFilter"/>
 
-
     <ListView
         android:id="@+id/listView"
         android:layout_width="match_parent"
         android:layout_height="395dp">
-
 
     </ListView>
 
@@ -25,16 +21,10 @@
         android:layout_width="match_parent"
         android:layout_height="20sp" />
 
-
-
-
-
-
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="bottom">
-
 
         <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"
@@ -50,10 +40,7 @@
                 android:src="@drawable/ic_add"
                 app:elevation="6dp"
                 app:fabSize="normal" />
-
-
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottom_navigation"
@@ -63,11 +50,6 @@
             android:background="#F3EFEF"
             app:itemIconTint="#0A0A0A"
             app:itemTextColor="@android:color/black"
-            app:menu="@menu/navigation"
-            />
-
-
+            app:menu="@menu/navigation" />
     </FrameLayout>
-
-
 </LinearLayout>

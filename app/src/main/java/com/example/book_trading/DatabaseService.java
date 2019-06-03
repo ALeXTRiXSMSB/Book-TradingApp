@@ -14,5 +14,4 @@ public class DatabaseService extends Service {
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
-
 }

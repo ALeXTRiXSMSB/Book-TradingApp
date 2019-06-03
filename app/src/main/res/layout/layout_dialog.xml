@@ -3,7 +3,6 @@
     android:layout_width="match_parent" android:layout_height="match_parent"
     android:padding="16dp">
 
-
     <EditText
         android:id="@+id/Info"
         android:layout_width="match_parent"
@@ -23,5 +22,4 @@
         android:layout_height="wrap_content"
         android:hint="Buch"
         android:layout_below="@+id/Mail"/>
-
 </RelativeLayout>

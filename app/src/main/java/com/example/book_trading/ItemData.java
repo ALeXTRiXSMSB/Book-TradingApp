@@ -20,10 +20,8 @@ public class ItemData implements Serializable {
         this.Beschreibung = beschreibung;
     }
 
-
     public String toString(){
         return Name + " (" + Zustand +")"; //Hier wird der Name des Buches und der Zustand dazu zurück gegeben
     }
-
 
 }

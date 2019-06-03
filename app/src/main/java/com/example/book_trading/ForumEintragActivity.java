@@ -8,8 +8,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Spinner;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,10 +20,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 public class ForumEintragActivity extends AppCompatActivity {
     private Button abbruchBtn;
     private Button verfassenBtn;
-
     private ItemData selectedItem;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +28,6 @@ public class ForumEintragActivity extends AppCompatActivity {
         setContentView(R.layout.forum_eintrag_layout);
         this.abbruchBtn = (Button)findViewById(R.id.abbruchBtn);
         this.verfassenBtn = (Button)findViewById(R.id.verfassenBtn);
-
 
         //////////////////////////////
         Intent activityThatCalled = getIntent();
@@ -74,20 +68,11 @@ public class ForumEintragActivity extends AppCompatActivity {
             }
         });
 
-
     }
-
-
-
-
-
-
-
 
     //////////////////////
     //Speichern
     public void onSaveClick(View view) {
-
         Intent goingBack = new Intent();
 
         selectedItem.Name = ((EditText)findViewById(R.id.nameEingabe)).getText().toString();
@@ -101,17 +86,12 @@ public class ForumEintragActivity extends AppCompatActivity {
         setResult(RESULT_OK, goingBack);
 
         finish();
-
     }
-
-
-
 
     //Löschen
     public void onDeleteClick(View view) {
         //Abfrage ob etwas gelöscht werden soll
         AlertDialog.Builder alterDialogBuilder = new AlertDialog.Builder(ForumEintragActivity.this);
-
 
         alterDialogBuilder.setTitle("Löschen"); //Titel Löschen wird angezeigt
 
@@ -122,7 +102,6 @@ public class ForumEintragActivity extends AppCompatActivity {
                 .setNegativeButton("NEIN", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-
                     }
                 })
                 .setPositiveButton("JA", new DialogInterface.OnClickListener() {
@@ -141,21 +120,7 @@ public class ForumEintragActivity extends AppCompatActivity {
         AlertDialog alertDialog = alterDialogBuilder.create();
         alertDialog.show();
 
-
     }
-
-    ////////////////////////////
-
-
-
-
-
-
-
-
-
-
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

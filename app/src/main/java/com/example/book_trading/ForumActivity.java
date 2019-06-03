@@ -95,15 +95,11 @@ public class ForumActivity extends AppCompatActivity {
             }
         });
 
-
         //klicken des kleinen Plus
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 AddNewItem();
-
-
                 /*Intent neintrag = new Intent(ForumActivity.this, ForumEintragActivity.class);
                 startActivity(neintrag);*/
             }
@@ -112,7 +108,6 @@ public class ForumActivity extends AppCompatActivity {
 
 
     private void AddNewItem(){
-
         Intent getDetailIntent = new Intent(this,
                 ForumEintragActivity.class);
 

@@ -48,7 +48,6 @@
                 android:orientation="horizontal"
                 android:weightSum="3">
 
-
                 <LinearLayout
                     android:layout_width="170dp"
                     android:layout_height="match_parent"
@@ -169,7 +168,6 @@
                 android:layout_height="wrap_content"
                 android:paddingLeft="20dp"
                 android:text="Physik- und Geschichtsbücher"/>
-
         </LinearLayout>
 
         <LinearLayout
@@ -180,8 +178,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="end|bottom">
 
-
-
             <TextView
                 android:id="@+id/textView_Bearbeiten"
                 android:textStyle="bold"
@@ -189,14 +185,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingLeft="20dp"
-
                 android:text="bearbeiten"/>
-
         </LinearLayout>
-
-
-
-
     </LinearLayout>
 
     <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -212,9 +202,6 @@
             android:background="#F3EFEF"
             app:itemIconTint="#0A0A0A"
             app:itemTextColor="@android:color/black"
-            app:menu="@menu/navigation"
-            />
-
-
+            app:menu="@menu/navigation" />
     </FrameLayout>
 </LinearLayout>

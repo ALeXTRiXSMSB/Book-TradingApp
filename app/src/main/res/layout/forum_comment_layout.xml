@@ -17,8 +17,6 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="35dp"
             android:src="@drawable/ic_camera" />
-
-
     </LinearLayout>
 
     <LinearLayout
@@ -33,41 +31,20 @@
             android:textColor="#4CAF50"
             android:textSize="16dp"
             android:textStyle="bold" />
-
-
-
-
-
-
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
-
-
-
-
     </LinearLayout>
-
-
-
-
-
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
-
         android:src="@drawable/ic_send"
-
         app:backgroundTint="@color/colorPrimary"
-
         android:id="@+id/fab_2"/>
-
-
 
     <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -97,9 +74,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="hier steht der Ihnalt"/>
-
             </LinearLayout>
-
 
             <LinearLayout
                 android:orientation="vertical"
@@ -118,9 +93,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="hier steht der Ihnalt"/>
-
             </LinearLayout>
-
 
             <LinearLayout
                 android:orientation="vertical"
@@ -128,7 +101,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp">
-
 
                 <TextView
                     android:id="@+id/editText_Zustand"
@@ -140,10 +112,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="hier steht der Ihnalt"/>
-
             </LinearLayout>
-
-
 
             <LinearLayout
                 android:orientation="vertical"
@@ -162,14 +131,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="hier steht der Ihnalt"/>
-
             </LinearLayout>
-
-
-
         </LinearLayout>
-
-
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottom_navigation"
@@ -180,7 +143,5 @@
             app:itemIconTint="#0A0A0A"
             app:itemTextColor="@android:color/black"
             app:menu="@menu/navigation" />
-
-
     </FrameLayout>
 </LinearLayout>

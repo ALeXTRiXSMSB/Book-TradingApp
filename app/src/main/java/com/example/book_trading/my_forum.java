@@ -3,10 +3,8 @@ package com.example.book_trading;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,16 +12,11 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
-
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
 import java.util.ArrayList;
 
 public class my_forum extends AppCompatActivity implements AdapterView.OnItemClickListener{
-
-    //private ArrayAdapter<String> adapter = null;
     private ListView itemsListView;
     private ArrayList<ItemData> itemArray;
     private ArrayAdapter<ItemData> adapter;
@@ -33,14 +26,12 @@ public class my_forum extends AppCompatActivity implements AdapterView.OnItemCli
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_forum);
-
        //Oberflächenelement
         itemsListView = findViewById(R.id.listView);
 
         itemArray = new ArrayList<ItemData>();
 
         FloatingActionButton floatingActionButton = findViewById(R.id.fab_1);   //Fab_Button
-
 
         LoadData(); //BeispielDaten laden
 
@@ -67,7 +58,6 @@ public class my_forum extends AppCompatActivity implements AdapterView.OnItemCli
             }
         });
 
-
         adapter = new ArrayAdapter<ItemData>(this, android.R.layout.simple_list_item_1,itemArray) {
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
@@ -87,34 +77,21 @@ public class my_forum extends AppCompatActivity implements AdapterView.OnItemCli
             }
         };
 
-
-
-       // itemsListView.setAdapter(adapter);
-
-
-
-
         //Verbindung Oberfläche mit dem Adapter
         itemsListView.setAdapter(adapter);
 
         //Der auf den ListView-Click hörende ist diese Klasse
         itemsListView.setOnItemClickListener(this);
 
-
         //klicken des kleinen Plus
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 AddNewItem();
-
-
-
             }
         });
 
     }
-
 
     //Menu-button
     @Override
@@ -136,22 +113,6 @@ public class my_forum extends AppCompatActivity implements AdapterView.OnItemCli
         }
     }
 
-
-
-
-
-
-
-
-
-
-
-    /////////////
-
-
-
-
-
     //neues Item Hinzufühgen
    private void AddNewItem(){
 
@@ -165,9 +126,6 @@ public class my_forum extends AppCompatActivity implements AdapterView.OnItemCli
 
         startActivityForResult(getDetailIntent, result);
     }
-
-
-
 
     //Eintrag anklicken
     @Override
@@ -183,10 +141,6 @@ public class my_forum extends AppCompatActivity implements AdapterView.OnItemCli
 
         startActivityForResult(getDetailIntent, result);
     }
-
-
-
-
 
     @Override //Nach dem Beenden des Eintrages
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -221,14 +175,8 @@ public class my_forum extends AppCompatActivity implements AdapterView.OnItemCli
         selectedData = null;
 
         adapter.notifyDataSetChanged();
+
     }
-
-
-
-
-
-
-
 
     //TestEinträge
     //Beispieldaten einfühgen
@@ -243,9 +191,6 @@ public class my_forum extends AppCompatActivity implements AdapterView.OnItemCli
         itemArray.add(item1);
         itemArray.add(item2);
         itemArray.add(item3);
-
     }
-
-
 
 }

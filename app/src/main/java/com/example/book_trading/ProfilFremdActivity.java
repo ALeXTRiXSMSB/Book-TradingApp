@@ -17,14 +17,9 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
  */
 
 public class ProfilFremdActivity extends AppCompatActivity {
-
-
     private TextView positivklick;
     private TextView positivZahl;
-
     private TextView nachrichtBtn;
-
-
     private int bewertungCounter;
     private int positivAnzahl;
     private int negativAnzahl;
@@ -38,15 +33,12 @@ public class ProfilFremdActivity extends AppCompatActivity {
         positivZahl = (TextView) findViewById(R.id.positiv);
         nachrichtBtn = (TextView) findViewById(R.id.textView_Mail);
 
-
         positivklick.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 likeklicken();
             }
         });
-
-
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.bottom_navigation);
         navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -70,15 +62,12 @@ public class ProfilFremdActivity extends AppCompatActivity {
             }
         });
        // positivBtn();
-
         nachrichtBtn();
     }
 
     //Setzen der Zahl unter dem like auf 1
     private void likeklicken() {
-
         positivZahl.setText("1");
-
     }
 
     @Override
@@ -99,9 +88,7 @@ public class ProfilFremdActivity extends AppCompatActivity {
         }
     }
 
-
-
-            //auf Nachricht schreiben klicken
+    //auf Nachricht schreiben klicken
     public void nachrichtBtn(){
         nachrichtBtn.setOnClickListener(new View.OnClickListener() {
             @Override
