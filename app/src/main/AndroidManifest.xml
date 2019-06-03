@@ -35,7 +35,7 @@
             android:label="Forum" />
         <activity
             android:name=".ForumCommentActivity"
-            android:label="Forum Chat" />
+            android:label="Details" />
         <activity
             android:name=".ForumEintragActivity"
             android:label="Forum Eintrag" />

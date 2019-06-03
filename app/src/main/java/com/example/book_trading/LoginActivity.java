@@ -38,11 +38,11 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 // auskommentiert zum Testen für mich
-                //performLogin();
+                performLogin();
 
                 // Test
-                Intent registerIntent = new Intent(LoginActivity.this, ProfilActivity.class);
-                LoginActivity.this.startActivity(registerIntent);
+                //Intent registerIntent = new Intent(LoginActivity.this, ProfilActivity.class);
+                //LoginActivity.this.startActivity(registerIntent);
                 // Test Ende
             }
         });

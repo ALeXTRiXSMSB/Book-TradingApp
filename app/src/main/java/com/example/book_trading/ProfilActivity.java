@@ -84,6 +84,7 @@ public class ProfilActivity extends AppCompatActivity implements ExampleDialog.E
         switch (item.getItemId()) {
             case R.id.logout:
                 Intent logout = new Intent(this, LoginActivity.class);
+                LoginActivity.prefConfig.writeLoginStatus(false);
                 startActivity(logout);
                 return true;
             default:
