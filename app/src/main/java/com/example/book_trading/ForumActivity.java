@@ -120,6 +120,14 @@ public class ForumActivity extends AppCompatActivity {
     }
 
     @Override
+    public void onBackPressed() {
+
+        setResult(RESULT_CANCELED);
+
+        finish();
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_layout, menu);
         return true;

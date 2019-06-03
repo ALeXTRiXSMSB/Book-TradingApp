@@ -88,6 +88,14 @@ public class ForumEintragActivity extends AppCompatActivity {
         finish();
     }
 
+    @Override
+    public void onBackPressed() {
+
+        setResult(RESULT_CANCELED);
+
+        finish();
+    }
+
     //Löschen
     public void onDeleteClick(View view) {
         //Abfrage ob etwas gelöscht werden soll
