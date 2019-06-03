@@ -133,6 +133,7 @@ public class ForumEintragActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.logout:
                 Intent logout = new Intent(this, LoginActivity.class);
+                LoginActivity.prefConfig.writeLoginStatus(false);
                 startActivity(logout);
                 return true;
             default:

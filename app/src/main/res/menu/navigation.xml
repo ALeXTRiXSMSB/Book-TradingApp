@@ -8,8 +8,8 @@
 
     <item
         android:id="@+id/navigateProfil"
-        android:icon="@drawable/ic_user"
-        android:title="Profil"/>
+        android:icon="@drawable/person_black"
+        android:title="Profil" />
 
     <item
         android:id="@+id/navigateForum"

@@ -8,11 +8,11 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="305dp">
+        android:layout_height="300sp">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="250dp"
+            android:layout_height="250sp"
             android:background="@drawable/gradientbackround"
             android:orientation="vertical">
 
@@ -180,12 +180,14 @@
 
             <TextView
                 android:id="@+id/textView_Bearbeiten"
-                android:textStyle="bold"
-                android:layout_gravity="center_vertical"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
                 android:paddingLeft="20dp"
-                android:text="bearbeiten"/>
+                android:paddingTop="20sp"
+                android:text="bearbeiten"
+                android:textSize="18sp"
+                android:textStyle="bold" />
         </LinearLayout>
     </LinearLayout>
 
