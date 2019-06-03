@@ -93,6 +93,13 @@ public class my_forum extends AppCompatActivity implements AdapterView.OnItemCli
 
     }
 
+    @Override
+    public void onBackPressed() {
+
+        setResult(RESULT_CANCELED);
+
+        finish();
+    }
     //Menu-button
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -147,29 +154,32 @@ public class my_forum extends AppCompatActivity implements AdapterView.OnItemCli
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        String sentBack = data.getStringExtra("action");    //Inhalte zurück geben
+        if (resultCode != RESULT_CANCELED && data != null) {
 
-        ItemData  item = (ItemData)data.getExtras().getSerializable("data");
+            String sentBack = data.getStringExtra("action");    //Inhalte zurück geben
 
-        switch (sentBack){ //was wurde gewählt Löschen oder Speichern
-            case "delete":{
-                if (itemArray.contains(selectedData))
-                    adapter.remove(selectedData);
-                break;
-            }
-            case "save":{
-                if (item != null) {
-                    //ADD
-                    if (selectedData == null)
-                        adapter.add(item);
-                        //INSERT => ersetzen der alten durch die neuen Daten
-                    else {
-                        int index = itemArray.indexOf(selectedData);
-                        adapter.insert(item, index);
+            ItemData item = (ItemData) data.getExtras().getSerializable("data");
+
+            switch (sentBack) { //was wurde gewählt Löschen oder Speichern
+                case "delete": {
+                    if (itemArray.contains(selectedData))
                         adapter.remove(selectedData);
-                    }
+                    break;
                 }
-                break;
+                case "save": {
+                    if (item != null) {
+                        //ADD
+                        if (selectedData == null)
+                            adapter.add(item);
+                            //INSERT => ersetzen der alten durch die neuen Daten
+                        else {
+                            int index = itemArray.indexOf(selectedData);
+                            adapter.insert(item, index);
+                            adapter.remove(selectedData);
+                        }
+                    }
+                    break;
+                }
             }
         }
 
