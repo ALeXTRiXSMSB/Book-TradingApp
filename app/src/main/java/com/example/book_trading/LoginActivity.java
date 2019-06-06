@@ -56,7 +56,7 @@ public class LoginActivity extends AppCompatActivity {
         final EditText UserName = (EditText) findViewById(R.id.user_name);
         final EditText Password = (EditText) findViewById(R.id.user_password);
         final String username = UserName.getText().toString();
-         String password = Password.getText().toString();
+        String password = Password.getText().toString();
         try {
             password = HashHelper.encrypt(password); //verschlüsseln des Textes
         } catch (Exception e) {
@@ -69,6 +69,10 @@ public class LoginActivity extends AppCompatActivity {
                 if(response.body().getResponse().equals("success")){ //Status Ok es kann sich eingeloggt werden
                     LoginActivity.prefConfig.writeLoginStatus(true); //LoginStatus auf true setzen um sich ein zu loggen
                     LoginActivity.prefConfig.writeName(response.body().getU_name());
+                    LoginActivity.prefConfig.writeEmail(response.body().getU_email());
+                    LoginActivity.prefConfig.writeFavorites(response.body().getU_favorites());
+                    LoginActivity.prefConfig.writeLikes(response.body().getU_like());
+                    LoginActivity.prefConfig.writeDiscription(response.body().getU_discription());
 
                     Intent registerIntent = new Intent(LoginActivity.this, ProfilActivity.class);
                     LoginActivity.this.startActivity(registerIntent);   //von der LoginActivity geht es weiter zum Profil bzw. der Startseite

@@ -11,7 +11,8 @@ public interface ApiInterface {
     Call<User> performRegistration(@Query("u_name") String UserName,@Query("u_pass") String UserPassword);
 
     @GET("login.php")
-    Call<User> performUserLogin(@Query("u_name") String UserName,@Query("u_pass") String UserPassword);
+    Call<User> performUserLogin(@Query("u_name") String UserName,
+                                @Query("u_pass") String UserPassword);
 
     @GET("getThreads.php")
     Call<ArrayList<Thread>> performGetThreads(@Query("t_id") int t_id,
@@ -28,7 +29,8 @@ public interface ApiInterface {
     Call<User> performGetProfile(@Query("u_id") int u_id,
                                  @Query("u_name") String name,
                                  @Query("u_discription") String beschreibung,
-                                 @Query("u_like") int likes);
+                                 @Query("u_like") int likes,
+                                 @Query("u_favorites") String favorites);
 
     @GET("editProfile.php")
     Call<User> performEditProfile(@Query("u_discription") String beschreibung,

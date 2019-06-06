@@ -19,6 +19,9 @@ public class User {
     @SerializedName("u_discription")
     private String u_discription;
 
+    @SerializedName("u_favorites")
+    private String u_favorites;
+
     @SerializedName("u_like")
     private int u_like;
 
@@ -27,7 +30,7 @@ public class User {
     }
 
     public void setResponse(String response) {
-        response = response;
+        this.response = response;
     }
 
     public int getU_id() {
@@ -60,6 +63,14 @@ public class User {
 
     public void setU_discription(String u_discription) {
         this.u_discription = u_discription;
+    }
+
+    public String getU_favorites() {
+        return u_favorites;
+    }
+
+    public void setU_favorites(String u_favorites) {
+        this.u_favorites = u_favorites;
     }
 
     public int getU_like() {

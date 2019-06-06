@@ -24,6 +24,7 @@ public class ProfilActivity extends AppCompatActivity implements ExampleDialog.E
         setContentView(R.layout.profil_layout);
         TextView user = (TextView) findViewById(R.id.txt_name_info);
         user.setText("Hello " + LoginActivity.prefConfig.readName());
+        this.applyTexts(LoginActivity.prefConfig.readDiscription(),LoginActivity.prefConfig.readEmail(),LoginActivity.prefConfig.readFavorites());
 
         textViewInfo = (TextView) findViewById(R.id.textView_Info);
         textViewMail = (TextView) findViewById(R.id.textView_Mail);
@@ -105,5 +106,4 @@ public class ProfilActivity extends AppCompatActivity implements ExampleDialog.E
         textViewMail.setText(mail);
         textViewBuch.setText(buch);
     }
-
 }
