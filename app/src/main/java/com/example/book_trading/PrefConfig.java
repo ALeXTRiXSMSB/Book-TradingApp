@@ -73,7 +73,6 @@ public class PrefConfig {   //Loginstatus
         return sharedPreferences.getString("com.abc.preference_favorites","Favoriten");
     }
 
-
     public void displayToast(String message){
         Toast.makeText(context,message, Toast.LENGTH_SHORT).show();
     }

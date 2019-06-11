@@ -76,7 +76,6 @@ public class my_forum extends AppCompatActivity implements AdapterView.OnItemCli
                 return view;
             }
         };
-
         //Verbindung Oberfläche mit dem Adapter
         itemsListView.setAdapter(adapter);
 
@@ -90,16 +89,14 @@ public class my_forum extends AppCompatActivity implements AdapterView.OnItemCli
                 AddNewItem();
             }
         });
-
     }
 
     @Override
     public void onBackPressed() {
-
         setResult(RESULT_CANCELED);
-
         finish();
     }
+
     //Menu-button
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -123,7 +120,6 @@ public class my_forum extends AppCompatActivity implements AdapterView.OnItemCli
 
     //neues Item Hinzufühgen
    private void AddNewItem(){
-
         Intent getDetailIntent = new Intent(this,
                 ForumEintragActivity.class);
 
@@ -138,7 +134,6 @@ public class my_forum extends AppCompatActivity implements AdapterView.OnItemCli
     //Eintrag anklicken
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
         Intent getDetailIntent = new Intent(this,
                 ForumEintragActivity.class); //Öffnen der Klasse um den Eintrag zu bearbeiten
 
@@ -182,17 +177,13 @@ public class my_forum extends AppCompatActivity implements AdapterView.OnItemCli
                 }
             }
         }
-
         selectedData = null;
-
         adapter.notifyDataSetChanged();
-
     }
 
     //TestEinträge
     //Beispieldaten einfühgen
     private void LoadData(){
-
         //Beispieldaten
         ItemData item1 = new ItemData("Buch 1", "1234", "schlecht","wie neu");
         ItemData item2 = new ItemData("Buch 2", "2345", "gut","nie benutzt");

@@ -8,17 +8,17 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="300sp">
+        android:layout_height="wrap_content">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="250sp"
+            android:layout_height="200sp"
             android:background="@drawable/gradientbackround"
             android:orientation="vertical">
 
             <ImageView
-                android:layout_width="155dp"
-                android:layout_height="135dp"
+                android:layout_width="wrap_content"
+                android:layout_height="100sp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="35dp"
                 android:src="@drawable/img_299586" />
@@ -37,20 +37,20 @@
         </LinearLayout>
 
         <androidx.cardview.widget.CardView
-            android:layout_width="336dp"
-            android:layout_height="105dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="220dp">
+            android:layout_marginTop="165sp">
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:weightSum="3">
 
                 <LinearLayout
-                    android:layout_width="170dp"
-                    android:layout_height="match_parent"
+                    android:layout_width="150sp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:orientation="vertical">
@@ -73,8 +73,8 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="160dp"
-                    android:layout_height="match_parent"
+                    android:layout_width="150sp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:orientation="vertical">
@@ -82,14 +82,15 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="like"
+                        android:text="likes"
                         android:textSize="20sp" />
 
                     <TextView
+                        android:id="@+id/positiv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingTop="10dp"
-                        android:text="10"
+                        android:text="0"
                         android:textColor="@color/startblue"
                         android:textSize="20sp"
                         android:textStyle="bold" />
@@ -99,21 +100,21 @@
     </RelativeLayout>
 
     <LinearLayout
-        android:layout_width="360dp"
+        android:layout_width="350sp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_gravity="center"
-        android:layout_marginTop="20sp">
+        android:layout_marginTop="50sp">
 
         <LinearLayout
             android:orientation="horizontal"
             android:paddingLeft="25dp"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
             <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="30sp"
+                android:layout_height="30sp"
                 android:src="@drawable/ic_info"/>
 
             <TextView
@@ -127,15 +128,15 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:orientation="horizontal"
             android:paddingLeft="25dp"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
             <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="30sp"
+                android:layout_height="30sp"
                 android:src="@drawable/ic_mail"/>
 
             <TextView
@@ -149,15 +150,15 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:orientation="horizontal"
             android:paddingLeft="25dp"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
             <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="30sp"
+                android:layout_height="30sp"
                 android:src="@drawable/ic_book"/>
 
             <TextView
@@ -171,7 +172,6 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_marginTop="5dp"
             android:orientation="horizontal"
             android:paddingLeft="25dp"
             android:layout_width="match_parent"

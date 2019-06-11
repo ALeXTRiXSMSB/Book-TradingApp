@@ -13,9 +13,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 /**
  * Activity-Klasse für das eigene Profil
  */
-
 public class ProfilActivity extends AppCompatActivity implements ExampleDialog.ExampleDialogListener {
-
     private TextView textViewInfo, textViewMail, textViewBuch, textViewForum,textViewBearbeiten;
 
     @Override
@@ -48,7 +46,6 @@ public class ProfilActivity extends AppCompatActivity implements ExampleDialog.E
                 startActivity(intent);
             }
         });
-
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.bottom_navigation);
         navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -106,4 +103,5 @@ public class ProfilActivity extends AppCompatActivity implements ExampleDialog.E
         textViewMail.setText(mail);
         textViewBuch.setText(buch);
     }
+
 }

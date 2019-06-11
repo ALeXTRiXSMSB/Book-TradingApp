@@ -80,4 +80,5 @@ public class User {
     public void setU_like(int u_like) {
         this.u_like = u_like;
     }
+
 }

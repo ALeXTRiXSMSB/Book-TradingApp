@@ -38,7 +38,6 @@ public class ForumEintragActivity extends AppCompatActivity {
         {
             selectedItem = new ItemData("","","","" );
         }
-
         ((EditText)findViewById(R.id.nameEingabe)).setText(selectedItem.Name);
         ((EditText)findViewById(R.id.isbnEingabe)).setText(selectedItem.ISBN);
         ((EditText)findViewById(R.id.zustandEingabe)).setText(selectedItem.Zustand);
@@ -67,7 +66,6 @@ public class ForumEintragActivity extends AppCompatActivity {
                 return false;
             }
         });
-
     }
 
     //////////////////////
@@ -90,9 +88,7 @@ public class ForumEintragActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-
         setResult(RESULT_CANCELED);
-
         finish();
     }
 
@@ -127,7 +123,6 @@ public class ForumEintragActivity extends AppCompatActivity {
                 });
         AlertDialog alertDialog = alterDialogBuilder.create();
         alertDialog.show();
-
     }
 
     @Override

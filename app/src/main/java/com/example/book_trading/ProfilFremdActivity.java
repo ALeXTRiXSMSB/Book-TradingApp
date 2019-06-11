@@ -5,8 +5,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,14 +14,9 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 /**
  * Activity-Klasse für das Profil anderer Personen
  */
-
 public class ProfilFremdActivity extends AppCompatActivity {
     private TextView positivklick;
     private TextView positivZahl;
-    private TextView nachrichtBtn;
-    private int bewertungCounter;
-    private int positivAnzahl;
-    private int negativAnzahl;
     FloatingActionButton direktChat;
 
     @Override
@@ -41,7 +34,6 @@ public class ProfilFremdActivity extends AppCompatActivity {
                 likeklicken();
             }
         });
-
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.bottom_navigation);
         navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -63,7 +55,6 @@ public class ProfilFremdActivity extends AppCompatActivity {
                 return false;
             }
         });
-
         direktChat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
