@@ -36,13 +36,12 @@ public class LoginActivity extends AppCompatActivity {
         LoginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 // auskommentiert zum Testen für mich
                 performLogin();
 
                 // Test
-                //Intent registerIntent = new Intent(LoginActivity.this, ProfilActivity.class);
-                //LoginActivity.this.startActivity(registerIntent);
+                // Intent registerIntent = new Intent(LoginActivity.this, ProfilActivity.class);
+                // LoginActivity.this.startActivity(registerIntent);
                 // Test Ende
             }
         });

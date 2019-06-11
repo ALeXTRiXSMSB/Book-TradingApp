@@ -30,7 +30,6 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     public void performRegistration(){
-
         String username = UserName.getText().toString();
         String password = UserPassword.getText().toString();
         try {
@@ -57,7 +56,7 @@ public class RegisterActivity extends AppCompatActivity {
             public void onFailure(Call<User> call, Throwable t) {
             }
         });
-          //Nach dem anmelden werden die Felder wieder geleert und es können neue Inhalte eingetragen werden
+        //Nach dem anmelden werden die Felder wieder geleert und es können neue Inhalte eingetragen werden
         //UserPassword.setText("");
         //UserName.setText("");
     }

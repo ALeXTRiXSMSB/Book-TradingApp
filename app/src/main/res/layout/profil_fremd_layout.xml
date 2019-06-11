@@ -8,17 +8,17 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="305dp">
+        android:layout_height="wrap_content">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="250dp"
+            android:layout_height="200sp"
             android:background="@drawable/gradientbackround"
             android:orientation="vertical">
 
             <ImageView
-                android:layout_width="155dp"
-                android:layout_height="135dp"
+                android:layout_width="wrap_content"
+                android:layout_height="100sp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="35dp"
                 android:src="@drawable/img_299586" />
@@ -31,26 +31,26 @@
                 android:layout_weight="1"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                android:text="Hello User"
+                android:text="User"
                 android:textColor="@android:color/black"
                 android:textAlignment="center" />
         </LinearLayout>
 
         <androidx.cardview.widget.CardView
-            android:layout_width="336dp"
-            android:layout_height="105dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="220dp">
+            android:layout_marginTop="165sp">
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:weightSum="3">
 
                 <LinearLayout
-                    android:layout_width="170dp"
-                    android:layout_height="match_parent"
+                    android:layout_width="150sp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:orientation="vertical">
@@ -72,8 +72,8 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="160dp"
-                    android:layout_height="match_parent"
+                    android:layout_width="150sp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:orientation="vertical">
@@ -82,7 +82,7 @@
                         android:id="@+id/positivklick"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="like"
+                        android:text="likes"
                         android:textSize="20sp" />
 
                     <TextView
@@ -114,7 +114,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="360dp"
+        android:layout_width="350sp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_gravity="center"
@@ -123,12 +123,12 @@
         <LinearLayout
             android:orientation="horizontal"
             android:paddingLeft="25dp"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
             <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="30sp"
+                android:layout_height="30sp"
                 android:src="@drawable/ic_info"/>
 
             <TextView
@@ -142,15 +142,15 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:orientation="horizontal"
             android:paddingLeft="25dp"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
             <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="30sp"
+                android:layout_height="30sp"
                 android:src="@drawable/ic_mail"/>
 
             <TextView
@@ -164,15 +164,15 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:orientation="horizontal"
             android:paddingLeft="25dp"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
             <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="30sp"
+                android:layout_height="30sp"
                 android:src="@drawable/ic_book"/>
 
             <TextView

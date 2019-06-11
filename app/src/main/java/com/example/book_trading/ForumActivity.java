@@ -9,14 +9,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
 import java.util.ArrayList;
 
 /**
@@ -26,7 +24,6 @@ import java.util.ArrayList;
 public class ForumActivity extends AppCompatActivity {
     private ListView lv;
     private ArrayAdapter<String> adapter = null;
-    //private Button eintragBtn;
     private ItemData selectedData;
     private static final String TAG = "MainActivity";
 
@@ -36,7 +33,6 @@ public class ForumActivity extends AppCompatActivity {
         setContentView(R.layout.forum_layout);
         this.lv = (ListView)findViewById(R.id.listView);
         EditText theFilter = (EditText) findViewById(R.id.searchFilter);
-        //this.eintragBtn = (Button)findViewById(R.id.neuerEintrag);
 
         FloatingActionButton floatingActionButton = findViewById(R.id.fab_1);   //Fab_Button
 
@@ -64,7 +60,6 @@ public class ForumActivity extends AppCompatActivity {
                 return false;
             }
         });
-
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,names);
         lv.setAdapter(adapter);
         test();
@@ -72,7 +67,6 @@ public class ForumActivity extends AppCompatActivity {
         theFilter.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
             }
 
             @Override
@@ -82,7 +76,6 @@ public class ForumActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-
             }
         });
 
@@ -106,7 +99,6 @@ public class ForumActivity extends AppCompatActivity {
         });
     }
 
-
     private void AddNewItem(){
         Intent getDetailIntent = new Intent(this,
                 ForumEintragActivity.class);
@@ -121,9 +113,7 @@ public class ForumActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-
         setResult(RESULT_CANCELED);
-
         finish();
     }
 

@@ -11,7 +11,6 @@ import android.widget.EditText;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
 public class ExampleDialog extends AppCompatDialogFragment {
-
     private EditText editTextInfo, editTextMail, editTextBuch;
     ExampleDialogListener listener;
 
@@ -28,25 +27,20 @@ public class ExampleDialog extends AppCompatDialogFragment {
                 .setNegativeButton("abbrechen", new DialogInterface.OnClickListener() {   //bei cancel Dialogfenster schließen
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-
                     }
                 })
-
                 .setPositiveButton("ok", new DialogInterface.OnClickListener() {    //Beim klicken auf ok die Inhalte übernehmen
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-
                         String info = editTextInfo.getText().toString();
                         String mail = editTextMail.getText().toString();
                         String buch = editTextBuch.getText().toString();
                         listener.applyTexts(info,mail,buch);
                     }
                 });
-
         editTextInfo= view.findViewById(R.id.Info);
         editTextMail = view.findViewById(R.id.Mail);
         editTextBuch = view.findViewById(R.id.Buch);
-
         return builder.create();
     }
 
@@ -57,7 +51,6 @@ public class ExampleDialog extends AppCompatDialogFragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-
         try {
             listener = (ExampleDialogListener) context;
         } catch (ClassCastException e) {

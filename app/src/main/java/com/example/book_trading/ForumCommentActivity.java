@@ -33,7 +33,6 @@ public class ForumCommentActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
         //beim klicken auf den Flieger kann man dem besitzer eine Message schreiben
         btnChat.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -42,7 +41,6 @@ public class ForumCommentActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.bottom_navigation);
         navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -64,7 +62,6 @@ public class ForumCommentActivity extends AppCompatActivity {
                 return false;
             }
         });
-
     }
 
     @Override

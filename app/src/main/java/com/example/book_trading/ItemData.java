@@ -4,13 +4,9 @@ import java.io.Serializable;
 
 //Diese klasse speichert die Inhalte kann später ggf. gelöscht werden
 public class ItemData implements Serializable {
-
     public String Name;
-
     public String ISBN;
-
     public String Zustand;
-
     public String Beschreibung;
 
     public ItemData(String name, String isbn, String zustand, String beschreibung){
