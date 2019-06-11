@@ -15,25 +15,25 @@ public class PrefConfig {   //Loginstatus
 
     public void writeEmail(String email){
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("com.abc.preference_email",email);
+        editor.putString(context.getString(R.string.pref_email),email);
         editor.commit();
     }
 
     public void writeLikes(int likes){
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putInt("com.abc.preference_like",likes);
+        editor.putInt(context.getString(R.string.pref_likes),likes);
         editor.commit();
     }
 
     public void writeFavorites(String favorites){
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("com.abc.preference_favorites",favorites);
+        editor.putString(context.getString(R.string.pref_favorites),favorites);
         editor.commit();
     }
 
     public void writeDiscription(String discription){
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("com.abc.preference_discription",discription);
+        editor.putString(context.getString(R.string.pref_discription),discription);
         editor.commit();
     }
 
@@ -58,19 +58,19 @@ public class PrefConfig {   //Loginstatus
     }
 
     public String readEmail(){
-        return sharedPreferences.getString("com.abc.preference_email","E-Mail");
+        return sharedPreferences.getString(context.getString(R.string.pref_email),"E-Mail");
     }
 
     public int readLikes(){
-        return sharedPreferences.getInt("com.abc.preference_likes",0);
+        return sharedPreferences.getInt(context.getString(R.string.pref_likes),0);
     }
 
     public String readDiscription(){
-        return sharedPreferences.getString("com.abc.preference_discription","Beschreibung");
+        return sharedPreferences.getString(context.getString(R.string.pref_discription),"Beschreibung");
     }
 
     public String readFavorites(){
-        return sharedPreferences.getString("com.abc.preference_favorites","Favoriten");
+        return sharedPreferences.getString(context.getString(R.string.pref_favorites),"Favoriten");
     }
 
 
