@@ -13,15 +13,25 @@ public class PrefConfig {   //Loginstatus
         sharedPreferences = context.getSharedPreferences(context.getString(R.string.pref_file),Context.MODE_PRIVATE);
     }
 
+    public void writeUID(String u_id){
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(context.getString(R.string.pref_u_id),u_id);
+        editor.commit();
+    }
+
+    public String readUID(){
+        return sharedPreferences.getString(context.getString(R.string.pref_u_id),"0");
+    }
+
     public void writeEmail(String email){
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(context.getString(R.string.pref_email),email);
         editor.commit();
     }
 
-    public void writeLikes(int likes){
+    public void writeLikes(String likes){
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putInt(context.getString(R.string.pref_likes),likes);
+        editor.putString(context.getString(R.string.pref_likes),likes);
         editor.commit();
     }
 
@@ -61,8 +71,8 @@ public class PrefConfig {   //Loginstatus
         return sharedPreferences.getString(context.getString(R.string.pref_email),"E-Mail");
     }
 
-    public int readLikes(){
-        return sharedPreferences.getInt(context.getString(R.string.pref_likes),0);
+    public String readLikes(){
+        return sharedPreferences.getString(context.getString(R.string.pref_likes),"0");
     }
 
     public String readDiscription(){

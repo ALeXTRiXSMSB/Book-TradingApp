@@ -28,13 +28,17 @@ public interface ApiInterface {
     @GET("getProfile.php")
     Call<User> performGetProfile(@Query("u_id") int u_id,
                                  @Query("u_name") String name,
+                                 @Query("u_email") String email,
                                  @Query("u_discription") String beschreibung,
-                                 @Query("u_like") int likes,
-                                 @Query("u_favorites") String favorites);
+                                 @Query("u_favorites") String favorites,
+                                 @Query("u_like") int likes);
 
+    //info mail buch
     @GET("editProfile.php")
-    Call<User> performEditProfile(@Query("u_discription") String beschreibung,
-                                  @Query("u_id") int u_id);
+    Call<User> performEditProfile(@Query("u_email") String email,
+                                  @Query("u_discription") String beschreibung,
+                                  @Query("u_favorites") String favoriten,
+                                  @Query("u_name") String u_id);
 
     @GET("createThread.php")
     Call<Thread> performCreateThread(@Query("t_titel") String titel,

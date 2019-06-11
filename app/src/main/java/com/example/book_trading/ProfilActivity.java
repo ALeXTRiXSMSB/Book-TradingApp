@@ -10,25 +10,40 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+
 /**
  * Activity-Klasse für das eigene Profil
  */
 public class ProfilActivity extends AppCompatActivity implements ExampleDialog.ExampleDialogListener {
-    private TextView textViewInfo, textViewMail, textViewBuch, textViewForum,textViewBearbeiten;
+
+    public static PrefConfig prefConfig;
+    public static ApiInterface apiInterface;
+
+    private TextView textViewInfo, textViewMail, textViewBuch, textViewForum,textViewBearbeiten,textviewLike,user;
+
+    //private TextView textViewInfo, textViewMail, textViewBuch, textViewForum,textViewBearbeiten;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profil_layout);
-        TextView user = (TextView) findViewById(R.id.txt_name_info);
-        user.setText("Hello " + LoginActivity.prefConfig.readName());
-        this.applyTexts(LoginActivity.prefConfig.readDiscription(),LoginActivity.prefConfig.readEmail(),LoginActivity.prefConfig.readFavorites());
+        prefConfig = new PrefConfig(this);
+        apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
 
+        user = (TextView) findViewById(R.id.txt_name_info);
         textViewInfo = (TextView) findViewById(R.id.textView_Info);
         textViewMail = (TextView) findViewById(R.id.textView_Mail);
         textViewBuch = (TextView) findViewById(R.id.textView_Buch);
-        textViewForum = (TextView) findViewById(R.id.textView_Forum);
         textViewBearbeiten = (TextView) findViewById(R.id.textView_Bearbeiten);
+        textviewLike = (TextView) findViewById(R.id.positiv);
+        textViewForum = (TextView) findViewById(R.id.textView_forum);
+
+        textviewLike.setText(this.prefConfig.readLikes());
+
+        user.setText("Hello " + this.prefConfig.readName());
+        this.applyTexts(this.prefConfig.readDiscription(),this.prefConfig.readEmail(),this.prefConfig.readFavorites());
 
         //beim klicken auf die bearbeiten um seine Profildaten zu bearbeiten
         textViewBearbeiten.setOnClickListener(new View.OnClickListener() {
@@ -82,7 +97,7 @@ public class ProfilActivity extends AppCompatActivity implements ExampleDialog.E
         switch (item.getItemId()) {
             case R.id.logout:
                 Intent logout = new Intent(this, LoginActivity.class);
-                LoginActivity.prefConfig.writeLoginStatus(false);
+                this.prefConfig.writeLoginStatus(false);
                 startActivity(logout);
                 return true;
             default:
