@@ -76,4 +76,15 @@ public class chatLogin {
         filter.setPriority(100);
         context.registerReceiver(receiver, filter);
     }
+
+
+    /**
+     * Intent zur Chat Übersicht
+     */
+    public static void startChatActivity(Context context) {
+        Intent i = new Intent(context, chat_uebersichtActivity.class);
+        context.startActivity(i);
+    }
 }
+
+
