@@ -99,9 +99,9 @@ public class ProfilActivity extends AppCompatActivity implements ExampleDialog.E
     //Dialog
     @Override
     public void applyTexts(String info, String mail, String buch) {
-        textViewInfo.setText(info);
-        textViewMail.setText(mail);
-        textViewBuch.setText(buch);
+        //textViewInfo.setText(info);
+        //textViewMail.setText(mail);
+        //textViewBuch.setText(buch);
     }
 
 }
