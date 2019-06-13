@@ -1,16 +1,20 @@
 package com.example.book_trading;
 
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
+import com.example.book_trading.chat.chatLogin;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class RegisterActivity extends AppCompatActivity {
-    private EditText  UserName, UserPassword;
+    private EditText UserName, UserPassword;
     private Button BnRegister;
 
     @Override
@@ -29,29 +33,33 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
 
-    public void performRegistration(){
-        String username = UserName.getText().toString();
-        String password = UserPassword.getText().toString();
+    private String password;
+
+    public void performRegistration() {
+        final String username = UserName.getText().toString();
+        String password_klartext = UserPassword.getText().toString();
         try {
-            password = HashHelper.encrypt(password); //verschlüsseln des Textes
+            password = HashHelper.encrypt(password_klartext); //verschlüsseln des Textes
         } catch (Exception e) {
             e.printStackTrace();
         }
-        if (username.length()==0 || password.length()==0){
+        if (username.length() == 0 || password.length() == 0) {
             LoginActivity.prefConfig.displayToast("Leereingaben sind ungültig!");
             return;
         }
-        Call<User> call = LoginActivity.apiInterface.performRegistration(username,password);// alles ab hier nach unten
+        Call<User> call = LoginActivity.apiInterface.performRegistration(username, password);// alles ab hier nach unten
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
-                if(response.body().getResponse().equals("success")){
+                if (response.body().getResponse().equals("success")) {
+                    chatLogin login = new chatLogin(username, password, false, getApplicationContext());
                     LoginActivity.prefConfig.displayToast("Alles Richtig");    //Registrierung hat funktioniert
                     //springe zurück
-                }else if(response.body().getResponse().equals("user exists")) {
+                } else if (response.body().getResponse().equals("user exists")) {
                     LoginActivity.prefConfig.displayToast("User already exist..."); //Es gibt bereits einen User mit gleichem Username
                 }
             }
+
             @Override
             public void onFailure(Call<User> call, Throwable t) {
             }
