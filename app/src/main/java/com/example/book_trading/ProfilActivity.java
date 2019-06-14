@@ -18,8 +18,8 @@ import retrofit2.Callback;
  */
 public class ProfilActivity extends AppCompatActivity implements ExampleDialog.ExampleDialogListener {
 
-    public static PrefConfig prefConfig;
-    public static ApiInterface apiInterface;
+    private static PrefConfig prefConfig;
+    private static ApiInterface apiInterface;
 
     private TextView textViewInfo, textViewMail, textViewBuch, textViewForum,textViewBearbeiten,textviewLike,user;
 
