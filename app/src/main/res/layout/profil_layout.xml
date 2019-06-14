@@ -20,7 +20,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="100sp"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="35dp"
+                android:layout_marginTop="35sp"
                 android:src="@drawable/img_299586" />
 
             <TextView
@@ -56,18 +56,17 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/textView"
+                        android:id="@+id/textView_Forum"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Forum"
                         android:textSize="20sp" />
 
                     <TextView
-                        android:id="@+id/textView_forum"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:paddingTop="10dp"
-                        android:text="0"
+                        android:paddingTop="10sp"
+                        android:text="7"
                         android:textColor="@color/startblue"
                         android:textSize="20sp"
                         android:textStyle="bold" />
@@ -90,7 +89,7 @@
                         android:id="@+id/positiv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:paddingTop="10dp"
+                        android:paddingTop="10sp"
                         android:text="0"
                         android:textColor="@color/startblue"
                         android:textSize="20sp"
@@ -109,7 +108,7 @@
 
         <LinearLayout
             android:orientation="horizontal"
-            android:paddingLeft="25dp"
+            android:paddingLeft="25sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
@@ -120,18 +119,18 @@
 
             <TextView
                 android:id="@+id/textView_Info"
+                android:textStyle="bold"
+                android:layout_gravity="center_vertical"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:paddingLeft="20dp"
-                android:text="Beschreibung"
-                android:textStyle="bold" />
+                android:paddingLeft="20sp"
+                android:text="Hey there! I am using BookTrading"/>
         </LinearLayout>
 
         <LinearLayout
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="10sp"
             android:orientation="horizontal"
-            android:paddingLeft="25dp"
+            android:paddingLeft="25sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
@@ -142,18 +141,18 @@
 
             <TextView
                 android:id="@+id/textView_Mail"
+                android:textStyle="bold"
+                android:layout_gravity="center_vertical"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:paddingLeft="20dp"
-                android:text="E-Mail"
-                android:textStyle="bold" />
+                android:paddingLeft="20sp"
+                android:text="Wiliam@gmx.com"/>
         </LinearLayout>
 
         <LinearLayout
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="10sp"
             android:orientation="horizontal"
-            android:paddingLeft="25dp"
+            android:paddingLeft="25sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
@@ -164,17 +163,17 @@
 
             <TextView
                 android:id="@+id/textView_Buch"
+                android:textStyle="bold"
+                android:layout_gravity="center_vertical"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:paddingLeft="20dp"
-                android:text="Favoriten"
-                android:textStyle="bold" />
+                android:paddingLeft="20sp"
+                android:text="Physik- und Geschichtsbücher"/>
         </LinearLayout>
 
         <LinearLayout
             android:orientation="horizontal"
-            android:paddingLeft="25dp"
+            android:paddingLeft="25sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="end|bottom">
@@ -184,7 +183,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:paddingLeft="20dp"
+                android:paddingLeft="20sp"
                 android:paddingTop="20sp"
                 android:text="bearbeiten"
                 android:textSize="18sp"

@@ -15,9 +15,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".my_forum"></activity>
-        <activity android:name=".RegisterActivity" />
-        <activity android:name=".LoginActivity">
+        <activity android:name=".RegisterActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".LoginActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -25,25 +26,37 @@
         </activity>
         <activity
             android:name=".ProfilActivity"
-            android:label="Profil" />
+            android:label="Profil"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ProfilFremdActivity"
-            android:label="Profil" />
+            android:label="Profil"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ForumActivity"
-            android:label="Forum" />
+            android:label="Forum"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".my_forum"
+            android:label="Mein Forum"
+            android:screenOrientation="portrait">
+        </activity>
         <activity
             android:name=".ForumCommentActivity"
-            android:label="Details" />
+            android:label="Details"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ForumEintragActivity"
-            android:label="Forum Eintrag" />
+            android:label="Forum Eintrag"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".NachrichtenActivity"
-            android:label="Nachrichten" />
+            android:label="Nachrichten"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ChatActivity"
-            android:label="Chat" />
+            android:label="Chat"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

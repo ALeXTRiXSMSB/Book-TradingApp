@@ -10,20 +10,13 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-
 /**
  * Activity-Klasse für das eigene Profil
  */
 public class ProfilActivity extends AppCompatActivity implements ExampleDialog.ExampleDialogListener {
-
     private static PrefConfig prefConfig;
     private static ApiInterface apiInterface;
-
     private TextView textViewInfo, textViewMail, textViewBuch, textViewForum,textViewBearbeiten,textviewLike,user;
-
-    //private TextView textViewInfo, textViewMail, textViewBuch, textViewForum,textViewBearbeiten;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +31,7 @@ public class ProfilActivity extends AppCompatActivity implements ExampleDialog.E
         textViewBuch = (TextView) findViewById(R.id.textView_Buch);
         textViewBearbeiten = (TextView) findViewById(R.id.textView_Bearbeiten);
         textviewLike = (TextView) findViewById(R.id.positiv);
-        textViewForum = (TextView) findViewById(R.id.textView_forum);
+        textViewForum = (TextView) findViewById(R.id.textView_Forum);
 
         textviewLike.setText(this.prefConfig.readLikes());
 
