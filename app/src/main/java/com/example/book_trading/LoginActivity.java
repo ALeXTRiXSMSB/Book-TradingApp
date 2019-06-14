@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -60,6 +61,7 @@ public class LoginActivity extends AppCompatActivity {
         if (prefConfig.readLoginStatus()) {   //wenn user ist eingelogt bzw bereits angemeldet ist und sich beim letzten mal nicht ausgeloggt hat
             Intent myIntent = new Intent(LoginActivity.this, ProfilActivity.class);  //öffnen der Profil seite
             LoginActivity.this.startActivity(myIntent);
+            chatLogin login = new chatLogin(prefConfig.readName(), prefConfig.readPassword(), true, getApplicationContext());
         }
     }
 
@@ -82,6 +84,7 @@ public class LoginActivity extends AppCompatActivity {
                 if (response.body().getResponse().equals("success")) { //Status Ok es kann sich eingeloggt werden
                     LoginActivity.prefConfig.writeLoginStatus(true); //LoginStatus auf true setzen um sich ein zu loggen
                     LoginActivity.prefConfig.writeName(response.body().getU_name());
+                    LoginActivity.prefConfig.writePassword(password);
                     LoginActivity.prefConfig.writeEmail(response.body().getU_email());
                     LoginActivity.prefConfig.writeLikes(response.body().getU_like());
                     LoginActivity.prefConfig.writeFavorites(response.body().getU_favorites());

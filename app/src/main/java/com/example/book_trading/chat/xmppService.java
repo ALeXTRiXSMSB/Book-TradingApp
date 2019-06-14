@@ -49,7 +49,7 @@ public class xmppService extends Service {
 
     private String empfaenger;
     private static final String XMPPDOMAIN = "booktrading";
-    private static final String IP = "192.168.178.34";
+    private static final String IP = "91.64.161.74";
 
     //TODO: EMPFANGER von der Datenbank abfragen -> möglicherweise Problem mit mehreren Teilhabern
 

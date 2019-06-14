@@ -23,12 +23,15 @@ public class chat_uebersichtActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_uebersicht);
 
+        setTitle("Chats:");
+
         lv_chat_uebaericht = (ListView) findViewById(R.id.chats_view);
 
         strings = new ArrayList<String>();
         strings.add("paul");
         strings.add("carl");
-        strings.add("carl2");
+        strings.add("alex");
+        strings.add("nils");
 
 
         build_lv();

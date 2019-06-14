@@ -8,83 +8,95 @@ public class PrefConfig {   //Loginstatus
     private SharedPreferences sharedPreferences;
     private Context context;
 
-    public PrefConfig(Context context){
+    public PrefConfig(Context context) {
         this.context = context;
-        sharedPreferences = context.getSharedPreferences(context.getString(R.string.pref_file),Context.MODE_PRIVATE);
+        sharedPreferences = context.getSharedPreferences(context.getString(R.string.pref_file), Context.MODE_PRIVATE);
     }
 
-    public void writeUID(String u_id){
+    public void writeUID(String u_id) {
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(context.getString(R.string.pref_u_id),u_id);
+        editor.putString(context.getString(R.string.pref_u_id), u_id);
         editor.commit();
     }
 
-    public String readUID(){
-        return sharedPreferences.getString(context.getString(R.string.pref_u_id),"0");
+    public String readUID() {
+        return sharedPreferences.getString(context.getString(R.string.pref_u_id), "0");
     }
 
-    public void writeEmail(String email){
+    public void writeEmail(String email) {
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(context.getString(R.string.pref_email),email);
+        editor.putString(context.getString(R.string.pref_email), email);
         editor.commit();
     }
 
-    public void writeLikes(String likes){
+    public void writeLikes(String likes) {
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(context.getString(R.string.pref_likes),likes);
+        editor.putString(context.getString(R.string.pref_likes), likes);
         editor.commit();
     }
 
-    public void writeFavorites(String favorites){
+    public void writeFavorites(String favorites) {
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(context.getString(R.string.pref_favorites),favorites);
+        editor.putString(context.getString(R.string.pref_favorites), favorites);
         editor.commit();
     }
 
-    public void writeDiscription(String discription){
+    public void writeDiscription(String discription) {
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(context.getString(R.string.pref_discription),discription);
+        editor.putString(context.getString(R.string.pref_discription), discription);
         editor.commit();
     }
 
-    public void writeLoginStatus(boolean status){       //safe user Loginstatus
+    public void writeLoginStatus(boolean status) {       //safe user Loginstatus
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putBoolean(context.getString(R.string.pref_login_status),status);
+        editor.putBoolean(context.getString(R.string.pref_login_status), status);
         editor.commit();
     }
 
-    public boolean readLoginStatus(){   //ließt den Login status aus von sharedPreferences
-        return sharedPreferences.getBoolean(context.getString(R.string.pref_login_status),false);
+    public boolean readLoginStatus() {   //ließt den Login status aus von sharedPreferences
+        return sharedPreferences.getBoolean(context.getString(R.string.pref_login_status), false);
     }
 
-    public void writeName(String name){ //schreibt username in SharePreferences
+    public void writeName(String name) { //schreibt username in SharePreferences
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(context.getString(R.string.pref_user_name),name);
+        editor.putString(context.getString(R.string.pref_user_name), name);
         editor.commit();
     }
 
-    public String readName(){
-        return sharedPreferences.getString(context.getString(R.string.pref_user_name),"User");
+    public void writePassword(String password) {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(context.getString(R.string.pref_u_password), password);
+        editor.commit();
+
+
     }
 
-    public String readEmail(){
-        return sharedPreferences.getString(context.getString(R.string.pref_email),"E-Mail");
+    public String readName() {
+        return sharedPreferences.getString(context.getString(R.string.pref_user_name), "User");
     }
 
-    public String readLikes(){
-        return sharedPreferences.getString(context.getString(R.string.pref_likes),"0");
+    public String readEmail() {
+        return sharedPreferences.getString(context.getString(R.string.pref_email), "E-Mail");
     }
 
-    public String readDiscription(){
-        return sharedPreferences.getString(context.getString(R.string.pref_discription),"Beschreibung");
+    public String readLikes() {
+        return sharedPreferences.getString(context.getString(R.string.pref_likes), "0");
     }
 
-    public String readFavorites(){
-        return sharedPreferences.getString(context.getString(R.string.pref_favorites),"Favoriten");
+    public String readDiscription() {
+        return sharedPreferences.getString(context.getString(R.string.pref_discription), "Beschreibung");
     }
 
-    public void displayToast(String message){
-        Toast.makeText(context,message, Toast.LENGTH_SHORT).show();
+    public String readFavorites() {
+        return sharedPreferences.getString(context.getString(R.string.pref_favorites), "Favoriten");
+    }
+
+    public String readPassword() {
+        return sharedPreferences.getString(context.getString(R.string.pref_u_password), "0");
+    }
+
+    public void displayToast(String message) {
+        Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
     }
 
 }
