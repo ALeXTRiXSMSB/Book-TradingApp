@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatDialogFragment;
 
 public class ExampleDialog extends AppCompatDialogFragment {
     private EditText editTextInfo, editTextMail, editTextBuch;
+
     ExampleDialogListener listener;
 
     @Override

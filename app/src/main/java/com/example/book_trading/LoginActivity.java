@@ -83,8 +83,8 @@ public class LoginActivity extends AppCompatActivity {
                     LoginActivity.prefConfig.writeLoginStatus(true); //LoginStatus auf true setzen um sich ein zu loggen
                     LoginActivity.prefConfig.writeName(response.body().getU_name());
                     LoginActivity.prefConfig.writeEmail(response.body().getU_email());
-                    LoginActivity.prefConfig.writeFavorites(response.body().getU_favorites());
                     LoginActivity.prefConfig.writeLikes(response.body().getU_like());
+                    LoginActivity.prefConfig.writeFavorites(response.body().getU_favorites());
                     LoginActivity.prefConfig.writeDiscription(response.body().getU_discription());
 
 
