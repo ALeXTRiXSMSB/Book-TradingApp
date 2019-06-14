@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.book_trading.chat.chat_uebersichtActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 /**
@@ -52,7 +54,7 @@ public class ProfilActivity extends AppCompatActivity implements ExampleDialog.E
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.navigateNachrichten:
-                        Intent a = new Intent(ProfilActivity.this, NachrichtenActivity.class);
+                        Intent a = new Intent(ProfilActivity.this, chat_uebersichtActivity.class);
                         startActivity(a);
                         break;
                     case R.id.navigateProfil:
@@ -99,9 +101,9 @@ public class ProfilActivity extends AppCompatActivity implements ExampleDialog.E
     //Dialog
     @Override
     public void applyTexts(String info, String mail, String buch) {
-        //textViewInfo.setText(info);
-        //textViewMail.setText(mail);
-        //textViewBuch.setText(buch);
+        textViewInfo.setText(info);
+        textViewMail.setText(mail);
+        textViewBuch.setText(buch);
     }
 
 }

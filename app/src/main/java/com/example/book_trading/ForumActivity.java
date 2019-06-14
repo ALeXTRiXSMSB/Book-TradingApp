@@ -13,6 +13,8 @@ import android.widget.EditText;
 import android.widget.ListView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.book_trading.chat.chat_uebersichtActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.ArrayList;
@@ -45,7 +47,7 @@ public class ForumActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.navigateNachrichten:
-                        Intent a = new Intent(ForumActivity.this, NachrichtenActivity.class);
+                        Intent a = new Intent(ForumActivity.this, chat_uebersichtActivity.class);
                         startActivity(a);
                         break;
                     case R.id.navigateProfil:

@@ -7,6 +7,8 @@ import android.view.MenuItem;
 import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.book_trading.chat.chat_uebersichtActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -37,8 +39,8 @@ public class ForumCommentActivity extends AppCompatActivity {
         btnChat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ForumCommentActivity.this, ChatActivity.class);
-                startActivity(intent);
+               // Intent intent = new Intent(ForumCommentActivity.this, .class);
+                //startActivity(intent);
             }
         });
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.bottom_navigation);
@@ -47,7 +49,7 @@ public class ForumCommentActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.navigateNachrichten:
-                        Intent a = new Intent(ForumCommentActivity.this, NachrichtenActivity.class);
+                        Intent a = new Intent(ForumCommentActivity.this, chat_uebersichtActivity.class);
                         startActivity(a);
                         break;
                     case R.id.navigateProfil:

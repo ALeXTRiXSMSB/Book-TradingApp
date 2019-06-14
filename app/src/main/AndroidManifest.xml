@@ -51,12 +51,6 @@
         <activity
             android:name=".ForumEintragActivity"
             android:label="Forum Eintrag" />
-        <activity
-            android:name=".NachrichtenActivity"
-            android:label="Nachrichten" />
-        <activity
-            android:name=".ChatActivity"
-            android:label="Chat" />
     </application>
 
 </manifest>
