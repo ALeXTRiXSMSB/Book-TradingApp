@@ -12,20 +12,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.book_trading.chat.chat_uebersichtActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-
 /**
  * Activity-Klasse für das eigene Profil
  */
 public class ProfilActivity extends AppCompatActivity implements ExampleDialog.ExampleDialogListener {
-
     private static PrefConfig prefConfig;
     private static ApiInterface apiInterface;
-
     private TextView textViewInfo, textViewMail, textViewBuch, textViewForum,textViewBearbeiten,textviewLike,user;
-
-    //private TextView textViewInfo, textViewMail, textViewBuch, textViewForum,textViewBearbeiten;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

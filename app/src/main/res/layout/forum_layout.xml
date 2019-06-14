@@ -7,13 +7,14 @@
 
     <EditText
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
+        android:hint="Filter"
         android:id="@+id/searchFilter"/>
 
     <ListView
         android:id="@+id/listView"
         android:layout_width="match_parent"
-        android:layout_height="395dp">
+        android:layout_height="400sp">
     </ListView>
 
     <Space
@@ -27,17 +28,18 @@
 
         <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"
-            android:layout_height="153dp">
+            android:layout_height="wrap_content">
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/fab_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
-                android:layout_margin="16dp"
-                android:background="@color/colorPrimary"
+                android:layout_margin="16sp"
+                app:backgroundTint="@color/colorPrimary"
+                app:itemIconTint="@android:color/white"
                 android:src="@drawable/ic_add"
-                app:elevation="6dp"
+                app:elevation="6sp"
                 app:fabSize="normal" />
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

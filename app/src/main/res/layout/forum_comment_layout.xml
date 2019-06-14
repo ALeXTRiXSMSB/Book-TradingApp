@@ -7,31 +7,22 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="200sp"
+        android:layout_height="wrap_content"
         android:background="@drawable/gradientbackround"
         android:orientation="vertical">
 
         <ImageView
-            android:layout_width="155dp"
-            android:layout_height="135dp"
+            android:layout_width="100sp"
+            android:layout_height="100sp"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="35dp"
+            android:layout_marginTop="20sp"
+            android:layout_marginBottom="20sp"
             android:src="@drawable/ic_camera" />
     </LinearLayout>
 
-    <LinearLayout
+    <Space
         android:layout_width="match_parent"
-        android:layout_height="20dp"
-        android:orientation="vertical">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Verkaufe/tausche für: "
-            android:textColor="#4CAF50"
-            android:textSize="16dp"
-            android:textStyle="bold" />
-    </LinearLayout>
+        android:layout_height="20sp" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -50,6 +41,7 @@
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginRight="10sp"
             android:src="@drawable/ic_send"
             app:backgroundTint="@color/colorPrimary"
             android:id="@+id/chat"/>
@@ -64,11 +56,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginTop="20dp">
+            android:layout_marginTop="20sp">
 
             <LinearLayout
                 android:orientation="vertical"
-                android:paddingLeft="25dp"
+                android:paddingLeft="25sp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -87,10 +79,10 @@
 
             <LinearLayout
                 android:orientation="vertical"
-                android:paddingLeft="25dp"
+                android:paddingLeft="25sp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp">
+                android:layout_marginTop="20sp">
 
                 <TextView
                     android:id="@+id/editText_ISBN"
@@ -98,6 +90,7 @@
                     android:layout_height="wrap_content"
                     android:text="ISBN: "
                     android:textStyle="bold"/>
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -106,10 +99,10 @@
 
             <LinearLayout
                 android:orientation="vertical"
-                android:paddingLeft="25dp"
+                android:paddingLeft="25sp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp">
+                android:layout_marginTop="20sp">
 
                 <TextView
                     android:id="@+id/editText_Zustand"
@@ -117,6 +110,7 @@
                     android:layout_height="wrap_content"
                     android:text="Zustand: "
                     android:textStyle="bold"/>
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -125,10 +119,10 @@
 
             <LinearLayout
                 android:orientation="vertical"
-                android:paddingLeft="25dp"
+                android:paddingLeft="25sp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp">
+                android:layout_marginTop="20sp">
 
                 <TextView
                     android:id="@+id/editText_Beschreibung"
@@ -136,6 +130,7 @@
                     android:layout_height="wrap_content"
                     android:text="Beschreibung: "
                     android:textStyle="bold"/>
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

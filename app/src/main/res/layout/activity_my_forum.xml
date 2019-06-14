@@ -8,7 +8,7 @@
     <ListView
         android:id="@+id/listView"
         android:layout_width="match_parent"
-        android:layout_height="425sp">
+        android:layout_height="400sp">
     </ListView>
 
     <Space
@@ -29,10 +29,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom|end"
-                android:layout_margin="16dp"
+                android:layout_margin="16sp"
                 android:background="@color/colorPrimary"
                 android:src="@drawable/ic_add"
-                app:elevation="6dp"
+                app:elevation="6sp"
                 app:fabSize="normal" />
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
     </FrameLayout>
