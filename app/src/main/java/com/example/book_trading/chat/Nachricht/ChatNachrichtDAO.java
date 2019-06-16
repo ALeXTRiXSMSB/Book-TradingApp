@@ -18,6 +18,12 @@ public interface ChatNachrichtDAO {
     @Query("SELECT * from chat_table ORDER BY id DESC")
     List<ChatNachricht> getAllChats();
 
+    @Query("SELECT DISTINCT `to` from chat_table ORDER BY id DESC")
+    List<String> getAllEmpfänger();
+
+
+
+
 
 }
 

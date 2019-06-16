@@ -5,10 +5,13 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.book_trading.chat.chatActivity;
 import com.example.book_trading.chat.chat_uebersichtActivity;
+import com.example.book_trading.chat.xmppService;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -17,8 +20,11 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
  */
 
 public class ForumCommentActivity extends AppCompatActivity {
-    FloatingActionButton btnFremdProfil;
-    FloatingActionButton btnChat;
+    private FloatingActionButton btnFremdProfil;
+    private FloatingActionButton btnChat;
+
+    //TODO: Username muss hier unbedingt geholt werden, sonst keine Zuordnung möglich!
+    private String fremd_username = "user";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,8 +45,9 @@ public class ForumCommentActivity extends AppCompatActivity {
         btnChat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               // Intent intent = new Intent(ForumCommentActivity.this, .class);
-                //startActivity(intent);
+                Intent intent = new Intent(ForumCommentActivity.this, chatActivity.class);
+                intent.putExtra("EMPFAENGER", fremd_username);
+                startActivity(intent);
             }
         });
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.bottom_navigation);
@@ -76,6 +83,9 @@ public class ForumCommentActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.logout:
+                stopService(new Intent(getApplicationContext(), xmppService.class)); //Xmpp wird beim ausloggen disconnectet,
+                // somit können Nachrichten die nicht empfangen wurden zum späteren Zeitpunkt abgefragt werden
+
                 Intent logout = new Intent(this, LoginActivity.class);
                 LoginActivity.prefConfig.writeLoginStatus(false);
                 startActivity(logout);

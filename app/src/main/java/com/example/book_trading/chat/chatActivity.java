@@ -72,7 +72,7 @@ public class chatActivity extends AppCompatActivity {
     }
 
 
-    public void build_Database() {
+    private void build_Database() {
 
 
         chatDatabase = ChatDatabase.getChatDatabase(getApplicationContext());
@@ -215,7 +215,7 @@ public class chatActivity extends AppCompatActivity {
 
     @Override
     public void onDestroy() {
-        stopService(new Intent(getApplicationContext(), xmppService.class));
+
 
 
         unregisterReceiver(broadcastReceiver);

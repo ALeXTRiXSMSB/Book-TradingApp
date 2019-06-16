@@ -6,10 +6,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.book_trading.chat.chatActivity;
 import com.example.book_trading.chat.chat_uebersichtActivity;
+import com.example.book_trading.chat.xmppService;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -19,7 +22,10 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 public class ProfilFremdActivity extends AppCompatActivity {
     private TextView positivklick;
     private TextView positivZahl;
-    FloatingActionButton direktChat;
+    private FloatingActionButton direktChat;
+
+    //TODO: Hier muss der Username der im Forum angeklickt wurde übertragen/überschrieben werden!
+    private String fremd_username = "user";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +66,8 @@ public class ProfilFremdActivity extends AppCompatActivity {
         direktChat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ProfilFremdActivity.this, chat_uebersichtActivity.class);
+                Intent intent = new Intent(ProfilFremdActivity.this, chatActivity.class);
+                intent.putExtra("EMPFAENGER", fremd_username);
                 startActivity(intent);
             }
         });
@@ -81,6 +88,8 @@ public class ProfilFremdActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.logout:
+                stopService(new Intent(getApplicationContext(), xmppService.class)); //Xmpp wird beim ausloggen disconnectet,
+                // somit können Nachrichten die nicht empfangen wurden zum späteren Zeitpunkt abgefragt werden
                 Intent logout = new Intent(this, LoginActivity.class);
                 LoginActivity.prefConfig.writeLoginStatus(false);
                 startActivity(logout);

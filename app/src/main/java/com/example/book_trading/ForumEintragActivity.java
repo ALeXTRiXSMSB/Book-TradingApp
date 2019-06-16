@@ -8,11 +8,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.book_trading.chat.chat_uebersichtActivity;
+import com.example.book_trading.chat.xmppService;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 /**
@@ -28,22 +30,21 @@ public class ForumEintragActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.forum_eintrag_layout);
-        this.abbruchBtn = (Button)findViewById(R.id.abbruchBtn);
-        this.verfassenBtn = (Button)findViewById(R.id.verfassenBtn);
+        this.abbruchBtn = (Button) findViewById(R.id.abbruchBtn);
+        this.verfassenBtn = (Button) findViewById(R.id.verfassenBtn);
 
         //////////////////////////////
         Intent activityThatCalled = getIntent();
 
-        selectedItem = (ItemData)activityThatCalled.getExtras().getSerializable("data");
+        selectedItem = (ItemData) activityThatCalled.getExtras().getSerializable("data");
         //Wenn es noch keinen Inhalt gibt leere alles
-        if (selectedItem == null)
-        {
-            selectedItem = new ItemData("","","","" );
+        if (selectedItem == null) {
+            selectedItem = new ItemData("", "", "", "");
         }
-        ((EditText)findViewById(R.id.nameEingabe)).setText(selectedItem.Name);
-        ((EditText)findViewById(R.id.isbnEingabe)).setText(selectedItem.ISBN);
-        ((EditText)findViewById(R.id.zustandEingabe)).setText(selectedItem.Zustand);
-        ((EditText)findViewById(R.id.beschreibungEingabe)).setText(selectedItem.Beschreibung);
+        ((EditText) findViewById(R.id.nameEingabe)).setText(selectedItem.Name);
+        ((EditText) findViewById(R.id.isbnEingabe)).setText(selectedItem.ISBN);
+        ((EditText) findViewById(R.id.zustandEingabe)).setText(selectedItem.Zustand);
+        ((EditText) findViewById(R.id.beschreibungEingabe)).setText(selectedItem.Beschreibung);
 
         //////////////////////////////
 
@@ -75,10 +76,10 @@ public class ForumEintragActivity extends AppCompatActivity {
     public void onSaveClick(View view) {
         Intent goingBack = new Intent();
 
-        selectedItem.Name = ((EditText)findViewById(R.id.nameEingabe)).getText().toString();
-        selectedItem.ISBN = ((EditText)findViewById(R.id.isbnEingabe)).getText().toString();
-        selectedItem.Zustand = ((EditText)findViewById(R.id.zustandEingabe)).getText().toString();
-        selectedItem.Beschreibung = ((EditText)findViewById(R.id.beschreibungEingabe)).getText().toString();
+        selectedItem.Name = ((EditText) findViewById(R.id.nameEingabe)).getText().toString();
+        selectedItem.ISBN = ((EditText) findViewById(R.id.isbnEingabe)).getText().toString();
+        selectedItem.Zustand = ((EditText) findViewById(R.id.zustandEingabe)).getText().toString();
+        selectedItem.Beschreibung = ((EditText) findViewById(R.id.beschreibungEingabe)).getText().toString();
 
         goingBack.putExtra("action", "save");
         goingBack.putExtra("data", selectedItem);
@@ -137,6 +138,9 @@ public class ForumEintragActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.logout:
+                stopService(new Intent(getApplicationContext(), xmppService.class)); //Xmpp wird beim ausloggen disconnectet,
+                // somit können Nachrichten die nicht empfangen wurden zum späteren Zeitpunkt abgefragt werden
+
                 Intent logout = new Intent(this, LoginActivity.class);
                 LoginActivity.prefConfig.writeLoginStatus(false);
                 startActivity(logout);

@@ -49,7 +49,7 @@ public class xmppService extends Service {
 
     private String empfaenger;
     private static final String XMPPDOMAIN = "booktrading";
-    private static final String IP = "91.64.161.74";
+    private static final String IP = "cf-schulze.de";
 
     //TODO: EMPFANGER von der Datenbank abfragen -> möglicherweise Problem mit mehreren Teilhabern
 
@@ -114,7 +114,7 @@ public class xmppService extends Service {
     }
 
 
-    //TODO: MAM Manager verstehen: welche NAchricht kommt zurück, welche jid? etc...
+    //TODO: MAM Manager (MultiAccountManager) vllt implementieren und reinladen, wenn gewünscht!
     private void mam_new_new(Jid jid) {
         try {
             MamManager mamManager = MamManager.getInstanceFor(connection);

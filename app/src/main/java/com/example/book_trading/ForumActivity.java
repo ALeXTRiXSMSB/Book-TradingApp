@@ -15,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.book_trading.chat.chat_uebersichtActivity;
+import com.example.book_trading.chat.xmppService;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.ArrayList;
@@ -129,6 +130,8 @@ public class ForumActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.logout:
+                stopService(new Intent(getApplicationContext(), xmppService.class)); //Xmpp wird beim ausloggen disconnectet,
+                // somit können Nachrichten die nicht empfangen wurden zum späteren Zeitpunkt abgefragt werden
                 Intent logout = new Intent(this, LoginActivity.class);
                 LoginActivity.prefConfig.writeLoginStatus(false);
                 startActivity(logout);
