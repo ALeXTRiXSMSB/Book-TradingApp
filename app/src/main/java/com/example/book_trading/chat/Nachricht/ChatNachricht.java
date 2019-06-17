@@ -5,7 +5,7 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "chat_table")
-public class ChatNachricht {
+public class  ChatNachricht {
 
     @PrimaryKey
     @NonNull

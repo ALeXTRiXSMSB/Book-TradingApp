@@ -22,10 +22,20 @@
             android:enabled="true"
             android:exported="true"></service>
 
-        <receiver
-            android:name=".chat.chatBroadcastReceiver"
-            android:enabled="true"
-            android:exported="true" />
+        <receiver android:name=".chat.chatBroadcastReceiver">
+            <intent-filter>
+                <action android:name="EMPFANGEN" />
+                <action android:name="GESENDET" />
+                <action android:name="GESENDET_LOGIN_SERVICE" />
+
+
+                <!-- <category android:name="..."/> -->
+                <!-- <data android:mimeType="*/*"/> -->
+            </intent-filter>
+        </receiver>
+
+
+
 
         <activity android:name=".chat.chatActivity" />
         <activity android:name=".chat.chat_uebersichtActivity" />

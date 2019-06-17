@@ -129,8 +129,8 @@ public class xmppService extends Service {
                 MamManager.MamQuery mamQuery = mamManager.queryArchive(mamQueryArgs);
                 List<Message> messages = mamQuery.getMessages();
                 for (Message message : messages) {
-                    Log.d("Mam funzt: Nachricht ", message.getBody());
-                    Log.d("Mam funzt: Sender ", message.getFrom().toString());
+                    Log.d("Mam: Nachricht ", message.getBody());
+                    Log.d("Mam: Sender ", message.getFrom().toString());
                 }
             }
         } catch (Exception e) {
