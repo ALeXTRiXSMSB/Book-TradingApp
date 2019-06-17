@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.example.book_trading.datenbank.ApiClient;
 import com.example.book_trading.datenbank.ApiInterface;
 import com.example.book_trading.datenbank.HashHelper;
+import com.example.book_trading.datenbank.MySQLDatabaseHelper;
 import com.example.book_trading.datenbank.PrefConfig;
 import com.example.book_trading.R;
 import com.example.book_trading.datenbank.User;
@@ -85,6 +86,7 @@ public class LoginActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
         Call<User> call = LoginActivity.apiInterface.performUserLogin(username, password);
         call.enqueue(new Callback<User>() {
             @Override

@@ -26,6 +26,7 @@ public class ForumCommentActivity extends AppCompatActivity {
     private FloatingActionButton btnFremdProfil;
     private FloatingActionButton btnChat;
     public TextView tv_name,tv_zustand,tv_beschreibung,tv_isbn;
+    public String name;
 
     //TODO: Username muss hier unbedingt geholt werden, sonst keine Zuordnung möglich!
     private String fremd_username = "user";
@@ -52,6 +53,7 @@ public class ForumCommentActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ForumCommentActivity.this, ProfilFremdActivity.class);
+                intent.putExtra("USERNAME",name);
                 startActivity(intent);
             }
         });
@@ -101,7 +103,7 @@ public class ForumCommentActivity extends AppCompatActivity {
                 // somit können Nachrichten die nicht empfangen wurden zum späteren Zeitpunkt abgefragt werden
 
                 Intent logout = new Intent(this, LoginActivity.class);
-                LoginActivity.prefConfig.writeLoginStatus(false);
+                ForumActivity.prefConfig.writeLoginStatus(false);
                 startActivity(logout);
                 return true;
             default:
@@ -110,7 +112,7 @@ public class ForumCommentActivity extends AppCompatActivity {
     }
 
     public void editData(String t_id){
-        Call<Thread> call = LoginActivity.apiInterface.performGetThread(t_id);
+        Call<Thread> call = ForumActivity.apiInterface.performGetThread(t_id);
         call.enqueue(new Callback<Thread>() {
             @Override
             public void onResponse(Call<Thread> call, Response<Thread> response) {
@@ -118,8 +120,7 @@ public class ForumCommentActivity extends AppCompatActivity {
                     case "success":{
                         tv_name.setText(response.body().getT_titel());
                         tv_beschreibung.setText(response.body().getT_discription());
-                        //tv_zustand.setText(response.body().getU_id());
-                        //tv_isbn.setText(response.body().getT_id());
+                        name = response.body().getU_name();
                         break;
                     }
                     case "no data":{

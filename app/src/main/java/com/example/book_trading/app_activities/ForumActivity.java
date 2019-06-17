@@ -15,6 +15,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.book_trading.R;
+import com.example.book_trading.datenbank.ApiClient;
+import com.example.book_trading.datenbank.ApiInterface;
+import com.example.book_trading.datenbank.PrefConfig;
 import com.example.book_trading.datenbank.Thread;
 import com.example.book_trading.chat.chat_uebersichtActivity;
 import com.example.book_trading.chat.xmppService;
@@ -35,12 +38,18 @@ public class ForumActivity extends AppCompatActivity {
     private ArrayAdapter<String> adapter = null;
     private ItemData selectedData;
     private static final String TAG = "MainActivity";
-    public ArrayList<Thread> listItems = new ArrayList<>();
+    private ArrayList<Thread> listItems = new ArrayList<>();
+    public static PrefConfig prefConfig;
+    public static ApiInterface apiInterface;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.forum_layout);
+
+        prefConfig = new PrefConfig(this);
+        apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
+
         this.lv = (ListView)findViewById(R.id.listView);
         EditText theFilter = (EditText) findViewById(R.id.searchFilter);
 
@@ -72,7 +81,7 @@ public class ForumActivity extends AppCompatActivity {
         });
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,names);
         lv.setAdapter(adapter);
-        test();
+        loadForum();
 
         theFilter.addTextChangedListener(new TextWatcher() {
             @Override
@@ -141,7 +150,7 @@ public class ForumActivity extends AppCompatActivity {
                 stopService(new Intent(getApplicationContext(), xmppService.class)); //Xmpp wird beim ausloggen disconnectet,
                 // somit können Nachrichten die nicht empfangen wurden zum späteren Zeitpunkt abgefragt werden
                 Intent logout = new Intent(this, LoginActivity.class);
-                LoginActivity.prefConfig.writeLoginStatus(false);
+                this.prefConfig.writeLoginStatus(false);
                 startActivity(logout);
                 return true;
             default:
@@ -149,8 +158,8 @@ public class ForumActivity extends AppCompatActivity {
         }
     }
 
-    public void test(){
-        Call<List<Thread>> call = LoginActivity.apiInterface.performGetThreads();
+    public void loadForum(){
+        Call<List<Thread>> call = this.apiInterface.performGetThreads();
         call.enqueue(new Callback<List<Thread>>() {
             @Override
             public void onResponse(Call<List<Thread>> call, Response<List<Thread>> response) {

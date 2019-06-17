@@ -16,8 +16,8 @@ public class Thread {
     @SerializedName("t_discription")
     private String t_discription;
 
-    @SerializedName("u_id")
-    private int u_id;
+    @SerializedName("u_name")
+    private String u_name;
 
     public String getResponse() {
         return response;
@@ -51,12 +51,12 @@ public class Thread {
         this.t_discription = t_discription;
     }
 
-    public int getU_id() {
-        return u_id;
+    public String getU_name() {
+        return u_name;
     }
 
-    public void setU_id(int u_id) {
-        this.u_id = u_id;
+    public void setU_name(String u_name) {
+        this.u_name = u_name;
     }
 
 }

@@ -16,20 +16,37 @@ import android.widget.ListView;
 import com.example.book_trading.R;
 import com.example.book_trading.chat.chat_uebersichtActivity;
 import com.example.book_trading.chat.xmppService;
+import com.example.book_trading.datenbank.ApiClient;
+import com.example.book_trading.datenbank.ApiInterface;
+import com.example.book_trading.datenbank.PrefConfig;
+import com.example.book_trading.datenbank.Thread;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MyForumActivity extends AppCompatActivity implements AdapterView.OnItemClickListener{
     private ListView itemsListView;
     private ArrayList<ItemData> itemArray;
     private ArrayAdapter<ItemData> adapter;
     private ItemData selectedData;
+    public static PrefConfig prefConfig;
+    public static ApiInterface apiInterface;
+    private ArrayList<ItemData> listItems = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_forum);
+
+        prefConfig = new PrefConfig(this);
+        apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
+
+
         //Oberflächenelement
         itemsListView = findViewById(R.id.listView);
 
@@ -37,7 +54,7 @@ public class MyForumActivity extends AppCompatActivity implements AdapterView.On
 
         FloatingActionButton floatingActionButton = findViewById(R.id.fab_1);   //Fab_Button
 
-        LoadData(); //BeispielDaten laden
+        LoadData(prefConfig.readName()); //BeispielDaten laden
 
         //Navigation am Display ende
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.bottom_navigation);
@@ -189,7 +206,26 @@ public class MyForumActivity extends AppCompatActivity implements AdapterView.On
 
     //TestEinträge
     //Beispieldaten einfühgen
-    private void LoadData(){
+    private void LoadData(String username){
+        Call<List<Thread>> call = this.apiInterface.performGetOwnThreads(username);
+        call.enqueue(new Callback<List<Thread>>() {
+            @Override
+            public void onResponse(Call<List<Thread>> call, Response<List<Thread>> response) {
+                for(Thread t: response.body()){
+                    adapter.add(new ItemData(t.getT_titel()));
+                }
+                for(Thread t:response.body()){
+                    listItems.add(new ItemData(t.getT_titel()));
+                }
+            }
+            @Override
+            public void onFailure(Call<List<Thread>> call, Throwable t) {
+
+            }
+        });
+
+
+        /**
         //Beispieldaten
         ItemData item1 = new ItemData("Buch 1", "1234", "schlecht","wie neu");
         ItemData item2 = new ItemData("Buch 2", "2345", "gut","nie benutzt");
@@ -199,6 +235,7 @@ public class MyForumActivity extends AppCompatActivity implements AdapterView.On
         itemArray.add(item1);
         itemArray.add(item2);
         itemArray.add(item3);
+         **/
     }
 
 }

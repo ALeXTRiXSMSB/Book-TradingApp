@@ -36,7 +36,7 @@ public class ProfilActivity extends AppCompatActivity implements ExampleDialog.E
         textViewMail = (TextView) findViewById(R.id.textView_Mail);
         textViewBuch = (TextView) findViewById(R.id.textView_Buch);
         textViewBearbeiten = (TextView) findViewById(R.id.textView_Bearbeiten);
-        textviewLike = (TextView) findViewById(R.id.positiv);
+        textviewLike = (TextView) findViewById(R.id.tv_positiv);
         textViewForum = (TextView) findViewById(R.id.textView_Forum);
 
         textviewLike.setText(this.prefConfig.readLikes());

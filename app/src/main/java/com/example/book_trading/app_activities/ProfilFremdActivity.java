@@ -14,8 +14,16 @@ import com.example.book_trading.R;
 import com.example.book_trading.chat.chatActivity;
 import com.example.book_trading.chat.chat_uebersichtActivity;
 import com.example.book_trading.chat.xmppService;
+import com.example.book_trading.datenbank.ApiClient;
+import com.example.book_trading.datenbank.ApiInterface;
+import com.example.book_trading.datenbank.PrefConfig;
+import com.example.book_trading.datenbank.User;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Activity-Klasse für das Profil anderer Personen
@@ -24,18 +32,38 @@ public class ProfilFremdActivity extends AppCompatActivity {
     private TextView positivklick;
     private TextView positivZahl;
     private FloatingActionButton direktChat;
+    private boolean likeClicked = false;
+    public static PrefConfig prefConfig;
+    public static ApiInterface apiInterface;
+    public TextView tv_eintraege, textView_Info, textView_Mail, textView_Buch, txt_name_info;
 
     //TODO: Hier muss der Username der im Forum angeklickt wurde übertragen/überschrieben werden!
-    private String fremd_username = "user";
+    public String fremd_username = "user";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profil_fremd_layout);
 
+        prefConfig = new PrefConfig(this);
+        apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
+
         positivklick = (TextView) findViewById(R.id.positivklick);
-        positivZahl = (TextView) findViewById(R.id.positiv);
+        positivZahl = (TextView) findViewById(R.id.tv_positiv);
         direktChat = findViewById(R.id.chat);
+
+        tv_eintraege = findViewById(R.id.tv_eintraege);
+        textView_Info = findViewById(R.id.textView_Info);
+        textView_Mail = findViewById(R.id.textView_Mail);
+        textView_Buch = findViewById(R.id.textView_Buch);
+        txt_name_info = findViewById(R.id.txt_name_info);
+
+
+        Intent i = getIntent();
+        Bundle b = i.getExtras();
+        if(b.getString("USERNAME") != null) {
+            this.loadData(b.getString("USERNAME"));
+        }
 
         positivklick.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,7 +104,10 @@ public class ProfilFremdActivity extends AppCompatActivity {
 
     //Setzen der Zahl unter dem like auf 1
     private void likeklicken() {
-        positivZahl.setText("1");
+        if(!this.likeClicked){
+            positivZahl.setText("1");
+            this.likeClicked=true;
+        }
     }
 
     @Override
@@ -98,6 +129,41 @@ public class ProfilFremdActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    public void loadData(String username){
+        Call<User> call = ProfilFremdActivity.apiInterface.performGetProfile(username);
+        call.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                switch(response.body().getResponse()){
+                    case "success":{
+                        txt_name_info.setText(response.body().getU_name());
+                        textView_Buch.setText(response.body().getU_favorites());
+                        textView_Mail.setText(response.body().getU_email());
+                        textView_Info.setText(response.body().getU_discription());
+                        positivZahl.setText(response.body().getU_like());
+                        break;
+                    }
+                    case "no data":{
+                        prefConfig.displayToast("User nicht Vorhanden");
+                        break;
+                    }
+                    case "missing argument":{
+                        prefConfig.displayToast("Missing Argument");
+                        break;
+                    }
+                    case "no request method":{
+                        prefConfig.displayToast("Keine Ahnung");
+                        break;
+                    }
+                }
+            }
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+
+            }
+        });
     }
 
 }

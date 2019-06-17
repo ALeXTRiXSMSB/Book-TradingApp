@@ -19,6 +19,9 @@ public interface ApiInterface {
     @GET("getThreads.php")
     Call<List<Thread>> performGetThreads();
 
+    @GET("ownThreads.php")
+    Call<List<Thread>> performGetOwnThreads(@Query("u_name") String username);
+
     @GET("getThread.php")
     Call<Thread> performGetThread(@Query("t_id") String t_id);
 
