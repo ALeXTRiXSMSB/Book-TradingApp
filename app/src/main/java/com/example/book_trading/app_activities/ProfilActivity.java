@@ -1,4 +1,4 @@
-package com.example.book_trading;
+package com.example.book_trading.app_activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,7 +8,10 @@ import android.view.View;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
+import com.example.book_trading.datenbank.ApiClient;
+import com.example.book_trading.datenbank.ApiInterface;
+import com.example.book_trading.datenbank.PrefConfig;
+import com.example.book_trading.R;
 import com.example.book_trading.chat.chat_uebersichtActivity;
 import com.example.book_trading.chat.xmppService;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -53,7 +56,7 @@ public class ProfilActivity extends AppCompatActivity implements ExampleDialog.E
         textViewForum.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ProfilActivity.this, my_forum.class);
+                Intent intent = new Intent(ProfilActivity.this, MyForumActivity.class);
                 startActivity(intent);
             }
         });

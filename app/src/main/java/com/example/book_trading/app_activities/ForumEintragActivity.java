@@ -1,18 +1,19 @@
-package com.example.book_trading;
+package com.example.book_trading.app_activities;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-
+import com.example.book_trading.R;
 import com.example.book_trading.chat.chat_uebersichtActivity;
 import com.example.book_trading.chat.xmppService;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -20,7 +21,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 /**
  * Activity-Klasse für den Forum Eintrag
  */
-
 public class ForumEintragActivity extends AppCompatActivity {
     private Button abbruchBtn;
     private Button verfassenBtn;
@@ -74,19 +74,35 @@ public class ForumEintragActivity extends AppCompatActivity {
     //////////////////////
     //Speichern
     public void onSaveClick(View view) {
-        Intent goingBack = new Intent();
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (cm.getActiveNetworkInfo() != null) { // verbunden
+            Intent goingBack = new Intent();
 
-        selectedItem.Name = ((EditText) findViewById(R.id.nameEingabe)).getText().toString();
-        selectedItem.ISBN = ((EditText) findViewById(R.id.isbnEingabe)).getText().toString();
-        selectedItem.Zustand = ((EditText) findViewById(R.id.zustandEingabe)).getText().toString();
-        selectedItem.Beschreibung = ((EditText) findViewById(R.id.beschreibungEingabe)).getText().toString();
+            selectedItem.Name = ((EditText)findViewById(R.id.nameEingabe)).getText().toString();
+            selectedItem.ISBN = ((EditText)findViewById(R.id.isbnEingabe)).getText().toString();
+            selectedItem.Zustand = ((EditText)findViewById(R.id.zustandEingabe)).getText().toString();
+            selectedItem.Beschreibung = ((EditText)findViewById(R.id.beschreibungEingabe)).getText().toString();
 
-        goingBack.putExtra("action", "save");
-        goingBack.putExtra("data", selectedItem);
+            goingBack.putExtra("action", "save");
+            goingBack.putExtra("data", selectedItem);
 
-        setResult(RESULT_OK, goingBack);
+            setResult(RESULT_OK, goingBack);
 
-        finish();
+            finish();
+        } else { // nicht verbunden
+            AlertDialog.Builder alterDialogBuilder = new AlertDialog.Builder(ForumEintragActivity.this);
+            alterDialogBuilder.setTitle("KEINE VERBINDUNG!");
+            alterDialogBuilder
+                    .setMessage("Keine Verbindung zum Server vorhanden.")
+                    .setCancelable(true)
+                    .setNeutralButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                        }
+                    });
+            AlertDialog alertDialog = alterDialogBuilder.create();
+            alertDialog.show();
+        }
     }
 
     @Override

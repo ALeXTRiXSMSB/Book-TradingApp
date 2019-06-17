@@ -1,4 +1,4 @@
-package com.example.book_trading;
+package com.example.book_trading.app_activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,16 +6,15 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
+import com.example.book_trading.R;
+import com.example.book_trading.datenbank.Thread;
 import com.example.book_trading.chat.chatActivity;
 import com.example.book_trading.chat.chat_uebersichtActivity;
 import com.example.book_trading.chat.xmppService;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -23,7 +22,6 @@ import retrofit2.Response;
 /**
  * Activity-Klasse für Einträge + Chat
  */
-
 public class ForumCommentActivity extends AppCompatActivity {
     private FloatingActionButton btnFremdProfil;
     private FloatingActionButton btnChat;

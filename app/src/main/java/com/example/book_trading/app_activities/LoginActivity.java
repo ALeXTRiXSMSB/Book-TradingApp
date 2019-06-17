@@ -1,24 +1,23 @@
-package com.example.book_trading;
+package com.example.book_trading.app_activities;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-
-import android.app.ActivityManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.IntentFilter;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
-import android.os.StrictMode;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-
-import com.example.book_trading.chat.chatBroadcastReceiver;
+import com.example.book_trading.datenbank.ApiClient;
+import com.example.book_trading.datenbank.ApiInterface;
+import com.example.book_trading.datenbank.HashHelper;
+import com.example.book_trading.datenbank.PrefConfig;
+import com.example.book_trading.R;
+import com.example.book_trading.datenbank.User;
 import com.example.book_trading.chat.chatLogin;
-import com.example.book_trading.chat.chat_uebersichtActivity;
-import com.example.book_trading.chat.xmppService;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 
@@ -30,7 +29,6 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
 
         prefConfig = new PrefConfig(this);
         apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
@@ -49,13 +47,23 @@ public class LoginActivity extends AppCompatActivity {
         LoginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // auskommentiert zum Testen für mich
-                performLogin();
-
-                // Test
-                // Intent registerIntent = new Intent(LoginActivity.this, ProfilActivity.class);
-                // LoginActivity.this.startActivity(registerIntent);
-                // Test Ende
+                ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+                if (cm.getActiveNetworkInfo() != null) { // verbunden
+                    performLogin();
+                } else { // nicht verbunden
+                    AlertDialog.Builder alterDialogBuilder = new AlertDialog.Builder(LoginActivity.this);
+                    alterDialogBuilder.setTitle("KEINE VERBINDUNG!");
+                    alterDialogBuilder
+                            .setMessage("Keine Verbindung zum Server vorhanden.")
+                            .setCancelable(true)
+                            .setNeutralButton("OK", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                }
+                            });
+                    AlertDialog alertDialog = alterDialogBuilder.create();
+                    alertDialog.show();
+                }
             }
         });
         if (prefConfig.readLoginStatus()) {   //wenn user ist eingelogt bzw bereits angemeldet ist und sich beim letzten mal nicht ausgeloggt hat
@@ -90,7 +98,6 @@ public class LoginActivity extends AppCompatActivity {
                     LoginActivity.prefConfig.writeFavorites(response.body().getU_favorites());
                     LoginActivity.prefConfig.writeDiscription(response.body().getU_discription());
 
-
                     chatLogin login = new chatLogin(username, password, true, getApplicationContext());
 
                     Intent registerIntent = new Intent(LoginActivity.this, ProfilActivity.class);
@@ -113,6 +120,5 @@ public class LoginActivity extends AppCompatActivity {
         UserName.setText("");   //nach der Anmeldung die Felder wieder leeren
         Password.setText("");
     }
-
 
 }

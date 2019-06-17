@@ -1,23 +1,13 @@
-package com.example.book_trading;
+package com.example.book_trading.datenbank;
 
 import android.content.Context;
-import android.content.Intent;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MySQLDatabaseHelper {
-
     private static PrefConfig prefConfig;
     private static ApiInterface apiInterface;
 
@@ -58,7 +48,6 @@ public class MySQLDatabaseHelper {
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
-
             }
         });
     }
@@ -90,7 +79,6 @@ public class MySQLDatabaseHelper {
                     }
                 }
             }
-
             @Override
             public void onFailure(Call<Thread> call, Throwable t) {
 
@@ -225,12 +213,10 @@ public class MySQLDatabaseHelper {
             @Override
             public void onResponse(Call<List<Thread>> call, Response<List<Thread>> response) {
                 List<Thread> tmp;
-
             }
 
             @Override
             public void onFailure(Call<List<Thread>> call, Throwable t) {
-
             }
         });
     }
@@ -253,8 +239,8 @@ public class MySQLDatabaseHelper {
 
     }
 
-
     public void writeToSharedPreference(){
 
     }
+
 }

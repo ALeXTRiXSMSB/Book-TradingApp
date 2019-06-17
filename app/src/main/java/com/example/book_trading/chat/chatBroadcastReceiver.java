@@ -12,7 +12,7 @@ import android.util.Log;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
-import com.example.book_trading.LoginActivity;
+import com.example.book_trading.app_activities.LoginActivity;
 import com.example.book_trading.R;
 
 public class chatBroadcastReceiver extends BroadcastReceiver {

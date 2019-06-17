@@ -1,4 +1,4 @@
-package com.example.book_trading;
+package com.example.book_trading.app_activities;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import androidx.appcompat.app.AppCompatDialogFragment;
+import com.example.book_trading.R;
 
 public class ExampleDialog extends AppCompatDialogFragment {
     private EditText editTextInfo, editTextMail, editTextBuch;

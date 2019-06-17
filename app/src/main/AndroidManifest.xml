@@ -4,6 +4,8 @@
     package="com.example.book_trading">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <dist:module dist:instant="true" />
 
@@ -27,9 +29,8 @@
 
         <activity android:name=".chat.chatActivity" />
         <activity android:name=".chat.chat_uebersichtActivity" />
-        <activity android:name=".my_forum" />
-        <activity android:name=".RegisterActivity" />
-        <activity android:name=".LoginActivity">
+        <activity android:name=".app_activities.RegisterActivity" />
+        <activity android:name=".app_activities.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -37,19 +38,22 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ProfilActivity"
+            android:name=".app_activities.ProfilActivity"
             android:label="Profil" />
         <activity
-            android:name=".ProfilFremdActivity"
+            android:name=".app_activities.ProfilFremdActivity"
             android:label="Profil" />
         <activity
-            android:name=".ForumActivity"
+            android:name=".app_activities.ForumActivity"
             android:label="Forum" />
         <activity
-            android:name=".ForumCommentActivity"
+            android:name=".app_activities.MyForumActivity"
+            android:label="Mein Forum" />
+        <activity
+            android:name=".app_activities.ForumCommentActivity"
             android:label="Details" />
         <activity
-            android:name=".ForumEintragActivity"
+            android:name=".app_activities.ForumEintragActivity"
             android:label="Forum Eintrag" />
     </application>
 

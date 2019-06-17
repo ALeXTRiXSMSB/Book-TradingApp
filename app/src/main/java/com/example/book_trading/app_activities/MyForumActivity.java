@@ -1,4 +1,4 @@
-package com.example.book_trading;
+package com.example.book_trading.app_activities;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -13,13 +13,14 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.example.book_trading.R;
 import com.example.book_trading.chat.chat_uebersichtActivity;
 import com.example.book_trading.chat.xmppService;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.ArrayList;
 
-public class my_forum extends AppCompatActivity implements AdapterView.OnItemClickListener{
+public class MyForumActivity extends AppCompatActivity implements AdapterView.OnItemClickListener{
     private ListView itemsListView;
     private ArrayList<ItemData> itemArray;
     private ArrayAdapter<ItemData> adapter;
@@ -29,7 +30,7 @@ public class my_forum extends AppCompatActivity implements AdapterView.OnItemCli
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_forum);
-       //Oberflächenelement
+        //Oberflächenelement
         itemsListView = findViewById(R.id.listView);
 
         itemArray = new ArrayList<ItemData>();
@@ -45,16 +46,16 @@ public class my_forum extends AppCompatActivity implements AdapterView.OnItemCli
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.navigateNachrichten:
-                        Intent a = new Intent(my_forum.this, chat_uebersichtActivity.class);
+                        Intent a = new Intent(MyForumActivity.this, chat_uebersichtActivity.class);
                         startActivity(a);
                         break;
                     case R.id.navigateProfil:
-                        Intent b = new Intent(my_forum.this, ProfilActivity.class);
+                        Intent b = new Intent(MyForumActivity.this, ProfilActivity.class);
                         startActivity(b);
                         break;
                     case R.id.navigateForum:
-                         Intent c = new Intent(my_forum.this, ForumActivity.class);
-                         startActivity(c);
+                        Intent c = new Intent(MyForumActivity.this, ForumActivity.class);
+                        startActivity(c);
                         break;
                 }
                 return false;
@@ -67,13 +68,13 @@ public class my_forum extends AppCompatActivity implements AdapterView.OnItemCli
                 /// Get the Item from ListView
                 View view = super.getView(position, convertView, parent);
 
-               // TextView tv = (TextView) view.findViewById(android.R.id.text1);
+                // TextView tv = (TextView) view.findViewById(android.R.id.text1);
 
-               // float size = Float.valueOf(textSize);
+                // float size = Float.valueOf(textSize);
 
                 // Set the text size 25 dip for ListView each item
 
-               // tv.setTextSize(TypedValue.COMPLEX_UNIT_DIP, size);
+                // tv.setTextSize(TypedValue.COMPLEX_UNIT_DIP, size);
 
                 // Return the view
                 return view;
@@ -124,7 +125,7 @@ public class my_forum extends AppCompatActivity implements AdapterView.OnItemCli
     }
 
     //neues Item Hinzufühgen
-   private void AddNewItem(){
+    private void AddNewItem(){
         Intent getDetailIntent = new Intent(this,
                 ForumEintragActivity.class);
 

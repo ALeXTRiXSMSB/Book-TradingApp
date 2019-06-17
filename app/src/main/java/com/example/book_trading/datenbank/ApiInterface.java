@@ -1,11 +1,9 @@
-package com.example.book_trading;
+package com.example.book_trading.datenbank;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
-import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 public interface ApiInterface {

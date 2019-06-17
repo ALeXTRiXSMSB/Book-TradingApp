@@ -1,8 +1,10 @@
-package com.example.book_trading;
+package com.example.book_trading.datenbank;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.widget.Toast;
+
+import com.example.book_trading.R;
 
 public class PrefConfig {   //Loginstatus
     private SharedPreferences sharedPreferences;

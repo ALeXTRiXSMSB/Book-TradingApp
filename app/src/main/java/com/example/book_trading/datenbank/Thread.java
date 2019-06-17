@@ -1,4 +1,4 @@
-package com.example.book_trading;
+package com.example.book_trading.datenbank;
 
 import com.google.gson.annotations.SerializedName;
 

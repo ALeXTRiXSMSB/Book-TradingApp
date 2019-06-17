@@ -1,14 +1,18 @@
-package com.example.book_trading;
+package com.example.book_trading.app_activities;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-
+import android.content.Context;
+import android.content.DialogInterface;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-
+import com.example.book_trading.datenbank.HashHelper;
+import com.example.book_trading.R;
+import com.example.book_trading.datenbank.User;
 import com.example.book_trading.chat.chatLogin;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -28,7 +32,23 @@ public class RegisterActivity extends AppCompatActivity {
         RegBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {   //User Registrieren
-                performRegistration();
+                ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+                if (cm.getActiveNetworkInfo() != null) { // verbunden
+                    performRegistration();
+                } else { // nicht verbunden
+                    AlertDialog.Builder alterDialogBuilder = new AlertDialog.Builder(RegisterActivity.this);
+                    alterDialogBuilder.setTitle("KEINE VERBINDUNG!");
+                    alterDialogBuilder
+                            .setMessage("Keine Verbindung zum Server vorhanden.")
+                            .setCancelable(true)
+                            .setNeutralButton("OK", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                }
+                            });
+                    AlertDialog alertDialog = alterDialogBuilder.create();
+                    alertDialog.show();
+                }
             }
         });
     }
@@ -59,7 +79,6 @@ public class RegisterActivity extends AppCompatActivity {
                     LoginActivity.prefConfig.displayToast("User already exist..."); //Es gibt bereits einen User mit gleichem Username
                 }
             }
-
             @Override
             public void onFailure(Call<User> call, Throwable t) {
             }
