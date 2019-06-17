@@ -94,7 +94,7 @@ public class ForumEintragActivity extends AppCompatActivity {
         });
     }
 
-    public void createThread(String titel, String beschreibung, String isbn, String zustand, String userID){
+    public void createThread(String titel, String beschreibung, String isbn, String zustand){
         Call<Thread> call = ForumEintragActivity.apiInterface.performCreateThread(titel,beschreibung,ForumEintragActivity.prefConfig.readName());
         call.enqueue(new Callback<Thread>() {
             @Override
@@ -129,7 +129,7 @@ public class ForumEintragActivity extends AppCompatActivity {
             selectedItem.Zustand = ((EditText)findViewById(R.id.zustandEingabe)).getText().toString();
             selectedItem.Beschreibung = ((EditText)findViewById(R.id.beschreibungEingabe)).getText().toString();
 
-            createThread(selectedItem.Name,selectedItem.Beschreibung,selectedItem.ISBN,selectedItem.Zustand,this.username);
+            createThread(selectedItem.Name,selectedItem.Beschreibung,selectedItem.ISBN,selectedItem.Zustand);
 
 
             goingBack.putExtra("action", "save");
