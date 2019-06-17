@@ -52,7 +52,7 @@ public class MySQLDatabaseHelper {
         });
     }
 
-    public void createThread(String titel, String beschreibung, int userid){
+    /**public void createThread(String titel, String beschreibung, int userid){
         Call<Thread> call = this.apiInterface.performCreateThread(titel,beschreibung,userid);
         call.enqueue(new Callback<Thread>() {
             @Override
@@ -85,7 +85,7 @@ public class MySQLDatabaseHelper {
             }
         });
     }
-
+**/
     //READ
     public void login(String username, String passwort){
         Call<User> call = this.apiInterface.performUserLogin(username,passwort);

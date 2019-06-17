@@ -37,6 +37,7 @@ public class MyForumActivity extends AppCompatActivity implements AdapterView.On
     public static PrefConfig prefConfig;
     public static ApiInterface apiInterface;
     private ArrayList<ItemData> listItems = new ArrayList<>();
+    private String username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +55,11 @@ public class MyForumActivity extends AppCompatActivity implements AdapterView.On
 
         FloatingActionButton floatingActionButton = findViewById(R.id.fab_1);   //Fab_Button
 
-        LoadData(prefConfig.readName()); //BeispielDaten laden
+        try{
+            LoadData(prefConfig.readName()); //BeispielDaten laden
+        }catch(NullPointerException e){
+            e.printStackTrace();
+        }
 
         //Navigation am Display ende
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.bottom_navigation);
@@ -150,6 +155,7 @@ public class MyForumActivity extends AppCompatActivity implements AdapterView.On
 
         selectedData = null;
         getDetailIntent.putExtra("data", selectedData);
+        getDetailIntent.putExtra("USERNAME",username);
 
         startActivityForResult(getDetailIntent, result);
     }
@@ -204,10 +210,8 @@ public class MyForumActivity extends AppCompatActivity implements AdapterView.On
         adapter.notifyDataSetChanged();
     }
 
-    //TestEinträge
-    //Beispieldaten einfühgen
     private void LoadData(String username){
-        Call<List<Thread>> call = this.apiInterface.performGetOwnThreads(username);
+        Call<List<Thread>> call = LoginActivity.apiInterface.performGetOwnThreads(username);
         call.enqueue(new Callback<List<Thread>>() {
             @Override
             public void onResponse(Call<List<Thread>> call, Response<List<Thread>> response) {
@@ -223,19 +227,6 @@ public class MyForumActivity extends AppCompatActivity implements AdapterView.On
 
             }
         });
-
-
-        /**
-        //Beispieldaten
-        ItemData item1 = new ItemData("Buch 1", "1234", "schlecht","wie neu");
-        ItemData item2 = new ItemData("Buch 2", "2345", "gut","nie benutzt");
-        ItemData item3 = new ItemData("Buch 3", "3456", "sehr gut","tolles Buch");
-
-        itemArray = new ArrayList();
-        itemArray.add(item1);
-        itemArray.add(item2);
-        itemArray.add(item3);
-         **/
     }
 
 }

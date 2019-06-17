@@ -16,7 +16,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.book_trading.R;
 import com.example.book_trading.chat.chat_uebersichtActivity;
 import com.example.book_trading.chat.xmppService;
+import com.example.book_trading.datenbank.ApiClient;
+import com.example.book_trading.datenbank.ApiInterface;
+import com.example.book_trading.datenbank.PrefConfig;
+import com.example.book_trading.datenbank.Thread;
+import com.example.book_trading.datenbank.User;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import java.util.jar.Attributes;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Activity-Klasse für den Forum Eintrag
@@ -25,6 +36,9 @@ public class ForumEintragActivity extends AppCompatActivity {
     private Button abbruchBtn;
     private Button verfassenBtn;
     private ItemData selectedItem;
+    private String username;
+    public static PrefConfig prefConfig;
+    public static ApiInterface apiInterface;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,10 +47,19 @@ public class ForumEintragActivity extends AppCompatActivity {
         this.abbruchBtn = (Button) findViewById(R.id.abbruchBtn);
         this.verfassenBtn = (Button) findViewById(R.id.verfassenBtn);
 
+        prefConfig = new PrefConfig(this);
+        apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
+
         //////////////////////////////
         Intent activityThatCalled = getIntent();
+        Bundle b = activityThatCalled.getExtras();
+        if(b!=null){
+            username = b.getString("USERNAME");
+        }
+
 
         selectedItem = (ItemData) activityThatCalled.getExtras().getSerializable("data");
+
         //Wenn es noch keinen Inhalt gibt leere alles
         if (selectedItem == null) {
             selectedItem = new ItemData("", "", "", "");
@@ -71,6 +94,29 @@ public class ForumEintragActivity extends AppCompatActivity {
         });
     }
 
+    public void createThread(String titel, String beschreibung, String isbn, String zustand, String userID){
+        Call<Thread> call = ForumEintragActivity.apiInterface.performCreateThread(titel,beschreibung,ForumEintragActivity.prefConfig.readName());
+        call.enqueue(new Callback<Thread>() {
+            @Override
+            public void onResponse(Call<Thread> call, Response<Thread> response) {
+                switch(response.body().getResponse()){
+                    case "success":{
+                        prefConfig.displayToast("Thread Angelegt");
+                        break;
+                    }
+                    default:{
+                        prefConfig.displayToast("Fehler");
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Thread> call, Throwable t) {
+
+            }
+        });
+    }
+
     //////////////////////
     //Speichern
     public void onSaveClick(View view) {
@@ -82,6 +128,9 @@ public class ForumEintragActivity extends AppCompatActivity {
             selectedItem.ISBN = ((EditText)findViewById(R.id.isbnEingabe)).getText().toString();
             selectedItem.Zustand = ((EditText)findViewById(R.id.zustandEingabe)).getText().toString();
             selectedItem.Beschreibung = ((EditText)findViewById(R.id.beschreibungEingabe)).getText().toString();
+
+            createThread(selectedItem.Name,selectedItem.Beschreibung,selectedItem.ISBN,selectedItem.Zustand,this.username);
+
 
             goingBack.putExtra("action", "save");
             goingBack.putExtra("data", selectedItem);
