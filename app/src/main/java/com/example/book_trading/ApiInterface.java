@@ -1,6 +1,8 @@
 package com.example.book_trading;
 
 import java.util.ArrayList;
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
@@ -17,13 +19,10 @@ public interface ApiInterface {
                                 @Query("u_pass") String UserPassword);
 
     @GET("getThreads.php")
-    Call<ArrayList<Thread>> performGetThreads();
+    Call<List<Thread>> performGetThreads();
 
     @GET("getThread.php")
-    Call<Thread> performGetThread(@Query("t_id") int t_id,
-                                  @Query("t_titel") String t_name,
-                                  @Query("t_discription") String beschreibung,
-                                  @Query("u_name") String name);
+    Call<Thread> performGetThread(@Query("t_id") String t_id);
 
     @GET("getProfile.php")
     Call<User> performGetProfile(@Query("u_name") String name);

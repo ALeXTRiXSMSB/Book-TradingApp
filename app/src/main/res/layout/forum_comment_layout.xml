@@ -72,9 +72,10 @@
                     android:textStyle="bold"/>
 
                 <TextView
+                    android:id="@+id/tv_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="hier steht der Ihnalt"/>
+                    android:hint="hier steht der Ihnalt" />
             </LinearLayout>
 
             <LinearLayout
@@ -92,9 +93,10 @@
                     android:textStyle="bold"/>
 
                 <TextView
+                    android:id="@+id/tv_isbn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="hier steht der Ihnalt"/>
+                    android:hint="hier steht der Ihnalt" />
             </LinearLayout>
 
             <LinearLayout
@@ -112,9 +114,10 @@
                     android:textStyle="bold"/>
 
                 <TextView
+                    android:id="@+id/tv_zustand"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="hier steht der Ihnalt"/>
+                    android:hint="hier steht der Ihnalt" />
             </LinearLayout>
 
             <LinearLayout
@@ -132,9 +135,10 @@
                     android:textStyle="bold"/>
 
                 <TextView
+                    android:id="@+id/tv_beschreibung"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="hier steht der Ihnalt"/>
+                    android:hint="hier steht der Ihnalt" />
             </LinearLayout>
         </LinearLayout>
 

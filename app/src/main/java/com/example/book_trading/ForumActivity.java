@@ -19,7 +19,11 @@ import com.example.book_trading.chat.xmppService;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.ArrayList;
+import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 /**
  * Activity-Klasse für das Forum
  */
@@ -29,6 +33,7 @@ public class ForumActivity extends AppCompatActivity {
     private ArrayAdapter<String> adapter = null;
     private ItemData selectedData;
     private static final String TAG = "MainActivity";
+    public ArrayList<Thread> listItems = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,6 +92,7 @@ public class ForumActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent comment = new Intent(view.getContext(), ForumCommentActivity.class);
+                comment.putExtra("TID",String.valueOf(listItems.get(position).getT_id()));
                 startActivity(comment);
             }
         });
@@ -142,14 +148,22 @@ public class ForumActivity extends AppCompatActivity {
     }
 
     public void test(){
-        adapter.add("Buch 1");
-        adapter.add("Buch 2");
-        adapter.add("Buch 3");
-        adapter.add("Zeitschrift 1");
-        adapter.add("Zeitschrift 2");
-        adapter.add("Zeitschrift 3");
-        adapter.add("Das Buch 1");
-        adapter.add("Das Buch 2");
+        Call<List<Thread>> call = LoginActivity.apiInterface.performGetThreads();
+        call.enqueue(new Callback<List<Thread>>() {
+            @Override
+            public void onResponse(Call<List<Thread>> call, Response<List<Thread>> response) {
+                for(Thread t: response.body()){
+                    adapter.add(t.getT_titel());
+                }
+           for(Thread t:response.body()){
+                    listItems.add(t);
+                }
+            }
+            @Override
+            public void onFailure(Call<List<Thread>> call, Throwable t) {
+
+            }
+        });
     }
 
 }

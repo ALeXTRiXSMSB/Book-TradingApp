@@ -3,7 +3,14 @@ package com.example.book_trading;
 import android.content.Context;
 import android.content.Intent;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -213,15 +220,16 @@ public class MySQLDatabaseHelper {
     }
 
     public void getAllThreads(){
-        Call<ArrayList<Thread>> call = this.apiInterface.performGetThreads();
-        call.enqueue(new Callback<ArrayList<Thread>>() {
+        Call<List<Thread>> call = this.apiInterface.performGetThreads();
+        call.enqueue(new Callback<List<Thread>>() {
             @Override
-            public void onResponse(Call<ArrayList<Thread>> call, Response<ArrayList<Thread>> response) {
+            public void onResponse(Call<List<Thread>> call, Response<List<Thread>> response) {
+                List<Thread> tmp;
 
             }
 
             @Override
-            public void onFailure(Call<ArrayList<Thread>> call, Throwable t) {
+            public void onFailure(Call<List<Thread>> call, Throwable t) {
 
             }
         });

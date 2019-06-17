@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,6 +16,10 @@ import com.example.book_trading.chat.xmppService;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 /**
  * Activity-Klasse für Einträge + Chat
  */
@@ -22,6 +27,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 public class ForumCommentActivity extends AppCompatActivity {
     private FloatingActionButton btnFremdProfil;
     private FloatingActionButton btnChat;
+    public TextView tv_name,tv_zustand,tv_beschreibung,tv_isbn;
 
     //TODO: Username muss hier unbedingt geholt werden, sonst keine Zuordnung möglich!
     private String fremd_username = "user";
@@ -30,6 +36,16 @@ public class ForumCommentActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.forum_comment_layout);
+
+        tv_name = findViewById(R.id.tv_name);
+        tv_zustand = findViewById(R.id.tv_zustand);
+        tv_beschreibung = findViewById(R.id.tv_beschreibung);
+        tv_isbn = findViewById(R.id.tv_isbn);
+
+        Bundle bundle = getIntent().getExtras();
+        if(bundle.getString("TID") != null){
+            this.editData(bundle.getString("TID"));
+        }
 
         btnFremdProfil = findViewById(R.id.profilFremd);
         btnChat = findViewById(R.id.chat);
@@ -93,6 +109,46 @@ public class ForumCommentActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    public void editData(String t_id){
+        Call<Thread> call = LoginActivity.apiInterface.performGetThread(t_id);
+        call.enqueue(new Callback<Thread>() {
+            @Override
+            public void onResponse(Call<Thread> call, Response<Thread> response) {
+                switch(response.body().getResponse()){
+                    case "success":{
+                        tv_name.setText(response.body().getT_titel());
+                        tv_beschreibung.setText(response.body().getT_discription());
+                        //tv_zustand.setText(response.body().getU_id());
+                        //tv_isbn.setText(response.body().getT_id());
+                        break;
+                    }
+                    case "no data":{
+                        LoginActivity.prefConfig.displayToast("No Data");
+                        break;
+                    }
+                    case "missing argument":{
+                        LoginActivity.prefConfig.displayToast("Missing Argument");
+                        break;
+                    }
+                    case "wrong request method":{
+                        LoginActivity.prefConfig.displayToast("wrong Request Method");
+                        break;
+                    }
+                    default:{
+
+                        break;
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Thread> call, Throwable t) {
+
+            }
+        });
+
     }
 
 }
