@@ -16,7 +16,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_margin="70sp"
-            android:text="Login Form"
+            android:text="Login"
             android:textAppearance="?android:textAppearanceLarge"
             android:textStyle="bold" />
 
@@ -37,7 +37,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="20sp"
             android:background="@drawable/et_bg"
-            android:hint="  Password"
+            android:hint="  Passwort"
             android:inputType="textPassword"
             android:textColor="@color/white" />
 
@@ -56,6 +56,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="60sp"
-            android:text="New User? Register Now" />
+            android:text="Jetzt Registrieren" />
     </LinearLayout>
 </RelativeLayout>

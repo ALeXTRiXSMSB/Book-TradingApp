@@ -107,7 +107,7 @@ public class LoginActivity extends AppCompatActivity {
                 } else if (response.body().getResponse().equals("no data")) {    //Status Fehler ein einloggen ist nicht möglich
                     LoginActivity.prefConfig.displayToast("User name oder Passwort ist falsch");
                 } else if (response.body().getResponse().equals("missing argument")) {
-                    LoginActivity.prefConfig.displayToast("Beide felder müssen uasgefüllt sein");
+                    LoginActivity.prefConfig.displayToast("Beide felder müssen ausgefüllt sein");
                 } else if (response.body().getResponse().equals("wrong request method")) {
                     LoginActivity.prefConfig.displayToast("Fehlerhafter request debugging message");
                 }

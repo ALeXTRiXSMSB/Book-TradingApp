@@ -41,7 +41,7 @@ public class ProfilActivity extends AppCompatActivity implements ExampleDialog.E
 
         textviewLike.setText(this.prefConfig.readLikes());
 
-        user.setText("Hello " + this.prefConfig.readName());
+        user.setText("Hallo " + this.prefConfig.readName());
         this.applyTexts(this.prefConfig.readDiscription(),this.prefConfig.readEmail(),this.prefConfig.readFavorites());
 
         //beim klicken auf die bearbeiten um seine Profildaten zu bearbeiten

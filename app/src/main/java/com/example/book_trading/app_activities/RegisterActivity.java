@@ -76,7 +76,7 @@ public class RegisterActivity extends AppCompatActivity {
                     LoginActivity.prefConfig.displayToast("Alles Richtig");    //Registrierung hat funktioniert
                     //springe zurück
                 } else if (response.body().getResponse().equals("user exists")) {
-                    LoginActivity.prefConfig.displayToast("User already exist..."); //Es gibt bereits einen User mit gleichem Username
+                    LoginActivity.prefConfig.displayToast("User existiert bereits..."); //Es gibt bereits einen User mit gleichem Username
                 }
             }
             @Override
