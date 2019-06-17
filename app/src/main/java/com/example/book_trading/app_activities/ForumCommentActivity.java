@@ -28,8 +28,7 @@ public class ForumCommentActivity extends AppCompatActivity {
     public TextView tv_name,tv_zustand,tv_beschreibung,tv_isbn;
     public String name;
 
-    //TODO: Username muss hier unbedingt geholt werden, sonst keine Zuordnung möglich!
-    private String fremd_username = "user";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +61,7 @@ public class ForumCommentActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ForumCommentActivity.this, chatActivity.class);
-                intent.putExtra("EMPFAENGER", fremd_username);
+                intent.putExtra("EMPFAENGER", name);
                 startActivity(intent);
             }
         });

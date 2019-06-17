@@ -38,7 +38,7 @@ public class ProfilFremdActivity extends AppCompatActivity {
     public TextView tv_eintraege, textView_Info, textView_Mail, textView_Buch, txt_name_info;
 
     //TODO: Hier muss der Username der im Forum angeklickt wurde übertragen/überschrieben werden!
-    public String fremd_username = "user";
+    public String fremd_username = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +61,7 @@ public class ProfilFremdActivity extends AppCompatActivity {
 
         Intent i = getIntent();
         Bundle b = i.getExtras();
-        if(b.getString("USERNAME") != null) {
+        if (b.getString("USERNAME") != null) {
             this.loadData(b.getString("USERNAME"));
         }
 
@@ -104,9 +104,9 @@ public class ProfilFremdActivity extends AppCompatActivity {
 
     //Setzen der Zahl unter dem like auf 1
     private void likeklicken() {
-        if(!this.likeClicked){
+        if (!this.likeClicked) {
             positivZahl.setText("1");
-            this.likeClicked=true;
+            this.likeClicked = true;
         }
     }
 
@@ -131,13 +131,15 @@ public class ProfilFremdActivity extends AppCompatActivity {
         }
     }
 
-    public void loadData(String username){
+    public void loadData(String username) {
+
         Call<User> call = ProfilFremdActivity.apiInterface.performGetProfile(username);
+        this.fremd_username = username;
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
-                switch(response.body().getResponse()){
-                    case "success":{
+                switch (response.body().getResponse()) {
+                    case "success": {
                         txt_name_info.setText(response.body().getU_name());
                         textView_Buch.setText(response.body().getU_favorites());
                         textView_Mail.setText(response.body().getU_email());
@@ -145,20 +147,21 @@ public class ProfilFremdActivity extends AppCompatActivity {
                         positivZahl.setText(response.body().getU_like());
                         break;
                     }
-                    case "no data":{
+                    case "no data": {
                         prefConfig.displayToast("User nicht Vorhanden");
                         break;
                     }
-                    case "missing argument":{
+                    case "missing argument": {
                         prefConfig.displayToast("Missing Argument");
                         break;
                     }
-                    case "no request method":{
+                    case "no request method": {
                         prefConfig.displayToast("Keine Ahnung");
                         break;
                     }
                 }
             }
+
             @Override
             public void onFailure(Call<User> call, Throwable t) {
 
