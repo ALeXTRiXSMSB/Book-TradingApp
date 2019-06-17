@@ -1,10 +1,12 @@
 package com.example.book_trading.chat;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.database.DataSetObserver;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
@@ -12,11 +14,14 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.example.book_trading.R;
+import com.example.book_trading.app_activities.ForumActivity;
+import com.example.book_trading.app_activities.ProfilActivity;
 import com.example.book_trading.chat.Nachricht.ChatDatabase;
 import com.example.book_trading.chat.Nachricht.ChatNachricht;
 import com.example.book_trading.chat.Nachricht.ChatNachrichtDAO;
 import com.example.book_trading.chat.Nachricht.NachrichtArrayAdapter;
 import com.example.book_trading.chat.Nachricht.uebersichtArrayAdapter;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -50,6 +55,28 @@ public class chat_uebersichtActivity extends AppCompatActivity {
 
 
         build_lv();
+
+        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.bottom_navigation);
+        navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.navigateNachrichten:
+                        //Intent a = new Intent(chat_uebersichtActivity.this, chat_uebersichtActivity.class);
+                        //startActivity(a);
+                        break;
+                    case R.id.navigateProfil:
+                         Intent b = new Intent(chat_uebersichtActivity.this, ProfilActivity.class);
+                         startActivity(b);
+                        break;
+                    case R.id.navigateForum:
+                        Intent c = new Intent(chat_uebersichtActivity.this, ForumActivity.class);
+                        startActivity(c);
+                        break;
+                }
+                return false;
+            }
+        });
 
     }
 
