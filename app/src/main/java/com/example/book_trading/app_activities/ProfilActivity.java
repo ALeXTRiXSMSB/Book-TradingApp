@@ -16,13 +16,17 @@ import com.example.book_trading.chat.chat_uebersichtActivity;
 import com.example.book_trading.chat.xmppService;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 /**
  * Activity-Klasse für das eigene Profil
  */
 public class ProfilActivity extends AppCompatActivity implements ExampleDialog.ExampleDialogListener {
     private static PrefConfig prefConfig;
     private static ApiInterface apiInterface;
-    private TextView textViewInfo, textViewMail, textViewBuch, textViewForum,textViewBearbeiten,textviewLike,user;
+    public TextView textViewInfo, textViewMail, textViewBuch, textViewForum,textViewBearbeiten,textviewLike,user,textview_forum;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,11 +42,13 @@ public class ProfilActivity extends AppCompatActivity implements ExampleDialog.E
         textViewBearbeiten = (TextView) findViewById(R.id.textView_Bearbeiten);
         textviewLike = (TextView) findViewById(R.id.tv_positiv);
         textViewForum = (TextView) findViewById(R.id.textView_Forum);
+        textview_forum = findViewById(R.id.textview_forum);
 
         textviewLike.setText(this.prefConfig.readLikes());
 
         user.setText("Hallo " + this.prefConfig.readName());
         this.applyTexts(this.prefConfig.readDiscription(),this.prefConfig.readEmail(),this.prefConfig.readFavorites());
+        update();
 
         //beim klicken auf die bearbeiten um seine Profildaten zu bearbeiten
         textViewBearbeiten.setOnClickListener(new View.OnClickListener() {
@@ -118,6 +124,23 @@ public class ProfilActivity extends AppCompatActivity implements ExampleDialog.E
         textViewInfo.setText(info);
         textViewMail.setText(mail);
         textViewBuch.setText(buch);
+    }
+
+    public void update(){
+        Call<String> call = ProfilActivity.apiInterface.performCount(ProfilActivity.prefConfig.readName());
+        call.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                String tmp = response.body().toString();
+                ProfilActivity.this.textview_forum.setText(tmp);
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+
+            }
+        });
+
     }
 
 }

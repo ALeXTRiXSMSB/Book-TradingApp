@@ -41,4 +41,10 @@ public interface ApiInterface {
                                      @Query("t_isbn") String isbn,
                                      @Query("t_zustand") String zustand,
                                      @Query("u_name") String u_name);
+
+    @GET("anzahlThread.php")
+    Call<String> performCount(@Query("u_name") String u_name);
+
+    @GET("incLike.php")
+    Call<Integer> performinclike(@Query("u_name") String u_name);
 }

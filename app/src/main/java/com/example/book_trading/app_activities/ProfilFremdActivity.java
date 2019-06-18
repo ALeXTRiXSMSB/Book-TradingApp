@@ -105,7 +105,18 @@ public class ProfilFremdActivity extends AppCompatActivity {
     //Setzen der Zahl unter dem like auf 1
     private void likeklicken() {
         if (!this.likeClicked) {
-            positivZahl.setText("1");
+            Call<Integer> call = ProfilFremdActivity.apiInterface.performinclike(this.fremd_username);
+            call.enqueue(new Callback<Integer>() {
+                @Override
+                public void onResponse(Call<Integer> call, Response<Integer> response) {
+                    loadData(fremd_username);
+                }
+
+                @Override
+                public void onFailure(Call<Integer> call, Throwable t) {
+
+                }
+            });
             this.likeClicked = true;
         }
     }
@@ -132,6 +143,19 @@ public class ProfilFremdActivity extends AppCompatActivity {
     }
 
     public void loadData(String username) {
+        Call<String> callUpdate = ProfilFremdActivity.apiInterface.performCount("username");
+        callUpdate.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                String tmp = response.body().toString();
+                ProfilFremdActivity.this.tv_eintraege.setText(tmp);
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+
+            }
+        });
 
         Call<User> call = ProfilFremdActivity.apiInterface.performGetProfile(username);
         this.fremd_username = username;
