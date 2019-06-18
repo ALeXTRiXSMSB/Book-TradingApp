@@ -95,7 +95,7 @@ public class ForumEintragActivity extends AppCompatActivity {
     }
 
     public void createThread(String titel, String beschreibung, String isbn, String zustand){
-        Call<Thread> call = ForumEintragActivity.apiInterface.performCreateThread(titel,beschreibung,ForumEintragActivity.prefConfig.readName());
+        Call<Thread> call = ForumEintragActivity.apiInterface.performCreateThread(titel,beschreibung,isbn, zustand,ForumEintragActivity.prefConfig.readName());
         call.enqueue(new Callback<Thread>() {
             @Override
             public void onResponse(Call<Thread> call, Response<Thread> response) {

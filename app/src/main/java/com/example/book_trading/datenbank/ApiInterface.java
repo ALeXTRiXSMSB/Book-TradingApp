@@ -38,5 +38,7 @@ public interface ApiInterface {
     @GET("createThread.php")
     Call<Thread> performCreateThread(@Query("t_titel") String titel,
                                      @Query("t_discription") String beschreibung,
+                                     @Query("t_isbn") String isbn,
+                                     @Query("t_zustand") String zustand,
                                      @Query("u_name") String u_name);
 }

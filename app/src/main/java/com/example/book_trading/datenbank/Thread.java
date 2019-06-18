@@ -16,6 +16,12 @@ public class Thread {
     @SerializedName("t_discription")
     private String t_discription;
 
+    @SerializedName("t_isbn")
+    private String isbn;
+
+    @SerializedName("t_zustand")
+    private String zustand;
+
     @SerializedName("u_name")
     private String u_name;
 
@@ -59,4 +65,19 @@ public class Thread {
         this.u_name = u_name;
     }
 
+    public String getIsbn() {
+        return isbn;
+    }
+
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
+    }
+
+    public String getZustand() {
+        return zustand;
+    }
+
+    public void setZustand(String zustand) {
+        this.zustand = zustand;
+    }
 }
