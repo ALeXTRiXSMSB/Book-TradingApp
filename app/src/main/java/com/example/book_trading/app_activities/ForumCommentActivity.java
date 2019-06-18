@@ -51,18 +51,29 @@ public class ForumCommentActivity extends AppCompatActivity {
         btnFremdProfil.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ForumCommentActivity.this, ProfilFremdActivity.class);
-                intent.putExtra("USERNAME",name);
-                startActivity(intent);
+                if(name.equals(ProfilFremdActivity.prefConfig.readName())){
+                    Intent b = new Intent(ForumCommentActivity.this, ProfilActivity.class);
+                    startActivity(b);
+                }
+                else {
+                    Intent intent = new Intent(ForumCommentActivity.this, ProfilFremdActivity.class);
+                    intent.putExtra("USERNAME",name);
+                    startActivity(intent);
+                }
             }
         });
         //beim klicken auf den Flieger kann man dem besitzer eine Message schreiben
         btnChat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ForumCommentActivity.this, chatActivity.class);
-                intent.putExtra("EMPFAENGER", name);
-                startActivity(intent);
+                if(name.equals(ProfilFremdActivity.prefConfig.readName())) {
+                    Intent a = new Intent(ForumCommentActivity.this, chat_uebersichtActivity.class);
+                    startActivity(a);
+                }else{
+                    Intent intent = new Intent(ForumCommentActivity.this, chatActivity.class);
+                    intent.putExtra("EMPFAENGER", name);
+                    startActivity(intent);
+                }
             }
         });
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.bottom_navigation);
