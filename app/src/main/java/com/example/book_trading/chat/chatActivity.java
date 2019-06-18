@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.database.DataSetObserver;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.EditText;
@@ -59,6 +60,7 @@ public class chatActivity extends AppCompatActivity {
 
 
         build_Database();
+        buildChatArrayAdapter();
 
         registerReceiver(this);
         registerReceiver_empfangen();
@@ -127,9 +129,8 @@ public class chatActivity extends AppCompatActivity {
 
     //TODO: Chat Nachricht benötigt für Datenbankabspeicherung: den Empfänger und Sender für Zuordnung
     private boolean receiveMessage(String s) {
-
-
         /**ArrayAdapter wird geupdatet*/
+        Log.d("chatActivity", "Nachricht " + s + " angekommen!");
         update_array_adapter();
         return true;
     }
@@ -166,14 +167,21 @@ public class chatActivity extends AppCompatActivity {
      * aus Datenbank wird die Liste der Nachrichten geholt und in den ArrayAdapter übertragen
      */
     private void update_array_adapter() {
-        buildChatArrayAdapter();
-        List<ChatNachricht> items = chatNachrichtDAO.getAllChats();
-        Collections.reverse(items);
-        for (ChatNachricht i : items) {
-            if (i.getTo().equals(empfaenger)) {
-                chatArrayAdapter.add(i);
+
+        chatActivity.this.runOnUiThread(new Runnable() {
+            public void run() {
+                buildChatArrayAdapter();
+                List<ChatNachricht> items = chatNachrichtDAO.getAllChats();
+                Collections.reverse(items);
+                for (ChatNachricht i : items) {
+                    if (i.getTo().equals(empfaenger)) {
+                        chatArrayAdapter.add(i);
+                    }
+                }
             }
-        }
+        });
+
+
     }
 
 
@@ -215,7 +223,6 @@ public class chatActivity extends AppCompatActivity {
 
     @Override
     public void onDestroy() {
-
 
 
         unregisterReceiver(broadcastReceiver);

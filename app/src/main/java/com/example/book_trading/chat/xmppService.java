@@ -256,7 +256,7 @@ public class xmppService extends Service {
     public void sendMessage(String message, String to) {
 
 
-        Chat chat = chatManager.chatWith(build_jid(to));
+            Chat chat = chatManager.chatWith(build_jid(to));
         try {
 
 

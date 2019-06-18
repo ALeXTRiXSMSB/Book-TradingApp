@@ -62,11 +62,9 @@ public class chatBroadcastReceiver extends BroadcastReceiver {
             String sender = bundle.getString("SENDER");
             Log.d("BroadcastReceiver", s);
             /**es wird nur notification gesendet wenn activity nicht aktiv ist*/
-            if (chatActivity.activity_active != null) {
-                if (!(chatActivity.activity_active)) {
-                    sendNotification(s, context, sender);
-                }
-            }
+
+            sendNotification(s, context, sender);
+
 
             /**Broadcast schickt intent weiter zur mainactivity*/
             Intent in = new Intent(BC_INTENT_EMPFANGEN);

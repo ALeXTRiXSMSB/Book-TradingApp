@@ -10,6 +10,7 @@
     <dist:module dist:instant="true" />
 
     <application
+        android:name=".chat.NotificationBase"
         android:allowBackup="true"
         android:background="#FFFFFF"
         android:icon="@mipmap/ic_launcher"
