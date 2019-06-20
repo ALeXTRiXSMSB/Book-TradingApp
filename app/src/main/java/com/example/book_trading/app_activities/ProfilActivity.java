@@ -8,12 +8,15 @@ import android.view.View;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.book_trading.chat.chatLogin;
 import com.example.book_trading.datenbank.ApiClient;
 import com.example.book_trading.datenbank.ApiInterface;
 import com.example.book_trading.datenbank.PrefConfig;
 import com.example.book_trading.R;
 import com.example.book_trading.chat.chat_uebersichtActivity;
 import com.example.book_trading.chat.xmppService;
+import com.example.book_trading.datenbank.User;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import retrofit2.Call;
@@ -25,7 +28,7 @@ import retrofit2.Response;
  */
 public class ProfilActivity extends AppCompatActivity implements ExampleDialog.ExampleDialogListener {
     public static PrefConfig prefConfig;
-    private static ApiInterface apiInterface;
+    public static ApiInterface apiInterface;
     public TextView textViewInfo, textViewMail, textViewBuch, textViewForum,textViewBearbeiten,textviewLike,user,textview_forum;
 
     @Override
@@ -44,11 +47,11 @@ public class ProfilActivity extends AppCompatActivity implements ExampleDialog.E
         textViewForum = (TextView) findViewById(R.id.textView_Forum);
         textview_forum = findViewById(R.id.textview_forum);
 
-        textviewLike.setText(this.prefConfig.readLikes());
 
+        update();
+        textviewLike.setText(this.prefConfig.readLikes());
         user.setText("Hallo " + this.prefConfig.readName());
         this.applyTexts(this.prefConfig.readDiscription(),this.prefConfig.readEmail(),this.prefConfig.readFavorites());
-        update();
 
         //beim klicken auf die bearbeiten um seine Profildaten zu bearbeiten
         textViewBearbeiten.setOnClickListener(new View.OnClickListener() {
@@ -141,6 +144,31 @@ public class ProfilActivity extends AppCompatActivity implements ExampleDialog.E
             }
         });
 
+        Call<User> callUpdate2 = ProfilActivity.apiInterface.performGetProfile(ProfilActivity.prefConfig.readName());
+        callUpdate2.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                if (response.body().getResponse().equals("success")) { //Status Ok es kann sich eingeloggt werden
+                    ProfilActivity.prefConfig.writeName(response.body().getU_name());
+                    ProfilActivity.prefConfig.writeEmail(response.body().getU_email());
+                    ProfilActivity.prefConfig.writeLikes(response.body().getU_like());
+                    ProfilActivity.prefConfig.writeFavorites(response.body().getU_favorites());
+                    ProfilActivity.prefConfig.writeDiscription(response.body().getU_discription());
+
+                } else if (response.body().getResponse().equals("no data")) {    //Status Fehler ein einloggen ist nicht möglich
+                    ProfilActivity.prefConfig.displayToast("User name oder Passwort ist falsch");
+                } else if (response.body().getResponse().equals("missing argument")) {
+                    ProfilActivity.prefConfig.displayToast("Beide felder müssen ausgefüllt sein");
+                } else if (response.body().getResponse().equals("wrong request method")) {
+                    ProfilActivity.prefConfig.displayToast("Fehlerhafter request debugging message");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+
+            }
+        });
     }
 
 }
