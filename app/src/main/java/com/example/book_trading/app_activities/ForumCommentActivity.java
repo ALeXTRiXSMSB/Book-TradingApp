@@ -70,7 +70,7 @@ public class ForumCommentActivity extends AppCompatActivity {
         btnChat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (tv_fremdName.getText().toString().equals(ProfilActivity.prefConfig.readName())) {
+
                     // wenn man selber Ersteller ist, kommt man zu den Nachrichten
                     if (tv_fremdName.getText().toString().equals(ProfilActivity.prefConfig.readName())) {
                         Intent a = new Intent(ForumCommentActivity.this, chat_uebersichtActivity.class);
@@ -80,7 +80,7 @@ public class ForumCommentActivity extends AppCompatActivity {
                         intent.putExtra("EMPFAENGER", name);
                         startActivity(intent);
                     }
-                }
+
             }
         });
 

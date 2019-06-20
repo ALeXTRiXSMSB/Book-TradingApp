@@ -10,9 +10,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.book_trading.R;
 import com.example.book_trading.chat.chat_uebersichtActivity;
 import com.example.book_trading.chat.xmppService;
@@ -21,6 +23,7 @@ import com.example.book_trading.datenbank.ApiInterface;
 import com.example.book_trading.datenbank.PrefConfig;
 import com.example.book_trading.datenbank.Thread;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -50,7 +53,7 @@ public class ForumEintragActivity extends AppCompatActivity {
         //////////////////////////////
         Intent activityThatCalled = getIntent();
         Bundle b = activityThatCalled.getExtras();
-        if(b!=null){
+        if (b != null) {
             username = b.getString("USERNAME");
             t_id = String.valueOf(b.getInt("T_ID"));
             getThread(t_id);
@@ -62,7 +65,7 @@ public class ForumEintragActivity extends AppCompatActivity {
         // wenn es noch keinen Inhalt gibt leere alles
         if (selectedItem == null) {
             selectedItem = new ItemData("", "", "", "");
-        }else{
+        } else {
             ((EditText) findViewById(R.id.nameEingabe)).setText(selectedItem.Name);
             ((EditText) findViewById(R.id.isbnEingabe)).setText(selectedItem.ISBN);
             ((EditText) findViewById(R.id.zustandEingabe)).setText(selectedItem.Zustand);
@@ -95,7 +98,7 @@ public class ForumEintragActivity extends AppCompatActivity {
         });
     }
 
-    public void deleteThread(String t_id){
+    public void deleteThread(String t_id) {
         Call<Thread> call = ForumEintragActivity.apiInterface.performDeleteThread(t_id);
         call.enqueue(new Callback<Thread>() {
             @Override
@@ -111,41 +114,41 @@ public class ForumEintragActivity extends AppCompatActivity {
     }
 
     /**
-     * @param t_id
-     * holt sich Einträge vom Server
+     * @param t_id holt sich Einträge vom Server
      */
-    public void getThread(String t_id){
+    public void getThread(String t_id) {
         Call<Thread> call = ForumEintragActivity.apiInterface.performGetThread(t_id);
         call.enqueue(new Callback<Thread>() {
             @Override
             public void onResponse(Call<Thread> call, Response<Thread> response) {
-                switch(response.body().getResponse()){
-                    case "success":{
-                        selectedItem = new ItemData(response.body().getT_titel(),response.body().getIsbn(),
-                        response.body().getZustand(),response.body().getT_discription());
+                switch (response.body().getResponse()) {
+                    case "success": {
+                        selectedItem = new ItemData(response.body().getT_titel(), response.body().getIsbn(),
+                                response.body().getZustand(), response.body().getT_discription());
                         ((EditText) findViewById(R.id.nameEingabe)).setText(selectedItem.Name);
                         ((EditText) findViewById(R.id.isbnEingabe)).setText(selectedItem.ISBN);
                         ((EditText) findViewById(R.id.zustandEingabe)).setText(selectedItem.Zustand);
                         ((EditText) findViewById(R.id.beschreibungEingabe)).setText(selectedItem.Beschreibung);
                         break;
                     }
-                    case "no data":{
+                    case "no data": {
                         prefConfig.displayToast("No Data");
                         break;
                     }
-                    case "missing argument":{
+                    case "missing argument": {
                         prefConfig.displayToast("missing argument");
                         break;
                     }
-                    case "wrong request method":{
+                    case "wrong request method": {
                         prefConfig.displayToast("wrong request method");
                         break;
                     }
-                    default:{
+                    default: {
 
                     }
                 }
             }
+
             @Override
             public void onFailure(Call<Thread> call, Throwable t) {
             }
@@ -156,20 +159,19 @@ public class ForumEintragActivity extends AppCompatActivity {
      * @param titel
      * @param beschreibung
      * @param isbn
-     * @param zustand
-     * eingetragenen Daten an den Server
+     * @param zustand      eingetragenen Daten an den Server
      */
-    public void createThread(String titel, String beschreibung, String isbn, String zustand){
-        Call<Thread> call = ForumEintragActivity.apiInterface.performCreateThread(titel,beschreibung,isbn, zustand,ForumEintragActivity.prefConfig.readName());
+    public void createThread(String titel, String beschreibung, String isbn, String zustand) {
+        Call<Thread> call = ForumEintragActivity.apiInterface.performCreateThread(titel, beschreibung, isbn, zustand, ForumEintragActivity.prefConfig.readName());
         call.enqueue(new Callback<Thread>() {
             @Override
             public void onResponse(Call<Thread> call, Response<Thread> response) {
-                switch(response.body().getResponse()){
-                    case "success":{
+                switch (response.body().getResponse()) {
+                    case "success": {
                         prefConfig.displayToast("Thread Angelegt");
                         break;
                     }
-                    default:{
+                    default: {
                         prefConfig.displayToast("Fehler");
                     }
                 }
@@ -191,12 +193,12 @@ public class ForumEintragActivity extends AppCompatActivity {
         if (cm.getActiveNetworkInfo() != null) { // verbunden mit Internet
             Intent goingBack = new Intent();
 
-            selectedItem.Name = ((EditText)findViewById(R.id.nameEingabe)).getText().toString();
-            selectedItem.ISBN = ((EditText)findViewById(R.id.isbnEingabe)).getText().toString();
-            selectedItem.Zustand = ((EditText)findViewById(R.id.zustandEingabe)).getText().toString();
-            selectedItem.Beschreibung = ((EditText)findViewById(R.id.beschreibungEingabe)).getText().toString();
+            selectedItem.Name = ((EditText) findViewById(R.id.nameEingabe)).getText().toString();
+            selectedItem.ISBN = ((EditText) findViewById(R.id.isbnEingabe)).getText().toString();
+            selectedItem.Zustand = ((EditText) findViewById(R.id.zustandEingabe)).getText().toString();
+            selectedItem.Beschreibung = ((EditText) findViewById(R.id.beschreibungEingabe)).getText().toString();
 
-            createThread(selectedItem.Name,selectedItem.Beschreibung,selectedItem.ISBN,selectedItem.Zustand);
+            createThread(selectedItem.Name, selectedItem.Beschreibung, selectedItem.ISBN, selectedItem.Zustand);
 
             goingBack.putExtra("action", "save");
             goingBack.putExtra("data", selectedItem);
@@ -249,7 +251,7 @@ public class ForumEintragActivity extends AppCompatActivity {
 
                         goingBack.putExtra("action", "delete");
                         //goingBack.putExtra("data", selectedItem);
-
+                        deleteThread();
                         setResult(RESULT_OK, goingBack);
 
                         finish();
@@ -279,6 +281,28 @@ public class ForumEintragActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    public void deleteThread() {
+        Call<Thread> call = ForumEintragActivity.apiInterface.performDeleteThread(selectedItem.Name);
+        call.enqueue(new Callback<Thread>() {
+            @Override
+            public void onResponse(Call<Thread> call, Response<Thread> response) {
+                switch (response.body().getResponse()) {
+                    case "success": {
+                        prefConfig.displayToast("Thread gelöscht");
+                        break;
+                    }
+                    default: {
+                        prefConfig.displayToast("Fehler");
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Thread> call, Throwable t) {
+            }
+        });
     }
 
 }
