@@ -130,6 +130,8 @@ public class ForumCommentActivity extends AppCompatActivity {
                     case "success":{
                         tv_name.setText(response.body().getT_titel());
                         tv_beschreibung.setText(response.body().getT_discription());
+                        tv_isbn.setText(response.body().getIsbn());
+                        tv_zustand.setText(response.body().getZustand());
                         name = response.body().getU_name();
                         break;
                     }

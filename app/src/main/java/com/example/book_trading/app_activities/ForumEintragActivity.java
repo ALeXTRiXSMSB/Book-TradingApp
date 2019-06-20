@@ -63,11 +63,15 @@ public class ForumEintragActivity extends AppCompatActivity {
         //Wenn es noch keinen Inhalt gibt leere alles
         if (selectedItem == null) {
             selectedItem = new ItemData("", "", "", "");
+        }else{
+            getThread(b.getString("t_id"));
         }
-        ((EditText) findViewById(R.id.nameEingabe)).setText(selectedItem.Name);
+
+        /**((EditText) findViewById(R.id.nameEingabe)).setText(selectedItem.Name);
         ((EditText) findViewById(R.id.isbnEingabe)).setText(selectedItem.ISBN);
         ((EditText) findViewById(R.id.zustandEingabe)).setText(selectedItem.Zustand);
         ((EditText) findViewById(R.id.beschreibungEingabe)).setText(selectedItem.Beschreibung);
+         **/
 
         //////////////////////////////
 
@@ -90,6 +94,42 @@ public class ForumEintragActivity extends AppCompatActivity {
                         break;
                 }
                 return false;
+            }
+        });
+    }
+
+    public void getThread(String t_id){
+        Call<Thread> call = ForumEintragActivity.apiInterface.performGetThread(t_id);
+        call.enqueue(new Callback<Thread>() {
+            @Override
+            public void onResponse(Call<Thread> call, Response<Thread> response) {
+                switch(response.body().getResponse()){
+                    case "success":{
+                        selectedItem = new ItemData(response.body().getT_titel(),response.body().getIsbn(),
+                        response.body().getZustand(),response.body().getT_discription());
+                        break;
+                    }
+                    case "no data":{
+                        prefConfig.displayToast("No Data");
+                        break;
+                    }
+                    case "missing argument":{
+                        prefConfig.displayToast("missing argument");
+                        break;
+                    }
+                    case "wrong request method":{
+                        prefConfig.displayToast("wrong request method");
+                        break;
+                    }
+                    default:{
+
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Thread> call, Throwable t) {
+
             }
         });
     }

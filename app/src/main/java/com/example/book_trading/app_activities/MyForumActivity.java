@@ -36,7 +36,7 @@ public class MyForumActivity extends AppCompatActivity implements AdapterView.On
     private ItemData selectedData;
     public static PrefConfig prefConfig;
     public static ApiInterface apiInterface;
-    private ArrayList<ItemData> listItems = new ArrayList<>();
+    private ArrayList<Thread> listItems = new ArrayList<>();
     private String username;
 
     @Override
@@ -170,6 +170,7 @@ public class MyForumActivity extends AppCompatActivity implements AdapterView.On
 
         selectedData = itemArray.get(position);
         getDetailIntent.putExtra("data", selectedData);
+        getDetailIntent.putExtra("t_id",this.listItems.get(position).getT_id());
 
         startActivityForResult(getDetailIntent, result);
     }
@@ -219,7 +220,7 @@ public class MyForumActivity extends AppCompatActivity implements AdapterView.On
                     adapter.add(new ItemData(t.getT_titel()));
                 }
                 for(Thread t:response.body()){
-                    listItems.add(new ItemData(t.getT_titel()));
+                    listItems.add(t);
                 }
             }
             @Override
