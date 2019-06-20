@@ -21,7 +21,7 @@ public class ItemData implements Serializable {
     }
 
     public String toString(){
-        return Name + " (" + Zustand +")"; //Hier wird der Name des Buches und der Zustand dazu zurück gegeben
+        return Name; //Hier wird der Name des Buches und der Zustand dazu zurück gegeben
     }
 
 }

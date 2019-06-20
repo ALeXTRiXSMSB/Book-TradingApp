@@ -35,6 +35,7 @@ public class ForumEintragActivity extends AppCompatActivity {
     private String username;
     public static PrefConfig prefConfig;
     public static ApiInterface apiInterface;
+    private String t_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +52,8 @@ public class ForumEintragActivity extends AppCompatActivity {
         Bundle b = activityThatCalled.getExtras();
         if(b!=null){
             username = b.getString("USERNAME");
+            t_id = String.valueOf(b.getInt("T_ID"));
+            getThread(t_id);
         }
 
         // Details vom jeweiligen Eintrag
@@ -60,7 +63,10 @@ public class ForumEintragActivity extends AppCompatActivity {
         if (selectedItem == null) {
             selectedItem = new ItemData("", "", "", "");
         }else{
-            getThread(b.getString("t_id"));
+            ((EditText) findViewById(R.id.nameEingabe)).setText(selectedItem.Name);
+            ((EditText) findViewById(R.id.isbnEingabe)).setText(selectedItem.ISBN);
+            ((EditText) findViewById(R.id.zustandEingabe)).setText(selectedItem.Zustand);
+            ((EditText) findViewById(R.id.beschreibungEingabe)).setText(selectedItem.Beschreibung);
         }
 
         //////////////////////////////
@@ -89,6 +95,21 @@ public class ForumEintragActivity extends AppCompatActivity {
         });
     }
 
+    public void deleteThread(String t_id){
+        Call<Thread> call = ForumEintragActivity.apiInterface.performDeleteThread(t_id);
+        call.enqueue(new Callback<Thread>() {
+            @Override
+            public void onResponse(Call<Thread> call, Response<Thread> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<Thread> call, Throwable t) {
+
+            }
+        });
+    }
+
     /**
      * @param t_id
      * holt sich Einträge vom Server
@@ -102,6 +123,10 @@ public class ForumEintragActivity extends AppCompatActivity {
                     case "success":{
                         selectedItem = new ItemData(response.body().getT_titel(),response.body().getIsbn(),
                         response.body().getZustand(),response.body().getT_discription());
+                        ((EditText) findViewById(R.id.nameEingabe)).setText(selectedItem.Name);
+                        ((EditText) findViewById(R.id.isbnEingabe)).setText(selectedItem.ISBN);
+                        ((EditText) findViewById(R.id.zustandEingabe)).setText(selectedItem.Zustand);
+                        ((EditText) findViewById(R.id.beschreibungEingabe)).setText(selectedItem.Beschreibung);
                         break;
                     }
                     case "no data":{
@@ -175,9 +200,7 @@ public class ForumEintragActivity extends AppCompatActivity {
 
             goingBack.putExtra("action", "save");
             goingBack.putExtra("data", selectedItem);
-
             setResult(RESULT_OK, goingBack);
-
             finish();
         } else { // nicht verbunden mit Internet
             AlertDialog.Builder alterDialogBuilder = new AlertDialog.Builder(ForumEintragActivity.this);

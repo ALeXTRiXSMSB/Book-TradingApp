@@ -170,8 +170,7 @@ public class MyForumActivity extends AppCompatActivity implements AdapterView.On
 
         selectedData = itemArray.get(position);
         getDetailIntent.putExtra("data", selectedData);
-        getDetailIntent.putExtra("t_id",this.listItems.get(position).getT_id());
-
+        getDetailIntent.putExtra("T_ID",this.listItems.get(position).getT_id());
         startActivityForResult(getDetailIntent, result);
     }
 

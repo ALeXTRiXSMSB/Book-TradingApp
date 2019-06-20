@@ -47,4 +47,7 @@ public interface ApiInterface {
 
     @GET("incLike.php")
     Call<Integer> performinclike(@Query("u_name") String u_name);
+
+    @GET("deleteThread.php")
+    Call<Thread> performDeleteThread(@Query("t_id") String t_name);
 }
