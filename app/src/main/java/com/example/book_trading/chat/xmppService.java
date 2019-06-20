@@ -51,7 +51,6 @@ public class xmppService extends Service {
     private static final String XMPPDOMAIN = "booktrading";
     private static final String IP = "cf-schulze.de";
 
-    //TODO: EMPFANGER von der Datenbank abfragen -> möglicherweise Problem mit mehreren Teilhabern
 
 
     private String username;

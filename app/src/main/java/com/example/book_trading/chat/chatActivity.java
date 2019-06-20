@@ -9,6 +9,8 @@ import android.content.IntentFilter;
 import android.database.DataSetObserver;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.EditText;
@@ -16,6 +18,8 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 
 import com.example.book_trading.R;
+import com.example.book_trading.app_activities.ForumActivity;
+import com.example.book_trading.app_activities.LoginActivity;
 import com.example.book_trading.chat.Nachricht.ChatDatabase;
 import com.example.book_trading.chat.Nachricht.ChatNachricht;
 import com.example.book_trading.chat.Nachricht.ChatNachrichtDAO;
@@ -163,7 +167,6 @@ public class chatActivity extends AppCompatActivity {
     }
 
 
-
     /**
      * aus Datenbank wird die Liste der Nachrichten geholt und in den ArrayAdapter übertragen
      */
@@ -235,4 +238,26 @@ public class chatActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_layout, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.logout:
+                stopService(new Intent(getApplicationContext(), xmppService.class)); //Xmpp wird beim ausloggen disconnectet,
+                // somit können Nachrichten die nicht empfangen wurden zum späteren Zeitpunkt abgefragt werden
+
+                Intent logout = new Intent(this, LoginActivity.class);
+                ForumActivity.prefConfig.writeLoginStatus(false);
+                startActivity(logout);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
+    }
 }

@@ -6,15 +6,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.database.DataSetObserver;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.book_trading.R;
 import com.example.book_trading.app_activities.ForumActivity;
+import com.example.book_trading.app_activities.LoginActivity;
 import com.example.book_trading.app_activities.ProfilActivity;
 import com.example.book_trading.chat.Nachricht.ChatDatabase;
 import com.example.book_trading.chat.Nachricht.ChatNachricht;
@@ -37,6 +40,7 @@ public class chat_uebersichtActivity extends AppCompatActivity {
     private uebersichtArrayAdapter uebersicht;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +52,8 @@ public class chat_uebersichtActivity extends AppCompatActivity {
 
 
         lv_chat_uebaericht = (ListView) findViewById(R.id.chats_view);
+
+
 
         buildChatArrayAdapter();
 
@@ -95,7 +101,6 @@ public class chat_uebersichtActivity extends AppCompatActivity {
             }
         });
 
-
     }
 
 
@@ -113,6 +118,8 @@ public class chat_uebersichtActivity extends AppCompatActivity {
         }
 
     }
+
+
 
 
     public void buildChatArrayAdapter() {
@@ -154,6 +161,29 @@ public class chat_uebersichtActivity extends AppCompatActivity {
 
 
         return letzte_nachricht;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_layout, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.logout:
+                stopService(new Intent(getApplicationContext(), xmppService.class)); //Xmpp wird beim ausloggen disconnectet,
+                // somit können Nachrichten die nicht empfangen wurden zum späteren Zeitpunkt abgefragt werden
+
+                Intent logout = new Intent(this, LoginActivity.class);
+                ForumActivity.prefConfig.writeLoginStatus(false);
+                startActivity(logout);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
     }
 
 

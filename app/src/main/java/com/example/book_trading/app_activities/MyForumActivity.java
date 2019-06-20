@@ -84,6 +84,8 @@ public class MyForumActivity extends AppCompatActivity implements AdapterView.On
             }
         });
 
+
+
         adapter = new ArrayAdapter<ItemData>(this, android.R.layout.simple_list_item_1,itemArray) {
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {

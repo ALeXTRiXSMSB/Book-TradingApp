@@ -12,6 +12,9 @@ import androidx.annotation.NonNull;
 
 import com.example.book_trading.R;
 
+import org.jivesoftware.smack.chat2.Chat;
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,10 +23,14 @@ public class uebersichtArrayAdapter extends ArrayAdapter<String> {
     private TextView chatText;
     private List<String> empfaengerList = new ArrayList<String>();
     private Context context;
+    private TextView letzte_nachricht;
+    private ChatDatabase chatDatabase;
+    private ChatNachrichtDAO chatNachrichtDAO;
 
 
     public uebersichtArrayAdapter(@NonNull Context context, int resource) {
         super(context, resource);
+        build_Database(context);
     }
 
     @Override
@@ -40,9 +47,29 @@ public class uebersichtArrayAdapter extends ArrayAdapter<String> {
 
         row = inflater.inflate(R.layout.item_empfaenger, parent, false);
 
+
         chatText = (TextView) row.findViewById(R.id.item_empfaenger);
-        chatText.setText(empfaengerObj);
+
+
+        List<ChatNachricht> chatNachrichts = chatNachrichtDAO.getAllChats();
+        ArrayList<ChatNachricht> chatNachrichts1 = new ArrayList<ChatNachricht>();
+        chatNachrichts1.addAll(chatNachrichts);
+        ChatNachricht chatnachricht = chatNachrichts1.get(chatNachrichts1.size() - 1);
+
+
+        chatText.setText(empfaengerObj + "\n");
+
+
         return row;
+    }
+
+    private void build_Database(Context context) {
+
+
+        chatDatabase = ChatDatabase.getChatDatabase(context.getApplicationContext());
+
+        chatNachrichtDAO = chatDatabase.getChatNachrichtDAO();
+
     }
 
 

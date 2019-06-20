@@ -15,6 +15,7 @@ public interface ChatNachrichtDAO {
     @Query("DELETE FROM chat_table")
     void deleteAll();
 
+
     @Query("SELECT * from chat_table ORDER BY id DESC")
     List<ChatNachricht> getAllChats();
 

@@ -9,7 +9,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Filter"
+        android:layout_margin="10dp"
         android:id="@+id/searchFilter"/>
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:background="@color/colorPrimary"
+        />
 
     <ListView
         android:id="@+id/listView"
@@ -39,7 +47,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
-                android:layout_margin="16sp"
+                android:layout_marginTop="0dp"
+                android:layout_marginRight="15dp"
                 app:backgroundTint="@color/colorPrimary"
                 app:itemIconTint="@android:color/white"
                 android:src="@drawable/ic_add"

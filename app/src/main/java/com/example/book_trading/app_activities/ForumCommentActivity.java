@@ -68,8 +68,9 @@ public class ForumCommentActivity extends AppCompatActivity {
         btnChat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(tv_fremdName.getText().toString().equals(ProfilActivity.prefConfig.readName())) {
                 // wenn man selber Ersteller ist, kommt man zu den Nachrichten
-                if(tv_fremdName.getText().toString().equals(ProfilFremdActivity.prefConfig.readName())) {
+                if(tv_fremdName.getText().toString().equals(ProfilActivity.prefConfig.readName())) {
                     Intent a = new Intent(ForumCommentActivity.this, chat_uebersichtActivity.class);
                     startActivity(a);
                 }else{
@@ -81,6 +82,7 @@ public class ForumCommentActivity extends AppCompatActivity {
         });
         // NavigationBar ganz unten
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.bottom_navigation);
+
         navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {

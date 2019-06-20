@@ -12,18 +12,18 @@
         android:id="@+id/item_empfaenger"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
+        android:layout_alignStart="@+id/textView2"
         android:layout_alignParentRight="true"
-        android:layout_marginStart="0dp"
+        android:layout_marginStart="80dp"
+
+
         android:layout_marginRight="30dp"
-
-
         android:fontFamily="sans-serif-light"
         android:lineSpacingExtra="8sp"
         android:padding="5dp"
         android:text="Beispieltext"
-        android:textAlignment="textEnd"
-        android:textAllCaps="true"
+        android:textAlignment="textStart"
+        android:textAllCaps="false"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textColor="#000000"
         android:textSize="22sp"
@@ -36,16 +36,11 @@
         android:layout_width="55dp"
         android:layout_height="55dp"
 
-        android:background="@drawable/bubble_empfaenger" />
 
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="120dp"
-        android:layout_marginTop="30dp"
-        android:text="Letzte Nachricht: ..." />
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="20dp"
+        android:background="@drawable/bubble_empfaenger"
+        android:textAlignment="textStart" />
 
 
 </RelativeLayout>
