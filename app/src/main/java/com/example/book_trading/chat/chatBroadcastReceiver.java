@@ -91,10 +91,9 @@ public class chatBroadcastReceiver extends BroadcastReceiver {
     private void sendNotification(String notificationmessage, Context context, String sender) {
 
 
-        //Intent resultIntent = new Intent(context, MainActivity.class);
-        //resultIntent.putExtra("EMPFAENGER", sender);
+        Intent resultIntent = new Intent(context, chatActivity.class);
+        resultIntent.putExtra("EMPFAENGER", sender);
 
-        Intent resultIntent = new Intent(context, LoginActivity.class);
 
         TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
         stackBuilder.addNextIntentWithParentStack(resultIntent);
