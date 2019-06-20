@@ -163,6 +163,7 @@ public class chatActivity extends AppCompatActivity {
     }
 
 
+
     /**
      * aus Datenbank wird die Liste der Nachrichten geholt und in den ArrayAdapter übertragen
      */

@@ -1,5 +1,6 @@
 package com.example.book_trading.chat;
 
+import android.app.ActivityManager;
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.app.TaskStackBuilder;
@@ -90,10 +91,9 @@ public class chatBroadcastReceiver extends BroadcastReceiver {
     private void sendNotification(String notificationmessage, Context context, String sender) {
 
 
-        //Intent resultIntent = new Intent(context, MainActivity.class);
-        //resultIntent.putExtra("EMPFAENGER", sender);
+        Intent resultIntent = new Intent(context, chatActivity.class);
+        resultIntent.putExtra("EMPFAENGER", sender);
 
-        Intent resultIntent = new Intent(context, LoginActivity.class);
 
         TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
         stackBuilder.addNextIntentWithParentStack(resultIntent);
@@ -115,15 +115,30 @@ public class chatBroadcastReceiver extends BroadcastReceiver {
 
 
     private void startXmpp(String USERNAME, String PASSWORD, Boolean ACCOUNT_EXIST, Context context) {
-        login_start_XMPP = new Intent(context, xmppService.class);
+
+        if (!(isXmppServiceRunning(xmppService.class, context))) {
+            login_start_XMPP = new Intent(context, xmppService.class);
 
 
 /**account exist ist wichtig um abzuschätzen ob registriert oder angemeldet wird*/
-        login_start_XMPP.putExtra("USERNAME", USERNAME);
-        login_start_XMPP.putExtra("PASSWORD", PASSWORD);
-        login_start_XMPP.putExtra("ACCOUNT_EXIST", ACCOUNT_EXIST);
-        context.startService(login_start_XMPP);
+            login_start_XMPP.putExtra("USERNAME", USERNAME);
+            login_start_XMPP.putExtra("PASSWORD", PASSWORD);
+            login_start_XMPP.putExtra("ACCOUNT_EXIST", ACCOUNT_EXIST);
+            context.startService(login_start_XMPP);
+        }
+    }
 
+    /**
+     * falls der Service für Xmpp schon läuft wird er nicht nochmal gestartet beim anmelden
+     */
+    private boolean isXmppServiceRunning(Class<?> serviceClass, Context context) {
+        ActivityManager manager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+            if (serviceClass.getName().equals(service.service.getClassName())) {
+                return true;
+            }
+        }
+        return false;
     }
 
 
