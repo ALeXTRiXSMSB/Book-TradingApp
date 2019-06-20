@@ -249,7 +249,7 @@ public class ForumEintragActivity extends AppCompatActivity {
 
                         goingBack.putExtra("action", "delete");
                         //goingBack.putExtra("data", selectedItem);
-
+                        ForumEintragActivity.this.deleteThread(t_id);
                         setResult(RESULT_OK, goingBack);
 
                         finish();
