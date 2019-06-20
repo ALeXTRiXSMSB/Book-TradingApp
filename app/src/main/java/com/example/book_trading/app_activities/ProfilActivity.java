@@ -24,7 +24,7 @@ import retrofit2.Response;
  * Activity-Klasse für das eigene Profil
  */
 public class ProfilActivity extends AppCompatActivity implements ExampleDialog.ExampleDialogListener {
-    private static PrefConfig prefConfig;
+    public static PrefConfig prefConfig;
     private static ApiInterface apiInterface;
     public TextView textViewInfo, textViewMail, textViewBuch, textViewForum,textViewBearbeiten,textviewLike,user,textview_forum;
 

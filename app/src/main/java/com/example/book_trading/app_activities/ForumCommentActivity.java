@@ -25,7 +25,7 @@ import retrofit2.Response;
 public class ForumCommentActivity extends AppCompatActivity {
     private FloatingActionButton btnFremdProfil;
     private FloatingActionButton btnChat;
-    public TextView tv_name,tv_zustand,tv_beschreibung,tv_isbn;
+    public TextView tv_name,tv_zustand,tv_beschreibung,tv_isbn,tv_fremdName;
     public String name;
 
 
@@ -39,6 +39,7 @@ public class ForumCommentActivity extends AppCompatActivity {
         tv_zustand = findViewById(R.id.tv_zustand);
         tv_beschreibung = findViewById(R.id.tv_beschreibung);
         tv_isbn = findViewById(R.id.tv_isbn);
+        tv_fremdName=findViewById((R.id.tv_FremdName));
 
         Bundle bundle = getIntent().getExtras();
         if(bundle.getString("TID") != null){
@@ -51,7 +52,7 @@ public class ForumCommentActivity extends AppCompatActivity {
         btnFremdProfil.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(name.equals(ProfilFremdActivity.prefConfig.readName())){
+                if(tv_fremdName.getText().toString().equals(ProfilActivity.prefConfig.readName())){
                     Intent b = new Intent(ForumCommentActivity.this, ProfilActivity.class);
                     startActivity(b);
                 }
@@ -66,7 +67,7 @@ public class ForumCommentActivity extends AppCompatActivity {
         btnChat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(name.equals(ProfilFremdActivity.prefConfig.readName())) {
+                if(tv_fremdName.getText().toString().equals(ProfilFremdActivity.prefConfig.readName())) {
                     Intent a = new Intent(ForumCommentActivity.this, chat_uebersichtActivity.class);
                     startActivity(a);
                 }else{
@@ -133,6 +134,7 @@ public class ForumCommentActivity extends AppCompatActivity {
                         tv_isbn.setText(response.body().getIsbn());
                         tv_zustand.setText(response.body().getZustand());
                         name = response.body().getU_name();
+                        tv_fremdName.setText(response.body().getU_name());
                         break;
                     }
                     case "no data":{
