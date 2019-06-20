@@ -6,8 +6,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.book_trading.R;
 import com.example.book_trading.datenbank.Thread;
 import com.example.book_trading.chat.chatActivity;
@@ -15,6 +17,7 @@ import com.example.book_trading.chat.chat_uebersichtActivity;
 import com.example.book_trading.chat.xmppService;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -25,7 +28,7 @@ import retrofit2.Response;
 public class ForumCommentActivity extends AppCompatActivity {
     private FloatingActionButton btnFremdProfil;
     private FloatingActionButton btnChat;
-    public TextView tv_name,tv_zustand,tv_beschreibung,tv_isbn,tv_fremdName;
+    public TextView tv_name, tv_zustand, tv_beschreibung, tv_isbn, tv_fremdName;
     public String name;
 
     @Override
@@ -37,11 +40,11 @@ public class ForumCommentActivity extends AppCompatActivity {
         tv_zustand = findViewById(R.id.tv_zustand);
         tv_beschreibung = findViewById(R.id.tv_beschreibung);
         tv_isbn = findViewById(R.id.tv_isbn);
-        tv_fremdName=findViewById((R.id.tv_FremdName));
+        tv_fremdName = findViewById((R.id.tv_FremdName));
 
         // Daten an den Server
         Bundle bundle = getIntent().getExtras();
-        if(bundle.getString("TID") != null){
+        if (bundle.getString("TID") != null) {
             this.editData(bundle.getString("TID"));
         }
 
@@ -53,13 +56,12 @@ public class ForumCommentActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // wenn man selber der Ersteller ist, kommt man auf das eigene Profil
-                if(tv_fremdName.getText().toString().equals(ProfilActivity.prefConfig.readName())){
+                if (tv_fremdName.getText().toString().equals(ProfilActivity.prefConfig.readName())) {
                     Intent b = new Intent(ForumCommentActivity.this, ProfilActivity.class);
                     startActivity(b);
-                }
-                else {
+                } else {
                     Intent intent = new Intent(ForumCommentActivity.this, ProfilFremdActivity.class);
-                    intent.putExtra("USERNAME",name);
+                    intent.putExtra("USERNAME", name);
                     startActivity(intent);
                 }
             }
@@ -68,24 +70,26 @@ public class ForumCommentActivity extends AppCompatActivity {
         btnChat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(tv_fremdName.getText().toString().equals(ProfilActivity.prefConfig.readName())) {
-                // wenn man selber Ersteller ist, kommt man zu den Nachrichten
-                if(tv_fremdName.getText().toString().equals(ProfilActivity.prefConfig.readName())) {
-                    Intent a = new Intent(ForumCommentActivity.this, chat_uebersichtActivity.class);
-                    startActivity(a);
-                }else{
-                    Intent intent = new Intent(ForumCommentActivity.this, chatActivity.class);
-                    intent.putExtra("EMPFAENGER", name);
-                    startActivity(intent);
+                if (tv_fremdName.getText().toString().equals(ProfilActivity.prefConfig.readName())) {
+                    // wenn man selber Ersteller ist, kommt man zu den Nachrichten
+                    if (tv_fremdName.getText().toString().equals(ProfilActivity.prefConfig.readName())) {
+                        Intent a = new Intent(ForumCommentActivity.this, chat_uebersichtActivity.class);
+                        startActivity(a);
+                    } else {
+                        Intent intent = new Intent(ForumCommentActivity.this, chatActivity.class);
+                        intent.putExtra("EMPFAENGER", name);
+                        startActivity(intent);
+                    }
                 }
             }
         });
+
         // NavigationBar ganz unten
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.bottom_navigation);
 
         navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            public boolean onNavigationItemSelected(MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.navigateNachrichten:
                         Intent a = new Intent(ForumCommentActivity.this, chat_uebersichtActivity.class);
@@ -128,17 +132,16 @@ public class ForumCommentActivity extends AppCompatActivity {
     }
 
     /**
-     * @param t_id
-     * Id der jeweiligen Einträge
-     * Methode für Daten aus der Datenbank an die Activity
+     * @param t_id Id der jeweiligen Einträge
+     *             Methode für Daten aus der Datenbank an die Activity
      */
-    public void editData(String t_id){
+    public void editData(String t_id) {
         Call<Thread> call = ForumActivity.apiInterface.performGetThread(t_id);
         call.enqueue(new Callback<Thread>() {
             @Override
             public void onResponse(Call<Thread> call, Response<Thread> response) {
-                switch(response.body().getResponse()){
-                    case "success":{
+                switch (response.body().getResponse()) {
+                    case "success": {
                         tv_name.setText(response.body().getT_titel());
                         tv_beschreibung.setText(response.body().getT_discription());
                         tv_isbn.setText(response.body().getIsbn());
@@ -147,19 +150,19 @@ public class ForumCommentActivity extends AppCompatActivity {
                         tv_fremdName.setText(response.body().getU_name());
                         break;
                     }
-                    case "no data":{
+                    case "no data": {
                         LoginActivity.prefConfig.displayToast("No Data");
                         break;
                     }
-                    case "missing argument":{
+                    case "missing argument": {
                         LoginActivity.prefConfig.displayToast("Missing Argument");
                         break;
                     }
-                    case "wrong request method":{
+                    case "wrong request method": {
                         LoginActivity.prefConfig.displayToast("wrong Request Method");
                         break;
                     }
-                    default:{
+                    default: {
 
                         break;
                     }
