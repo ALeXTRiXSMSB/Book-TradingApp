@@ -20,15 +20,13 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 /**
- * Activity-Klasse für Einträge + Chat
+ * Activity-Klasse für die Details der Forumeinträge
  */
 public class ForumCommentActivity extends AppCompatActivity {
     private FloatingActionButton btnFremdProfil;
     private FloatingActionButton btnChat;
     public TextView tv_name,tv_zustand,tv_beschreibung,tv_isbn,tv_fremdName;
     public String name;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +39,7 @@ public class ForumCommentActivity extends AppCompatActivity {
         tv_isbn = findViewById(R.id.tv_isbn);
         tv_fremdName=findViewById((R.id.tv_FremdName));
 
+        // Daten an den Server
         Bundle bundle = getIntent().getExtras();
         if(bundle.getString("TID") != null){
             this.editData(bundle.getString("TID"));
@@ -49,9 +48,11 @@ public class ForumCommentActivity extends AppCompatActivity {
         btnFremdProfil = findViewById(R.id.profilFremd);
         btnChat = findViewById(R.id.chat);
 
+        // wenn man hier klickt kommt man auf das Profil von demjenigen der den Eintrag erstellt hat
         btnFremdProfil.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // wenn man selber der Ersteller ist, kommt man auf das eigene Profil
                 if(tv_fremdName.getText().toString().equals(ProfilActivity.prefConfig.readName())){
                     Intent b = new Intent(ForumCommentActivity.this, ProfilActivity.class);
                     startActivity(b);
@@ -63,10 +64,11 @@ public class ForumCommentActivity extends AppCompatActivity {
                 }
             }
         });
-        //beim klicken auf den Flieger kann man dem besitzer eine Message schreiben
+        // beim klicken auf den Flieger kann man dem Ersteller eine Nachricht schreiben
         btnChat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // wenn man selber Ersteller ist, kommt man zu den Nachrichten
                 if(tv_fremdName.getText().toString().equals(ProfilFremdActivity.prefConfig.readName())) {
                     Intent a = new Intent(ForumCommentActivity.this, chat_uebersichtActivity.class);
                     startActivity(a);
@@ -77,6 +79,7 @@ public class ForumCommentActivity extends AppCompatActivity {
                 }
             }
         });
+        // NavigationBar ganz unten
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.bottom_navigation);
         navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -122,6 +125,11 @@ public class ForumCommentActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * @param t_id
+     * Id der jeweiligen Einträge
+     * Methode für Daten aus der Datenbank an die Activity
+     */
     public void editData(String t_id){
         Call<Thread> call = ForumActivity.apiInterface.performGetThread(t_id);
         call.enqueue(new Callback<Thread>() {
@@ -158,10 +166,8 @@ public class ForumCommentActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<Thread> call, Throwable t) {
-
             }
         });
-
     }
 
 }

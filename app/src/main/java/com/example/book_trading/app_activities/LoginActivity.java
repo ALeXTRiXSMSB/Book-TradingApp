@@ -14,7 +14,6 @@ import android.widget.TextView;
 import com.example.book_trading.datenbank.ApiClient;
 import com.example.book_trading.datenbank.ApiInterface;
 import com.example.book_trading.datenbank.HashHelper;
-import com.example.book_trading.datenbank.MySQLDatabaseHelper;
 import com.example.book_trading.datenbank.PrefConfig;
 import com.example.book_trading.R;
 import com.example.book_trading.datenbank.User;
@@ -22,9 +21,13 @@ import com.example.book_trading.chat.chatLogin;
 import retrofit2.Call;
 import retrofit2.Callback;
 
+/**
+ * Activity wenn man das erste mal App startet
+ */
 public class LoginActivity extends AppCompatActivity {
     public static PrefConfig prefConfig;
     public static ApiInterface apiInterface;
+    private String password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,22 +39,22 @@ public class LoginActivity extends AppCompatActivity {
 
         final TextView RegText = (TextView) findViewById(R.id.register_txt);
         final Button LoginBtn = (Button) findViewById(R.id.login_bn);
-        //Registrieren auf TextMessage
+        // Registrieren auf TextMessage
         RegText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent registerIntent = new Intent(LoginActivity.this, RegisterActivity.class); //Öffnen der Register Activity um sich ein Konto zu erstellen
+                Intent registerIntent = new Intent(LoginActivity.this, RegisterActivity.class); // Öffnen der Register Activity um sich ein Konto zu erstellen
                 LoginActivity.this.startActivity(registerIntent);
             }
         });
-        //LogIn-Button klicken um in die App zu gelangen
+        // Login-Button klicken um in die App zu gelangen
         LoginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-                if (cm.getActiveNetworkInfo() != null) { // verbunden
+                if (cm.getActiveNetworkInfo() != null) { // wenn mit Internet verbunden dann Methode ausführen
                     performLogin();
-                } else { // nicht verbunden
+                } else { // nicht verbunden mit Internet -> Dialog
                     AlertDialog.Builder alterDialogBuilder = new AlertDialog.Builder(LoginActivity.this);
                     alterDialogBuilder.setTitle("KEINE VERBINDUNG!");
                     alterDialogBuilder
@@ -67,22 +70,24 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
-        if (prefConfig.readLoginStatus()) {   //wenn user ist eingelogt bzw bereits angemeldet ist und sich beim letzten mal nicht ausgeloggt hat
-            Intent myIntent = new Intent(LoginActivity.this, ProfilActivity.class);  //öffnen der Profil seite
+        // wenn user ist eingeloggt bzw. bereits angemeldet ist und sich beim letzten mal nicht ausgeloggt hat
+        if (prefConfig.readLoginStatus()) {
+            Intent myIntent = new Intent(LoginActivity.this, ProfilActivity.class);  // öffnen der Profilseite
             LoginActivity.this.startActivity(myIntent);
             chatLogin login = new chatLogin(prefConfig.readName(), prefConfig.readPassword(), true, getApplicationContext());
         }
     }
 
-    private String password;
-
-    private void performLogin() {    //was passiert beim klicken auf den Login-Button
+    /**
+     * Methode zum einloggen
+     */
+    private void performLogin() { // beim klicken auf den Login-Button
         final EditText UserName = (EditText) findViewById(R.id.user_name);
         final EditText Password = (EditText) findViewById(R.id.user_password);
         final String username = UserName.getText().toString();
         String password_klartext = Password.getText().toString();
         try {
-            password = HashHelper.encrypt(password_klartext); //verschlüsseln des Textes
+            password = HashHelper.encrypt(password_klartext); // verschlüsseln des Textes
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -90,9 +95,9 @@ public class LoginActivity extends AppCompatActivity {
         Call<User> call = LoginActivity.apiInterface.performUserLogin(username, password);
         call.enqueue(new Callback<User>() {
             @Override
-            public void onResponse(Call<User> call, retrofit2.Response<User> response) {//Prüfen des Status beim einloggen
-                if (response.body().getResponse().equals("success")) { //Status Ok es kann sich eingeloggt werden
-                    LoginActivity.prefConfig.writeLoginStatus(true); //LoginStatus auf true setzen um sich ein zu loggen
+            public void onResponse(Call<User> call, retrofit2.Response<User> response) { // Prüfen des Status beim einloggen
+                if (response.body().getResponse().equals("success")) { // Status Ok es kann sich eingeloggt werden
+                    LoginActivity.prefConfig.writeLoginStatus(true); // LoginStatus auf true setzen um sich einzuloggen
                     LoginActivity.prefConfig.writeName(response.body().getU_name());
                     LoginActivity.prefConfig.writePassword(password);
                     LoginActivity.prefConfig.writeEmail(response.body().getU_email());
@@ -103,10 +108,9 @@ public class LoginActivity extends AppCompatActivity {
                     chatLogin login = new chatLogin(username, password, true, getApplicationContext());
 
                     Intent registerIntent = new Intent(LoginActivity.this, ProfilActivity.class);
-                    LoginActivity.this.startActivity(registerIntent);   //von der LoginActivity geht es weiter zum Profil bzw. der Startseite
+                    LoginActivity.this.startActivity(registerIntent); // von der LoginActivity geht es weiter zum Profil bzw. der Startseite
 
-
-                } else if (response.body().getResponse().equals("no data")) {    //Status Fehler ein einloggen ist nicht möglich
+                } else if (response.body().getResponse().equals("no data")) { // StatusFehler ein einloggen ist nicht möglich
                     LoginActivity.prefConfig.displayToast("User name oder Passwort ist falsch");
                 } else if (response.body().getResponse().equals("missing argument")) {
                     LoginActivity.prefConfig.displayToast("Beide felder müssen ausgefüllt sein");
@@ -119,7 +123,8 @@ public class LoginActivity extends AppCompatActivity {
             public void onFailure(Call<User> call, Throwable t) {
             }
         });
-        UserName.setText("");   //nach der Anmeldung die Felder wieder leeren
+        // nach der Anmeldung die Felder wieder leeren
+        UserName.setText("");
         Password.setText("");
     }
 

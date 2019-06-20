@@ -13,7 +13,6 @@ import android.widget.EditText;
 import android.widget.ListView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.example.book_trading.R;
 import com.example.book_trading.datenbank.ApiClient;
 import com.example.book_trading.datenbank.ApiInterface;
@@ -25,14 +24,13 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.ArrayList;
 import java.util.List;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
 /**
  * Activity-Klasse für das Forum
  */
-
 public class ForumActivity extends AppCompatActivity {
     private ListView lv;
     private ArrayAdapter<String> adapter = null;
@@ -42,6 +40,9 @@ public class ForumActivity extends AppCompatActivity {
     public static PrefConfig prefConfig;
     public static ApiInterface apiInterface;
 
+    /**
+     * diese Methode wird beim Start der Activity aufgerufen
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,21 +58,21 @@ public class ForumActivity extends AppCompatActivity {
 
         ArrayList<String> names = new ArrayList<>();
 
-        //Navigation am Display ende
+        // Navigation am Display-ende
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.bottom_navigation);
         navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
-                    case R.id.navigateNachrichten:
+                    case R.id.navigateNachrichten: // wenn man auf Nachrichten klickt
                         Intent a = new Intent(ForumActivity.this, chat_uebersichtActivity.class);
                         startActivity(a);
                         break;
-                    case R.id.navigateProfil:
+                    case R.id.navigateProfil: // wenn man auf Profil klickt
                         Intent b = new Intent(ForumActivity.this, ProfilActivity.class);
                         startActivity(b);
                         break;
-                    case R.id.navigateForum:
+                    case R.id.navigateForum: // wenn man auf Forum klickt
                         // Intent c = new Intent(ForumActivity.this, ForumActivity.class);
                         // startActivity(c);
                         break;
@@ -79,10 +80,13 @@ public class ForumActivity extends AppCompatActivity {
                 return false;
             }
         });
-        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,names);
+        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,names); // Adapter für die einzelnen Einträge
         lv.setAdapter(adapter);
         loadForum();
 
+        /**
+         * Filter neu wenn sich was ändert
+         */
         theFilter.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -98,7 +102,7 @@ public class ForumActivity extends AppCompatActivity {
             }
         });
 
-        //klicken der einträge
+        // klicken der Einträge
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -108,17 +112,18 @@ public class ForumActivity extends AppCompatActivity {
             }
         });
 
-        //klicken des kleinen Plus
+        // klicken des kleinen Plus
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 AddNewItem();
-                /*Intent neintrag = new Intent(ForumActivity.this, ForumEintragActivity.class);
-                startActivity(neintrag);*/
             }
         });
     }
 
+    /**
+     * Methode um Forumeinträge hinzuzufügen
+     */
     private void AddNewItem(){
         Intent getDetailIntent = new Intent(this,
                 ForumEintragActivity.class);
@@ -131,18 +136,29 @@ public class ForumActivity extends AppCompatActivity {
         startActivityForResult(getDetailIntent, result);
     }
 
+    /**
+     * wenn man zurück-Taste drückt
+     */
     @Override
     public void onBackPressed() {
         setResult(RESULT_CANCELED);
         finish();
     }
 
+    /**
+     * @param menu
+     * für den Logout
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_layout, menu);
         return true;
     }
 
+    /**
+     * @param item
+     * wenn im Menu auf das Item geklickt wird -> Logout
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -158,6 +174,9 @@ public class ForumActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Methode um Forumeinträge neu zu laden
+     */
     public void loadForum(){
         Call<List<Thread>> call = this.apiInterface.performGetThreads();
         call.enqueue(new Callback<List<Thread>>() {
@@ -172,7 +191,6 @@ public class ForumActivity extends AppCompatActivity {
             }
             @Override
             public void onFailure(Call<List<Thread>> call, Throwable t) {
-
             }
         });
     }

@@ -20,11 +20,7 @@ import com.example.book_trading.datenbank.ApiClient;
 import com.example.book_trading.datenbank.ApiInterface;
 import com.example.book_trading.datenbank.PrefConfig;
 import com.example.book_trading.datenbank.Thread;
-import com.example.book_trading.datenbank.User;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-
-import java.util.jar.Attributes;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -57,24 +53,19 @@ public class ForumEintragActivity extends AppCompatActivity {
             username = b.getString("USERNAME");
         }
 
-
+        // Details vom jeweiligen Eintrag
         selectedItem = (ItemData) activityThatCalled.getExtras().getSerializable("data");
 
-        //Wenn es noch keinen Inhalt gibt leere alles
+        // wenn es noch keinen Inhalt gibt leere alles
         if (selectedItem == null) {
             selectedItem = new ItemData("", "", "", "");
         }else{
             getThread(b.getString("t_id"));
         }
 
-        /**((EditText) findViewById(R.id.nameEingabe)).setText(selectedItem.Name);
-        ((EditText) findViewById(R.id.isbnEingabe)).setText(selectedItem.ISBN);
-        ((EditText) findViewById(R.id.zustandEingabe)).setText(selectedItem.Zustand);
-        ((EditText) findViewById(R.id.beschreibungEingabe)).setText(selectedItem.Beschreibung);
-         **/
-
         //////////////////////////////
 
+        // Navigation Bar
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.bottom_navigation);
         navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -98,6 +89,10 @@ public class ForumEintragActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * @param t_id
+     * holt sich Einträge vom Server
+     */
     public void getThread(String t_id){
         Call<Thread> call = ForumEintragActivity.apiInterface.performGetThread(t_id);
         call.enqueue(new Callback<Thread>() {
@@ -126,14 +121,19 @@ public class ForumEintragActivity extends AppCompatActivity {
                     }
                 }
             }
-
             @Override
             public void onFailure(Call<Thread> call, Throwable t) {
-
             }
         });
     }
 
+    /**
+     * @param titel
+     * @param beschreibung
+     * @param isbn
+     * @param zustand
+     * eingetragenen Daten an den Server
+     */
     public void createThread(String titel, String beschreibung, String isbn, String zustand){
         Call<Thread> call = ForumEintragActivity.apiInterface.performCreateThread(titel,beschreibung,isbn, zustand,ForumEintragActivity.prefConfig.readName());
         call.enqueue(new Callback<Thread>() {
@@ -152,16 +152,18 @@ public class ForumEintragActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<Thread> call, Throwable t) {
-
             }
         });
     }
 
     //////////////////////
-    //Speichern
+
+    /**
+     * wenn Speicherbutton gedrückt wird
+     */
     public void onSaveClick(View view) {
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        if (cm.getActiveNetworkInfo() != null) { // verbunden
+        if (cm.getActiveNetworkInfo() != null) { // verbunden mit Internet
             Intent goingBack = new Intent();
 
             selectedItem.Name = ((EditText)findViewById(R.id.nameEingabe)).getText().toString();
@@ -171,14 +173,13 @@ public class ForumEintragActivity extends AppCompatActivity {
 
             createThread(selectedItem.Name,selectedItem.Beschreibung,selectedItem.ISBN,selectedItem.Zustand);
 
-
             goingBack.putExtra("action", "save");
             goingBack.putExtra("data", selectedItem);
 
             setResult(RESULT_OK, goingBack);
 
             finish();
-        } else { // nicht verbunden
+        } else { // nicht verbunden mit Internet
             AlertDialog.Builder alterDialogBuilder = new AlertDialog.Builder(ForumEintragActivity.this);
             alterDialogBuilder.setTitle("KEINE VERBINDUNG!");
             alterDialogBuilder
@@ -200,23 +201,25 @@ public class ForumEintragActivity extends AppCompatActivity {
         finish();
     }
 
-    //Löschen
+    /**
+     * wenn Löschenbutton gedrückt wird
+     */
     public void onDeleteClick(View view) {
-        //Abfrage ob etwas gelöscht werden soll
+        // Abfrage ob etwas gelöscht werden soll
         AlertDialog.Builder alterDialogBuilder = new AlertDialog.Builder(ForumEintragActivity.this);
 
-        alterDialogBuilder.setTitle("Löschen"); //Titel Löschen wird angezeigt
+        alterDialogBuilder.setTitle("Löschen"); // Titel "Löschen" wird angezeigt
 
-        //Set dialog message
+        // set dialog message
         alterDialogBuilder
                 .setMessage("Soll der Eintrag nun gelöscht werden?")
                 .setCancelable(true)
-                .setNegativeButton("NEIN", new DialogInterface.OnClickListener() {
+                .setNegativeButton("NEIN", new DialogInterface.OnClickListener() { // wenn Nein gedrückt wird
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                     }
                 })
-                .setPositiveButton("JA", new DialogInterface.OnClickListener() {
+                .setPositiveButton("JA", new DialogInterface.OnClickListener() { // wenn Ja gedrückt wird
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Intent goingBack = new Intent();
