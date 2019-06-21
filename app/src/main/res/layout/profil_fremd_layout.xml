@@ -55,11 +55,7 @@
                     android:gravity="center"
                     android:orientation="vertical">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Forum"
-                        android:textSize="20sp" />
+
 
                     <TextView
                         android:id="@+id/tv_eintraege"
@@ -70,6 +66,16 @@
                         android:textColor="@color/startblue"
                         android:textSize="20sp"
                         android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:text="Forum"
+                        android:textColor="@color/gradStop"
+                        android:textSize="20dp"
+                        android:textStyle="bold" />
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -79,12 +85,7 @@
                     android:gravity="center"
                     android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/positivklick"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="likes"
-                        android:textSize="20sp" />
+
 
                     <TextView
                         android:id="@+id/tv_positiv"
@@ -95,6 +96,15 @@
                         android:textColor="@color/startblue"
                         android:textSize="20sp"
                         android:textStyle="bold" />
+
+
+                    <TextView
+                        android:id="@+id/positivklick"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="20sp"
+                        android:background="@drawable/ic_mode_edit_fremprofil_24dp"
+                        android:layout_margin="10dp"/>
                 </LinearLayout>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
@@ -111,7 +121,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/chat"
-            app:backgroundTint="@color/startblue" />
+            app:backgroundTint="@color/colorPrimary" />
     </LinearLayout>
 
     <LinearLayout

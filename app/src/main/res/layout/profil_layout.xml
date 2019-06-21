@@ -56,13 +56,6 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/textView_Forum"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Forum"
-                        android:textSize="20sp" />
-
-                    <TextView
                         android:id="@+id/textview_forum"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -71,6 +64,18 @@
                         android:textColor="@color/startblue"
                         android:textSize="20sp"
                         android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/textView_Forum"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:text="Forum"
+                        android:textColor="#FF3F51B5"
+                        android:textSize="20dp"
+                        android:textStyle="bold" />
+
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -81,12 +86,6 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Likes"
-                        android:textSize="20sp" />
-
-                    <TextView
                         android:id="@+id/tv_positiv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -95,6 +94,15 @@
                         android:textColor="@color/startblue"
                         android:textSize="20sp"
                         android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="20sp"
+                        android:background="@drawable/ic_thumb_up_black_24dp"
+                        android:layout_margin="10dp"/>
+
+
                 </LinearLayout>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
@@ -181,14 +189,15 @@
 
             <TextView
                 android:id="@+id/textView_Bearbeiten"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
                 android:layout_gravity="center_vertical"
+                android:layout_marginLeft="250dp"
+                android:background="@drawable/ic_mode_edit_black_24dp"
                 android:paddingLeft="20sp"
                 android:paddingTop="20sp"
-                android:text="bearbeiten"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textColor="@color/colorPrimary"
+                android:textSize="18sp" />
         </LinearLayout>
     </LinearLayout>
 

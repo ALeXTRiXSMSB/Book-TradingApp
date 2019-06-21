@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <TextView
-        android:paddingTop="10sp"
-        android:paddingLeft="10sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingLeft="10sp"
+        android:paddingTop="10sp"
         android:text="Name:"
         android:textColor="@android:color/black"
         android:textSize="20sp" />
@@ -25,9 +26,9 @@
         android:layout_height="20sp" />
 
     <TextView
-        android:paddingLeft="10sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingLeft="10sp"
         android:text="ISBN:"
         android:textColor="@android:color/black"
         android:textSize="20sp" />
@@ -45,9 +46,9 @@
         android:layout_height="20sp" />
 
     <TextView
-        android:paddingLeft="10sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingLeft="10sp"
         android:text="Zustand:"
         android:textColor="@android:color/black"
         android:textSize="20sp" />
@@ -65,9 +66,9 @@
         android:layout_height="20sp" />
 
     <TextView
-        android:paddingLeft="10sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingLeft="10sp"
         android:text="Beschreibung:"
         android:textColor="@android:color/black"
         android:textSize="20sp" />
@@ -78,7 +79,10 @@
         android:layout_height="100sp"
         android:ems="10"
         android:inputType="textMultiLine"
-        android:textColor="@android:color/black" />
+        android:textColor="@android:color/black"
+        />
+
+
 
     <Space
         android:layout_width="match_parent"
@@ -91,25 +95,27 @@
 
         <Button
             android:id="@+id/abbruchBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:onClick="onDeleteClick"
-            android:text="Löschen"
-            android:backgroundTint="@color/colorPrimary"
-            android:textColor="@android:color/white"
-            android:textSize="20sp" />
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+
+
+            android:background="@drawable/ic_indeterminate_check_box_black_24dp"
+            android:onClick="onDeleteClick" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="20sp"
+            android:layout_weight="1" />
 
         <Button
             android:id="@+id/verfassenBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:background="@drawable/ic_add_box_black_24dp"
             android:onClick="onSaveClick"
-            android:text="Verfassen"
-            android:backgroundTint="@color/colorPrimary"
-            android:textColor="@android:color/white"
-            android:textSize="20sp" />
+
+
+            />
     </LinearLayout>
 
     <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
