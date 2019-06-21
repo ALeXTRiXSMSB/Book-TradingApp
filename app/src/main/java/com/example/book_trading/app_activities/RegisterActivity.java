@@ -4,6 +4,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.view.View;
@@ -24,6 +25,7 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText UserName, UserPassword;
     private Button BnRegister;
     private String password;
+    private boolean accept = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +42,10 @@ public class RegisterActivity extends AppCompatActivity {
                 ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
                 if (cm.getActiveNetworkInfo() != null) { // wenn verbunden mit Internet
                     performRegistration();
+                    if(accept){
+                        Intent i = new Intent(RegisterActivity.this,LoginActivity.class);
+                        startActivity(i);
+                    }
                 } else { // wenn nicht verbunden mit Internet
                     AlertDialog.Builder alterDialogBuilder = new AlertDialog.Builder(RegisterActivity.this);
                     alterDialogBuilder.setTitle("KEINE VERBINDUNG!");
@@ -80,6 +86,7 @@ public class RegisterActivity extends AppCompatActivity {
                 if (response.body().getResponse().equals("success")) {
                     chatLogin login = new chatLogin(username, password, false, getApplicationContext());
                     LoginActivity.prefConfig.displayToast("Alles Richtig"); // Registrierung hat funktioniert
+                    RegisterActivity.this.accept = true;
                 } else if (response.body().getResponse().equals("user exists")) {
                     LoginActivity.prefConfig.displayToast("User existiert bereits..."); // es gibt bereits einen User mit gleichem Username
                 }
@@ -89,5 +96,4 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
     }
-
 }

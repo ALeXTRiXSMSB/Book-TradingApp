@@ -38,6 +38,7 @@ public class ForumEintragActivity extends AppCompatActivity {
     public static PrefConfig prefConfig;
     public static ApiInterface apiInterface;
     private String t_id;
+    private boolean exists = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +69,7 @@ public class ForumEintragActivity extends AppCompatActivity {
             ((EditText) findViewById(R.id.isbnEingabe)).setText(selectedItem.ISBN);
             ((EditText) findViewById(R.id.zustandEingabe)).setText(selectedItem.Zustand);
             ((EditText) findViewById(R.id.beschreibungEingabe)).setText(selectedItem.Beschreibung);
+            exists = true;
         }
         // Navigation Bar
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.bottom_navigation);
@@ -216,8 +218,11 @@ public class ForumEintragActivity extends AppCompatActivity {
                 selectedItem.Zustand = ((EditText) findViewById(R.id.zustandEingabe)).getText().toString();
                 selectedItem.Beschreibung = ((EditText) findViewById(R.id.beschreibungEingabe)).getText().toString();
 
-                //updateThread(selectedItem.Name, selectedItem.Beschreibung, selectedItem.ISBN, selectedItem.Zustand);
-                createThread(selectedItem.Name, selectedItem.Beschreibung, selectedItem.ISBN, selectedItem.Zustand);
+                if(exists){
+                    updateThread(selectedItem.Name, selectedItem.Beschreibung, selectedItem.ISBN, selectedItem.Zustand);
+                }else{
+                    createThread(selectedItem.Name, selectedItem.Beschreibung, selectedItem.ISBN, selectedItem.Zustand);
+                }
 
                 goingBack.putExtra("action", "save");
                 goingBack.putExtra("data", selectedItem);

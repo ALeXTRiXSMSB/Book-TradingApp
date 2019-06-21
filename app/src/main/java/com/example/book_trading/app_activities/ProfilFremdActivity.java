@@ -53,6 +53,7 @@ public class ProfilFremdActivity extends AppCompatActivity {
         textView_Buch = findViewById(R.id.textView_Buch);
         txt_name_info = findViewById(R.id.txt_name_info);
 
+
         Intent i = getIntent();
         Bundle b = i.getExtras();
         if (b.getString("USERNAME") != null) {
@@ -104,6 +105,13 @@ public class ProfilFremdActivity extends AppCompatActivity {
      * wenn man das jeweilige Profil noch nicht geliket hat kann man es liken
      */
     private void likeklicken() {
+        String[] liked = ProfilFremdActivity.prefConfig.readAlleadyLiked().split(",");
+        for(int i = 0; i < liked.length;i++){
+            if(liked[i].matches(fremd_username)){
+                this.likeClicked = true;
+            }
+        }
+        positivZahl = findViewById(R.id.tv_positiv);
         if (!this.likeClicked) {
             Call<Integer> call = ProfilFremdActivity.apiInterface.performinclike(this.fremd_username);
             call.enqueue(new Callback<Integer>() {
@@ -115,7 +123,9 @@ public class ProfilFremdActivity extends AppCompatActivity {
                 public void onFailure(Call<Integer> call, Throwable t) {
                 }
             });
-            this.likeClicked = true;
+            int tmp = Integer.valueOf(this.positivZahl.getText().toString());
+            this.positivZahl.setText(String.valueOf(tmp+1));
+            ProfilFremdActivity.prefConfig.writeAllreadyLiked(this.fremd_username);
         }
     }
 
@@ -144,7 +154,7 @@ public class ProfilFremdActivity extends AppCompatActivity {
      * Methode für die Aktualisierung des FremdProfils
      */
     public void loadData(String username) {
-        Call<String> callUpdate = ProfilFremdActivity.apiInterface.performCount("username");
+        Call<String> callUpdate = ProfilFremdActivity.apiInterface.performCount(username);
         callUpdate.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {

@@ -47,14 +47,10 @@ public class MyForumActivity extends AppCompatActivity implements AdapterView.On
 
         prefConfig = new PrefConfig(this);
         apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
-
         // Oberflächenelement
         itemsListView = findViewById(R.id.listView);
-
         itemArray = new ArrayList<ItemData>();
-
         FloatingActionButton floatingActionButton = findViewById(R.id.fab_1); // Fab_Button
-
         try{
             LoadData(prefConfig.readName()); // Beispieldaten laden
         }catch(NullPointerException e){

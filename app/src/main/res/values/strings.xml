@@ -13,5 +13,6 @@
     <string name="pref_discription">com.abc.preference_discription</string>
     <string name="pref_u_id">com.abc.preferences_u_id</string>
     <string name="pref_u_password">com.abc.preferences_u_password</string>
+    <string name="pref_allready_liked">com.abc.preferences_allready_liked</string>
 
 </resources>

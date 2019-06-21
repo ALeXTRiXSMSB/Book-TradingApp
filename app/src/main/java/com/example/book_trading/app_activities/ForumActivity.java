@@ -107,7 +107,16 @@ public class ForumActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent comment = new Intent(view.getContext(), ForumCommentActivity.class);
-                comment.putExtra("TID",String.valueOf(listItems.get(position).getT_id()));
+                String tmp = adapter.getItem(position);
+                String tid = null;
+                for(Thread t:listItems){
+                    if(t.getT_titel().matches(tmp)){
+                        tid = String.valueOf(t.getT_id());
+                    }
+                }
+                if(tid != null){
+                    comment.putExtra("TID",tid);
+                }
                 startActivity(comment);
             }
         });
@@ -127,12 +136,9 @@ public class ForumActivity extends AppCompatActivity {
     private void AddNewItem(){
         Intent getDetailIntent = new Intent(this,
                 ForumEintragActivity.class);
-
         final int result = 1;
-
         selectedData = null;
         getDetailIntent.putExtra("data", selectedData);
-
         startActivityForResult(getDetailIntent, result);
     }
 

@@ -27,9 +27,6 @@ public class ProfilActivity extends AppCompatActivity implements ExampleDialog.E
     public static PrefConfig prefConfig;
     public static ApiInterface apiInterface;
     public TextView textViewInfo, textViewMail, textViewBuch, textViewForum,textViewBearbeiten,textviewLike,user,textview_forum;
-    public String prefinfo;
-    public String prefbuch;
-    public String prefmail;
 
     /**
      * diese Methode wird beim Start der Activity aufgerufen

@@ -38,7 +38,7 @@ public class ForumCommentActivity extends AppCompatActivity {
         tv_isbn = findViewById(R.id.tv_isbn);
         tv_fremdName = findViewById((R.id.tv_FremdName));
 
-        // Daten an den Server
+        // Daten die für die Server abfrage notwendig sind als übergabe aus einer anderen Activity
         Bundle bundle = getIntent().getExtras();
         if (bundle.getString("TID") != null) {
             this.editData(bundle.getString("TID"));
