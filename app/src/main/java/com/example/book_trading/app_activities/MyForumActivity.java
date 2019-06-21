@@ -27,6 +27,9 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/**
+ * Activity für das eigene Forum
+ */
 public class MyForumActivity extends AppCompatActivity implements AdapterView.OnItemClickListener{
     private ListView itemsListView;
     private ArrayList<ItemData> itemArray;

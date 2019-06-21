@@ -17,6 +17,9 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/**
+ * Activity um sich zu Registrieren
+ */
 public class RegisterActivity extends AppCompatActivity {
     private EditText UserName, UserPassword;
     private Button BnRegister;

@@ -11,6 +11,9 @@ import android.widget.EditText;
 import androidx.appcompat.app.AppCompatDialogFragment;
 import com.example.book_trading.R;
 
+/**
+ * Klasse für den Dialog
+ */
 public class ExampleDialog extends AppCompatDialogFragment {
     private EditText editTextInfo, editTextMail, editTextBuch;
 

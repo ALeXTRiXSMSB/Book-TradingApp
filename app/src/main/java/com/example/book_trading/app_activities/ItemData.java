@@ -2,7 +2,9 @@ package com.example.book_trading.app_activities;
 
 import java.io.Serializable;
 
-// diese Klasse speichert die Inhalte
+/**
+ * diese Klasse speichert die Inhalte des Buches
+ */
 public class ItemData implements Serializable {
     public String Name;
     public String ISBN;
@@ -21,7 +23,7 @@ public class ItemData implements Serializable {
     }
 
     public String toString(){
-        return Name; // hier wird der Name des Buches und der Zustand dazu zurückgegeben
+        return Name; // hier wird der Name des Buches zurückgegeben
     }
 
 }

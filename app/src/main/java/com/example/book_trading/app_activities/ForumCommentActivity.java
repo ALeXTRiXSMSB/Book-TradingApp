@@ -125,7 +125,7 @@ public class ForumCommentActivity extends AppCompatActivity {
 
     /**
      * @param t_id Id der jeweiligen Einträge
-     *             Methode für Daten aus der Datenbank an die Activity
+     * Methode für Daten aus der Datenbank an die Activity
      */
     public void editData(String t_id) {
         Call<Thread> call = ForumActivity.apiInterface.performGetThread(t_id);
