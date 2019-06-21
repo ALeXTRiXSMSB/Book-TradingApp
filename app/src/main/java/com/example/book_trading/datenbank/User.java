@@ -25,6 +25,9 @@ public class User {
     @SerializedName("u_like")
     private String u_like;
 
+    @SerializedName("u_liked")
+    private String u_liked;
+
     public String getResponse() {
         return response;
     }
@@ -80,5 +83,4 @@ public class User {
     public void setU_like(String u_like) {
         this.u_like = u_like;
     }
-
 }

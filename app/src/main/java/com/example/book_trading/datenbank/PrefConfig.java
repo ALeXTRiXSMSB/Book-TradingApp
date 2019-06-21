@@ -15,6 +15,12 @@ public class PrefConfig {   //Loginstatus
         sharedPreferences = context.getSharedPreferences(context.getString(R.string.pref_file), Context.MODE_PRIVATE);
     }
 
+    public void clearAllreadyLiked(){
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(context.getString(R.string.pref_allready_liked),"");
+        editor.commit();
+    }
+
     public void writeAllreadyLiked(String name){
         SharedPreferences.Editor editor = sharedPreferences.edit();
         StringBuilder sb = new StringBuilder();

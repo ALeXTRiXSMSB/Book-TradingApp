@@ -36,7 +36,7 @@ public class LoginActivity extends AppCompatActivity {
 
         prefConfig = new PrefConfig(this);
         apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
-
+        prefConfig.clearAllreadyLiked();
         final TextView RegText = (TextView) findViewById(R.id.register_txt);
         final Button LoginBtn = (Button) findViewById(R.id.login_bn);
         // Registrieren auf TextMessage
