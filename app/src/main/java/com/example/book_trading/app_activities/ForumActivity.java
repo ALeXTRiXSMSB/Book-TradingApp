@@ -54,7 +54,7 @@ public class ForumActivity extends AppCompatActivity {
         this.lv = (ListView)findViewById(R.id.listView);
         EditText theFilter = (EditText) findViewById(R.id.searchFilter);
 
-        FloatingActionButton floatingActionButton = findViewById(R.id.fab_1);   //Fab_Button
+        FloatingActionButton floatingActionButton = findViewById(R.id.fab_1); // Fab_Button
 
         ArrayList<String> names = new ArrayList<>();
 
@@ -147,7 +147,7 @@ public class ForumActivity extends AppCompatActivity {
 
     /**
      * @param menu
-     * für den Logout
+     * Menu für den Logout
      */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -163,7 +163,7 @@ public class ForumActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.logout:
-                stopService(new Intent(getApplicationContext(), xmppService.class)); //Xmpp wird beim ausloggen disconnectet,
+                stopService(new Intent(getApplicationContext(), xmppService.class)); // Xmpp wird beim ausloggen disconnected,
                 // somit können Nachrichten die nicht empfangen wurden zum späteren Zeitpunkt abgefragt werden
                 Intent logout = new Intent(this, LoginActivity.class);
                 this.prefConfig.writeLoginStatus(false);

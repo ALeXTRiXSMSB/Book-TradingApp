@@ -28,44 +28,46 @@
                 <action android:name="EMPFANGEN" />
                 <action android:name="GESENDET" />
                 <action android:name="GESENDET_LOGIN_SERVICE" />
-
-
-                <!-- <category android:name="..."/> -->
-                <!-- <data android:mimeType="*/*"/> -->
             </intent-filter>
         </receiver>
 
-
-
-
-        <activity android:name=".chat.chatActivity" />
-        <activity android:name=".chat.chat_uebersichtActivity" />
-        <activity android:name=".app_activities.RegisterActivity" />
-        <activity android:name=".app_activities.LoginActivity">
+        <activity android:name=".chat.chatActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".chat.chat_uebersichtActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".app_activities.RegisterActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".app_activities.LoginActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".app_activities.ProfilActivity"
-            android:label="Profil" />
+            android:label="Profil"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".app_activities.ProfilFremdActivity"
-            android:label="Profil" />
+            android:label="Profil"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".app_activities.ForumActivity"
-            android:label="Forum" />
+            android:label="Forum"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".app_activities.MyForumActivity"
-            android:label="Mein Forum" />
+            android:label="Mein Forum"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".app_activities.ForumCommentActivity"
-            android:label="Details" />
+            android:label="Details"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".app_activities.ForumEintragActivity"
-            android:label="Forum Eintrag" />
+            android:label="Forum Eintrag"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

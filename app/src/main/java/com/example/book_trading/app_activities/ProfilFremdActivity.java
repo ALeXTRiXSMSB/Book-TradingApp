@@ -6,10 +6,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.example.book_trading.R;
 import com.example.book_trading.chat.chatActivity;
 import com.example.book_trading.chat.chat_uebersichtActivity;
@@ -20,7 +18,6 @@ import com.example.book_trading.datenbank.PrefConfig;
 import com.example.book_trading.datenbank.User;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -36,8 +33,6 @@ public class ProfilFremdActivity extends AppCompatActivity {
     public static PrefConfig prefConfig;
     public static ApiInterface apiInterface;
     public TextView tv_eintraege, textView_Info, textView_Mail, textView_Buch, txt_name_info;
-
-    //TODO: Hier muss der Username der im Forum angeklickt wurde übertragen/überschrieben werden!
     public String fremd_username = "";
 
     @Override
@@ -58,19 +53,20 @@ public class ProfilFremdActivity extends AppCompatActivity {
         textView_Buch = findViewById(R.id.textView_Buch);
         txt_name_info = findViewById(R.id.txt_name_info);
 
-
         Intent i = getIntent();
         Bundle b = i.getExtras();
         if (b.getString("USERNAME") != null) {
             this.loadData(b.getString("USERNAME"));
         }
 
+        // beim klicken auf den Daumen
         positivklick.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 likeklicken();
             }
         });
+        // NavigationBar unten
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.bottom_navigation);
         navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -92,6 +88,7 @@ public class ProfilFremdActivity extends AppCompatActivity {
                 return false;
             }
         });
+        // beim klicken auf den Chat-Button
         direktChat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -102,7 +99,10 @@ public class ProfilFremdActivity extends AppCompatActivity {
         });
     }
 
-    //Setzen der Zahl unter dem like auf 1
+    /**
+     * Methode zum liken
+     * wenn man das jeweilige Profil noch nicht geliket hat kann man es liken
+     */
     private void likeklicken() {
         if (!this.likeClicked) {
             Call<Integer> call = ProfilFremdActivity.apiInterface.performinclike(this.fremd_username);
@@ -111,10 +111,8 @@ public class ProfilFremdActivity extends AppCompatActivity {
                 public void onResponse(Call<Integer> call, Response<Integer> response) {
                     loadData(fremd_username);
                 }
-
                 @Override
                 public void onFailure(Call<Integer> call, Throwable t) {
-
                 }
             });
             this.likeClicked = true;
@@ -127,11 +125,11 @@ public class ProfilFremdActivity extends AppCompatActivity {
         return true;
     }
 
-    @Override   //Ausloggen
-    public boolean onOptionsItemSelected(MenuItem item) {
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) { // logout
         switch (item.getItemId()) {
             case R.id.logout:
-                stopService(new Intent(getApplicationContext(), xmppService.class)); //Xmpp wird beim ausloggen disconnectet,
+                stopService(new Intent(getApplicationContext(), xmppService.class)); // Xmpp wird beim ausloggen disconnected,
                 // somit können Nachrichten die nicht empfangen wurden zum späteren Zeitpunkt abgefragt werden
                 Intent logout = new Intent(this, LoginActivity.class);
                 LoginActivity.prefConfig.writeLoginStatus(false);
@@ -142,6 +140,9 @@ public class ProfilFremdActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Methode für die Aktualisierung des FremdProfils
+     */
     public void loadData(String username) {
         Call<String> callUpdate = ProfilFremdActivity.apiInterface.performCount("username");
         callUpdate.enqueue(new Callback<String>() {
@@ -150,13 +151,10 @@ public class ProfilFremdActivity extends AppCompatActivity {
                 String tmp = response.body().toString();
                 ProfilFremdActivity.this.tv_eintraege.setText(tmp);
             }
-
             @Override
             public void onFailure(Call<String> call, Throwable t) {
-
             }
         });
-
         Call<User> call = ProfilFremdActivity.apiInterface.performGetProfile(username);
         this.fremd_username = username;
         call.enqueue(new Callback<User>() {
@@ -185,10 +183,8 @@ public class ProfilFremdActivity extends AppCompatActivity {
                     }
                 }
             }
-
             @Override
             public void onFailure(Call<User> call, Throwable t) {
-
             }
         });
     }

@@ -17,9 +17,13 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/**
+ * Activity um sich zu Registrieren
+ */
 public class RegisterActivity extends AppCompatActivity {
     private EditText UserName, UserPassword;
     private Button BnRegister;
+    private String password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,13 +33,14 @@ public class RegisterActivity extends AppCompatActivity {
         UserName = (EditText) findViewById(R.id.txt_user_name);
         UserPassword = (EditText) findViewById(R.id.txt_password);
         final Button RegBtn = (Button) findViewById(R.id.bn_register);
+        // beim klicken auf den Registrieren-Button
         RegBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {   //User Registrieren
+            public void onClick(View v) { // User Registrieren
                 ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-                if (cm.getActiveNetworkInfo() != null) { // verbunden
+                if (cm.getActiveNetworkInfo() != null) { // wenn verbunden mit Internet
                     performRegistration();
-                } else { // nicht verbunden
+                } else { // wenn nicht verbunden mit Internet
                     AlertDialog.Builder alterDialogBuilder = new AlertDialog.Builder(RegisterActivity.this);
                     alterDialogBuilder.setTitle("KEINE VERBINDUNG!");
                     alterDialogBuilder
@@ -53,13 +58,14 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
 
-    private String password;
-
+    /**
+     * Methode für die Registrierung
+     */
     public void performRegistration() {
         final String username = UserName.getText().toString();
         String password_klartext = UserPassword.getText().toString();
         try {
-            password = HashHelper.encrypt(password_klartext); //verschlüsseln des Textes
+            password = HashHelper.encrypt(password_klartext); // verschlüsseln des Textes
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -67,25 +73,21 @@ public class RegisterActivity extends AppCompatActivity {
             LoginActivity.prefConfig.displayToast("Leereingaben sind ungültig!");
             return;
         }
-        Call<User> call = LoginActivity.apiInterface.performRegistration(username, password);// alles ab hier nach unten
+        Call<User> call = LoginActivity.apiInterface.performRegistration(username, password);
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 if (response.body().getResponse().equals("success")) {
                     chatLogin login = new chatLogin(username, password, false, getApplicationContext());
-                    LoginActivity.prefConfig.displayToast("Alles Richtig");    //Registrierung hat funktioniert
-                    //springe zurück
+                    LoginActivity.prefConfig.displayToast("Alles Richtig"); // Registrierung hat funktioniert
                 } else if (response.body().getResponse().equals("user exists")) {
-                    LoginActivity.prefConfig.displayToast("User existiert bereits..."); //Es gibt bereits einen User mit gleichem Username
+                    LoginActivity.prefConfig.displayToast("User existiert bereits..."); // es gibt bereits einen User mit gleichem Username
                 }
             }
             @Override
             public void onFailure(Call<User> call, Throwable t) {
             }
         });
-        //Nach dem anmelden werden die Felder wieder geleert und es können neue Inhalte eingetragen werden
-        //UserPassword.setText("");
-        //UserName.setText("");
     }
 
 }

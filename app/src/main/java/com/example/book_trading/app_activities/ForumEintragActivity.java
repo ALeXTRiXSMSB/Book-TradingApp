@@ -47,7 +47,6 @@ public class ForumEintragActivity extends AppCompatActivity {
         prefConfig = new PrefConfig(this);
         apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
 
-        //////////////////////////////
         Intent activityThatCalled = getIntent();
         Bundle b = activityThatCalled.getExtras();
         if(b!=null){
@@ -68,9 +67,6 @@ public class ForumEintragActivity extends AppCompatActivity {
             ((EditText) findViewById(R.id.zustandEingabe)).setText(selectedItem.Zustand);
             ((EditText) findViewById(R.id.beschreibungEingabe)).setText(selectedItem.Beschreibung);
         }
-
-        //////////////////////////////
-
         // Navigation Bar
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.bottom_navigation);
         navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -181,8 +177,6 @@ public class ForumEintragActivity extends AppCompatActivity {
         });
     }
 
-    //////////////////////
-
     /**
      * wenn Speicherbutton gedrückt wird
      */
@@ -237,18 +231,18 @@ public class ForumEintragActivity extends AppCompatActivity {
         alterDialogBuilder
                 .setMessage("Soll der Eintrag nun gelöscht werden?")
                 .setCancelable(true)
-                .setNegativeButton("NEIN", new DialogInterface.OnClickListener() { // wenn Nein gedrückt wird
+                .setNegativeButton("NEIN", new DialogInterface.OnClickListener() { // wenn "Nein" gedrückt wird
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                     }
                 })
-                .setPositiveButton("JA", new DialogInterface.OnClickListener() { // wenn Ja gedrückt wird
+                .setPositiveButton("JA", new DialogInterface.OnClickListener() { // wenn "Ja" gedrückt wird
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Intent goingBack = new Intent();
 
                         goingBack.putExtra("action", "delete");
-                        //goingBack.putExtra("data", selectedItem);
+
                         ForumEintragActivity.this.deleteThread(t_id);
                         setResult(RESULT_OK, goingBack);
 
@@ -269,7 +263,7 @@ public class ForumEintragActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.logout:
-                stopService(new Intent(getApplicationContext(), xmppService.class)); //Xmpp wird beim ausloggen disconnectet,
+                stopService(new Intent(getApplicationContext(), xmppService.class)); // Xmpp wird beim ausloggen disconnected,
                 // somit können Nachrichten die nicht empfangen wurden zum späteren Zeitpunkt abgefragt werden
 
                 Intent logout = new Intent(this, LoginActivity.class);

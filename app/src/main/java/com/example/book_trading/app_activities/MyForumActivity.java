@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-
 import com.example.book_trading.R;
 import com.example.book_trading.chat.chat_uebersichtActivity;
 import com.example.book_trading.chat.xmppService;
@@ -24,11 +23,13 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.ArrayList;
 import java.util.List;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/**
+ * Activity für das eigene Forum
+ */
 public class MyForumActivity extends AppCompatActivity implements AdapterView.OnItemClickListener{
     private ListView itemsListView;
     private ArrayList<ItemData> itemArray;
@@ -47,21 +48,19 @@ public class MyForumActivity extends AppCompatActivity implements AdapterView.On
         prefConfig = new PrefConfig(this);
         apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
 
-
-        //Oberflächenelement
+        // Oberflächenelement
         itemsListView = findViewById(R.id.listView);
 
         itemArray = new ArrayList<ItemData>();
 
-        FloatingActionButton floatingActionButton = findViewById(R.id.fab_1);   //Fab_Button
+        FloatingActionButton floatingActionButton = findViewById(R.id.fab_1); // Fab_Button
 
         try{
-            LoadData(prefConfig.readName()); //BeispielDaten laden
+            LoadData(prefConfig.readName()); // Beispieldaten laden
         }catch(NullPointerException e){
             e.printStackTrace();
         }
-
-        //Navigation am Display ende
+        // Navigation am Display-ende
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.bottom_navigation);
         navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -83,20 +82,18 @@ public class MyForumActivity extends AppCompatActivity implements AdapterView.On
                 return false;
             }
         });
-
-
-
+        // Adapter für die ListView
         adapter = new ArrayAdapter<ItemData>(this, android.R.layout.simple_list_item_1,itemArray) {
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
-                /// Get the Item from ListView
+                /// get the Item from ListView
                 View view = super.getView(position, convertView, parent);
 
                 // TextView tv = (TextView) view.findViewById(android.R.id.text1);
 
                 // float size = Float.valueOf(textSize);
 
-                // Set the text size 25 dip for ListView each item
+                // set the text size 25 dip for ListView each item
 
                 // tv.setTextSize(TypedValue.COMPLEX_UNIT_DIP, size);
 
@@ -104,13 +101,13 @@ public class MyForumActivity extends AppCompatActivity implements AdapterView.On
                 return view;
             }
         };
-        //Verbindung Oberfläche mit dem Adapter
+        // Verbindung Oberfläche mit dem Adapter
         itemsListView.setAdapter(adapter);
 
-        //Der auf den ListView-Click hörende ist diese Klasse
+        // der auf den ListView-Click hörende ist diese Klasse
         itemsListView.setOnItemClickListener(this);
 
-        //klicken des kleinen Plus
+        // klicken des kleinen Plus
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -125,19 +122,25 @@ public class MyForumActivity extends AppCompatActivity implements AdapterView.On
         finish();
     }
 
-    //Menu-button
+    /**
+     * @param menu
+     * Menu-Bar
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_layout, menu);
         return true;
     }
 
-    //klicken auf den Outlock button
+    /**
+     * @param item
+     * klicken auf logout
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.logout:
-                stopService(new Intent(getApplicationContext(), xmppService.class)); //Xmpp wird beim ausloggen disconnectet,
+                stopService(new Intent(getApplicationContext(), xmppService.class)); // Xmpp wird beim ausloggen disconnected,
                 // somit können Nachrichten die nicht empfangen wurden zum späteren Zeitpunkt abgefragt werden
                 Intent logout = new Intent(this, LoginActivity.class);
                 LoginActivity.prefConfig.writeLoginStatus(false);
@@ -148,7 +151,9 @@ public class MyForumActivity extends AppCompatActivity implements AdapterView.On
         }
     }
 
-    //neues Item Hinzufühgen
+    /**
+     * Methode um neues Item hinzuzufügen
+     */
     private void AddNewItem(){
         Intent getDetailIntent = new Intent(this,
                 ForumEintragActivity.class);
@@ -162,7 +167,13 @@ public class MyForumActivity extends AppCompatActivity implements AdapterView.On
         startActivityForResult(getDetailIntent, result);
     }
 
-    //Eintrag anklicken
+    /**
+     * @param parent
+     * @param view
+     * @param position
+     * @param id
+     * Methode wenn Eintrag angeklickt wurde
+     */
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Intent getDetailIntent = new Intent(this,
@@ -176,29 +187,33 @@ public class MyForumActivity extends AppCompatActivity implements AdapterView.On
         startActivityForResult(getDetailIntent, result);
     }
 
-    @Override //Nach dem Beenden des Eintrages
+    /**
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     * nach dem beenden des Eintrages
+     */
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (resultCode != RESULT_CANCELED && data != null) {
 
-            String sentBack = data.getStringExtra("action");    //Inhalte zurück geben
+            String sentBack = data.getStringExtra("action"); // Inhalte zurückgeben
 
             ItemData item = (ItemData) data.getExtras().getSerializable("data");
 
-            switch (sentBack) { //was wurde gewählt Löschen oder Speichern
+            switch (sentBack) { // was wurde gewählt "Löschen" oder "Speichern"
                 case "delete": {
                     if (itemArray.contains(selectedData))
                         adapter.remove(selectedData);
                     break;
                 }
                 case "save": {
-                    if (item != null) {
-                        //ADD
+                    if (item != null) { // hinzufügen
                         if (selectedData == null)
                             adapter.add(item);
-                            //INSERT => ersetzen der alten durch die neuen Daten
-                        else {
+                        else { // INSERT => ersetzen der alten durch die neuen Daten
                             int index = itemArray.indexOf(selectedData);
                             adapter.insert(item, index);
                             adapter.remove(selectedData);
@@ -212,6 +227,9 @@ public class MyForumActivity extends AppCompatActivity implements AdapterView.On
         adapter.notifyDataSetChanged();
     }
 
+    /**
+     * Methode um die eigenen ForumEinträge vom Server zu holen
+     */
     private void LoadData(String username){
         Call<List<Thread>> call = LoginActivity.apiInterface.performGetOwnThreads(username);
         call.enqueue(new Callback<List<Thread>>() {
@@ -226,7 +244,6 @@ public class MyForumActivity extends AppCompatActivity implements AdapterView.On
             }
             @Override
             public void onFailure(Call<List<Thread>> call, Throwable t) {
-
             }
         });
     }
