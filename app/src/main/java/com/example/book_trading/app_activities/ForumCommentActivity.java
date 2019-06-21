@@ -22,11 +22,21 @@ import retrofit2.Response;
  * Activity-Klasse für die Details der Forumeinträge
  */
 public class ForumCommentActivity extends AppCompatActivity {
+    /**
+     * Klassen Attribute
+     */
     private FloatingActionButton btnFremdProfil;
     private FloatingActionButton btnChat;
     public TextView tv_name, tv_zustand, tv_beschreibung, tv_isbn, tv_fremdName;
     public String name;
 
+    /**
+     * Einstiegspunkt der Activity
+     * Aufruf der methode für die abfrage an den Server mit der id des Threads damit diese nachgeladen werden können
+     * Navigations bar erstellen
+     * Onlick listener für die Profil und Nachrichten Buttons
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -101,12 +111,22 @@ public class ForumCommentActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Methode zum erstellen eines Menüs
+     * @param menu
+     * @return
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_layout, menu);
         return true;
     }
 
+    /**
+     * Logout Methode
+     * @param item
+     * @return
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -125,7 +145,7 @@ public class ForumCommentActivity extends AppCompatActivity {
 
     /**
      * @param t_id Id der jeweiligen Einträge
-     * Methode für Daten aus der Datenbank an die Activity
+     * Methode damit die daten aus der Datenbank in die Aktivity geladen werden können
      */
     public void editData(String t_id) {
         Call<Thread> call = ForumActivity.apiInterface.performGetThread(t_id);

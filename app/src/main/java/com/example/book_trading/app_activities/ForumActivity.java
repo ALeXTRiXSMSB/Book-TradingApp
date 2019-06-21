@@ -32,6 +32,9 @@ import retrofit2.Response;
  * Activity-Klasse für das Forum
  */
 public class ForumActivity extends AppCompatActivity {
+    /**
+     * Klassen Attribute
+     */
     private ListView lv;
     private ArrayAdapter<String> adapter = null;
     private ItemData selectedData;

@@ -22,11 +22,21 @@ import retrofit2.Response;
  * Activity um sich zu Registrieren
  */
 public class RegisterActivity extends AppCompatActivity {
+    /**
+     * Klassen Attribute
+     */
     private EditText UserName, UserPassword;
     private Button BnRegister;
     private String password;
     private boolean accept = false;
 
+    /**
+     * Einstiegspunkt für die Aktivity
+     * Onclick Listener für den Registrierbutton
+     * und Aufruf der Registrierungsfunktion die eine Anfrage an der MySQL-Server schickt
+     * zusätzlich gibt es eine abfrage mittels Connectionmanager ob eine Internetverbindung besteht
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,6 +76,10 @@ public class RegisterActivity extends AppCompatActivity {
 
     /**
      * Methode für die Registrierung
+     * Das eingegebene Passwort wird mittels der HashHelper Klasse verschlüsselt
+     * und dann an die Retrofit abfrage übergeben
+     * Mittels Retrofit wir eine Abfrage an den MySQL-Server geschickt
+     * Es kommt eine Statusmeldung vom server zurück
      */
     public void performRegistration() {
         final String username = UserName.getText().toString();

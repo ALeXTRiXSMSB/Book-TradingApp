@@ -31,6 +31,9 @@ import retrofit2.Response;
  * Activity-Klasse für den Forum Eintrag
  */
 public class ForumEintragActivity extends AppCompatActivity {
+    /**
+     * Klassen Attribute
+     */
     private Button abbruchBtn;
     private Button verfassenBtn;
     private ItemData selectedItem;
@@ -40,6 +43,13 @@ public class ForumEintragActivity extends AppCompatActivity {
     private String t_id;
     private boolean exists = false;
 
+    /**
+     * Einstiegspunkt für die Activity
+     * sollten sich zusätzliche Daten in dem Intent befinden aus dem die Activity aufgerufen wird
+     * werden diese mittels Anfrage an den MySQL Server abgefragt
+     * Daten aus der Abfrage werden in die Activity geladen
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -95,6 +105,10 @@ public class ForumEintragActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Methode zum Löschen eines Threads
+     * @param t_id
+     */
     public void deleteThread(String t_id){
         Call<Thread> call = ForumEintragActivity.apiInterface.performDeleteThread(t_id);
         call.enqueue(new Callback<Thread>() {
@@ -112,7 +126,9 @@ public class ForumEintragActivity extends AppCompatActivity {
 
     /**
      * @param t_id
-     * holt sich Einträge vom Server
+     * Anfrage an den Server damit in der Activity die Korrekten Daten geladen werden
+     * wenn welche vorhanden sind
+     * wird nur aufgerufen wenn daten beim Activity Aufruf mit gegeben wurden
      */
     public void getThread(String t_id){
         Call<Thread> call = ForumEintragActivity.apiInterface.performGetThread(t_id);
@@ -157,7 +173,7 @@ public class ForumEintragActivity extends AppCompatActivity {
      * @param beschreibung
      * @param isbn
      * @param zustand
-     * eingetragenen Daten an den Server
+     * eingetragenen Daten an den Server übermitteln damit in der datenbank ein neuer thread angelegt wird
      */
     public void createThread(String titel, String beschreibung, String isbn, String zustand){
         Call<Thread> call = ForumEintragActivity.apiInterface.performCreateThread(titel,beschreibung,isbn, zustand,ForumEintragActivity.prefConfig.readName());
@@ -181,6 +197,14 @@ public class ForumEintragActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Methode für ein Update eines bereits vorhandenen Threads
+     * Keine behandlung von status meldungen
+     * @param name
+     * @param beschreibung
+     * @param isbn
+     * @param zustand
+     */
     public void updateThread(String name, String beschreibung, String isbn,String zustand){
         Call<Thread> call = ForumEintragActivity.apiInterface.performUpdateThread(name,beschreibung,isbn,zustand,t_id);
         call.enqueue(new Callback<Thread>() {
@@ -198,6 +222,10 @@ public class ForumEintragActivity extends AppCompatActivity {
 
     /**
      * wenn Speicherbutton gedrückt wird
+     * entweder wird die createmethode aufgerufen oder die update methode
+     * wenn die Activity leer aufgerufen wurde wird ein neuer Thread erstellt
+     * wenn die Activity mit daten aufgerufen wird bekommt der Thread auf dem
+     * MySQL Server ein update der Daten
      */
     public void onSaveClick(View view) {
         EditText name = findViewById(R.id.nameEingabe);
@@ -247,6 +275,9 @@ public class ForumEintragActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * beenden der Activity ohne änderungen vorgenommen zu haben
+     */
     @Override
     public void onBackPressed() {
         setResult(RESULT_CANCELED);
@@ -255,6 +286,7 @@ public class ForumEintragActivity extends AppCompatActivity {
 
     /**
      * wenn Löschenbutton gedrückt wird
+     * Aufruf der Löschen funktion damit der Server die jetzigen eintrag auch löscht
      */
     public void onDeleteClick(View view) {
         // Abfrage ob etwas gelöscht werden soll
@@ -288,12 +320,22 @@ public class ForumEintragActivity extends AppCompatActivity {
         alertDialog.show();
     }
 
+    /**
+     * Methode zum erstellen des Menüs
+     * @param menu
+     * @return
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_layout, menu);
         return true;
     }
 
+    /**
+     * Logout Methode Login Activity wird geladen
+     * @param item
+     * @return
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -309,5 +351,4 @@ public class ForumEintragActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
-
 }
