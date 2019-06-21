@@ -50,4 +50,11 @@ public interface ApiInterface {
 
     @GET("deleteThread.php")
     Call<Thread> performDeleteThread(@Query("t_id") String t_name);
+
+    @GET("updateThread.php")
+    Call<Thread> performUpdateThread(@Query("t_titel")String titel,
+                                     @Query("t_discription")String beschreibung,
+                                     @Query("t_isbn")String isbn,
+                                     @Query("t_zustand")String zustand,
+                                     @Query("t_id") String t_id);
 }

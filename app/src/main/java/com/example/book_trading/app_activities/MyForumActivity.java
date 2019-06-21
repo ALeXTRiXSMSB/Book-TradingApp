@@ -200,7 +200,6 @@ public class MyForumActivity extends AppCompatActivity implements AdapterView.On
         if (resultCode != RESULT_CANCELED && data != null) {
 
             String sentBack = data.getStringExtra("action"); // Inhalte zurückgeben
-
             ItemData item = (ItemData) data.getExtras().getSerializable("data");
 
             switch (sentBack) { // was wurde gewählt "Löschen" oder "Speichern"

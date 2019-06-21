@@ -10,6 +10,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -177,38 +179,66 @@ public class ForumEintragActivity extends AppCompatActivity {
         });
     }
 
+    public void updateThread(String name, String beschreibung, String isbn,String zustand){
+        Call<Thread> call = ForumEintragActivity.apiInterface.performUpdateThread(name,beschreibung,isbn,zustand,t_id);
+        call.enqueue(new Callback<Thread>() {
+            @Override
+            public void onResponse(Call<Thread> call, Response<Thread> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<Thread> call, Throwable t) {
+
+            }
+        });
+    }
+
     /**
      * wenn Speicherbutton gedrückt wird
      */
     public void onSaveClick(View view) {
-        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        if (cm.getActiveNetworkInfo() != null) { // verbunden mit Internet
-            Intent goingBack = new Intent();
+        EditText name = findViewById(R.id.nameEingabe);
+        EditText isbn = findViewById(R.id.isbnEingabe);
+        EditText zustand = findViewById(R.id.zustandEingabe);
+        EditText beschreibung = findViewById(R.id.beschreibungEingabe);
+        if(!name.getText().toString().isEmpty() ||
+                !isbn.getText().toString().isEmpty() ||
+                !zustand.getText().toString().isEmpty() ||
+                !beschreibung.getText().toString().isEmpty() ){
 
-            selectedItem.Name = ((EditText)findViewById(R.id.nameEingabe)).getText().toString();
-            selectedItem.ISBN = ((EditText)findViewById(R.id.isbnEingabe)).getText().toString();
-            selectedItem.Zustand = ((EditText)findViewById(R.id.zustandEingabe)).getText().toString();
-            selectedItem.Beschreibung = ((EditText)findViewById(R.id.beschreibungEingabe)).getText().toString();
+            ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+            if (cm.getActiveNetworkInfo() != null) { // verbunden mit Internet
+                Intent goingBack = new Intent();
 
-            createThread(selectedItem.Name,selectedItem.Beschreibung,selectedItem.ISBN,selectedItem.Zustand);
+                selectedItem.Name = ((EditText) findViewById(R.id.nameEingabe)).getText().toString();
+                selectedItem.ISBN = ((EditText) findViewById(R.id.isbnEingabe)).getText().toString();
+                selectedItem.Zustand = ((EditText) findViewById(R.id.zustandEingabe)).getText().toString();
+                selectedItem.Beschreibung = ((EditText) findViewById(R.id.beschreibungEingabe)).getText().toString();
 
-            goingBack.putExtra("action", "save");
-            goingBack.putExtra("data", selectedItem);
-            setResult(RESULT_OK, goingBack);
-            finish();
-        } else { // nicht verbunden mit Internet
-            AlertDialog.Builder alterDialogBuilder = new AlertDialog.Builder(ForumEintragActivity.this);
-            alterDialogBuilder.setTitle("KEINE VERBINDUNG!");
-            alterDialogBuilder
-                    .setMessage("Keine Verbindung zum Server vorhanden.")
-                    .setCancelable(true)
-                    .setNeutralButton("OK", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                        }
-                    });
-            AlertDialog alertDialog = alterDialogBuilder.create();
-            alertDialog.show();
+                //updateThread(selectedItem.Name, selectedItem.Beschreibung, selectedItem.ISBN, selectedItem.Zustand);
+                createThread(selectedItem.Name, selectedItem.Beschreibung, selectedItem.ISBN, selectedItem.Zustand);
+
+                goingBack.putExtra("action", "save");
+                goingBack.putExtra("data", selectedItem);
+                setResult(RESULT_OK, goingBack);
+                finish();
+            } else { // nicht verbunden mit Internet
+                AlertDialog.Builder alterDialogBuilder = new AlertDialog.Builder(ForumEintragActivity.this);
+                alterDialogBuilder.setTitle("KEINE VERBINDUNG!");
+                alterDialogBuilder
+                        .setMessage("Keine Verbindung zum Server vorhanden.")
+                        .setCancelable(true)
+                        .setNeutralButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                            }
+                        });
+                AlertDialog alertDialog = alterDialogBuilder.create();
+                alertDialog.show();
+            }
+        }else{
+            Toast.makeText(this,"Bitte alle Felder Ausfüllem",Toast.LENGTH_LONG).show();
         }
     }
 
