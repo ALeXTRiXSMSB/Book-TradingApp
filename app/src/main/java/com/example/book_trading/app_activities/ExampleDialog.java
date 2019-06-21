@@ -26,12 +26,12 @@ public class ExampleDialog extends AppCompatDialogFragment {
 
         builder.setView(view)
                 .setTitle("Bearbeiten")
-                .setNegativeButton("abbrechen", new DialogInterface.OnClickListener() {   //bei cancel Dialogfenster schließen
+                .setNegativeButton("abbrechen", new DialogInterface.OnClickListener() { // bei cancel Dialogfenster schließen
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                     }
                 })
-                .setPositiveButton("ok", new DialogInterface.OnClickListener() {    //Beim klicken auf ok die Inhalte übernehmen
+                .setPositiveButton("ok", new DialogInterface.OnClickListener() { // beim klicken auf Ok die Inhalte übernehmen
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         String info = editTextInfo.getText().toString();
