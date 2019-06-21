@@ -8,8 +8,6 @@ import android.view.View;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
-import com.example.book_trading.chat.chatLogin;
 import com.example.book_trading.datenbank.ApiClient;
 import com.example.book_trading.datenbank.ApiInterface;
 import com.example.book_trading.datenbank.PrefConfig;
@@ -18,7 +16,6 @@ import com.example.book_trading.chat.chat_uebersichtActivity;
 import com.example.book_trading.chat.xmppService;
 import com.example.book_trading.datenbank.User;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -31,6 +28,9 @@ public class ProfilActivity extends AppCompatActivity implements ExampleDialog.E
     public static ApiInterface apiInterface;
     public TextView textViewInfo, textViewMail, textViewBuch, textViewForum,textViewBearbeiten,textviewLike,user,textview_forum;
 
+    /**
+     * diese Methode wird beim Start der Activity aufgerufen
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,13 +47,12 @@ public class ProfilActivity extends AppCompatActivity implements ExampleDialog.E
         textViewForum = (TextView) findViewById(R.id.textView_Forum);
         textview_forum = findViewById(R.id.textview_forum);
 
-
         update();
         textviewLike.setText(this.prefConfig.readLikes());
         user.setText("Hallo " + this.prefConfig.readName());
         this.applyTexts(this.prefConfig.readDiscription(),this.prefConfig.readEmail(),this.prefConfig.readFavorites());
 
-        //beim klicken auf die bearbeiten um seine Profildaten zu bearbeiten
+        // beim klicken auf das Symbol zum bearbeiten der Profildaten
         textViewBearbeiten.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,7 +60,7 @@ public class ProfilActivity extends AppCompatActivity implements ExampleDialog.E
             }
         });
 
-        //Klicken auf Forum um zu seinen eigenen Forum Produkten zu kommen
+        // klicken auf Forum um zu seinem eigenen Forum zu kommen
         textViewForum.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -69,6 +68,7 @@ public class ProfilActivity extends AppCompatActivity implements ExampleDialog.E
                 startActivity(intent);
             }
         });
+        // NavigationBar unten
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.bottom_navigation);
         navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -92,19 +92,25 @@ public class ProfilActivity extends AppCompatActivity implements ExampleDialog.E
         });
     }
 
-    //menu-Bar anlegen
+    /**
+     * @param menu
+     * Menu für das Logout
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_layout, menu);
         return true;
     }
 
-    //Menu-Barklicken
+    /**
+     * @param item
+     * wenn im Menu auf das Item geklickt wird -> Logout
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.logout:
-                stopService(new Intent(getApplicationContext(), xmppService.class)); //Xmpp wird beim ausloggen disconnectet,
+                stopService(new Intent(getApplicationContext(), xmppService.class)); // Xmpp wird beim ausloggen disconnected,
                 // somit können Nachrichten die nicht empfangen wurden zum späteren Zeitpunkt abgefragt werden
                 Intent logout = new Intent(this, LoginActivity.class);
                 this.prefConfig.writeLoginStatus(false);
@@ -115,13 +121,20 @@ public class ProfilActivity extends AppCompatActivity implements ExampleDialog.E
         }
     }
 
-    //Dialogfensteröffnen
+    /**
+     * Methode um das Dialogfenster zu öffnen
+     */
     private void openDialog() {
         ExampleDialog exampleDialog = new ExampleDialog();
         exampleDialog.show(getSupportFragmentManager(), "example dialog");
     }
 
-    //Dialog
+    /**
+     * @param info
+     * @param mail
+     * @param buch
+     * für die Profilbeschreibung
+     */
     @Override
     public void applyTexts(String info, String mail, String buch) {
         textViewInfo.setText(info);
@@ -129,6 +142,9 @@ public class ProfilActivity extends AppCompatActivity implements ExampleDialog.E
         textViewBuch.setText(buch);
     }
 
+    /**
+     * Methode für die Aktualisierung des Profils
+     */
     public void update(){
         Call<String> call = ProfilActivity.apiInterface.performCount(ProfilActivity.prefConfig.readName());
         call.enqueue(new Callback<String>() {
@@ -137,25 +153,22 @@ public class ProfilActivity extends AppCompatActivity implements ExampleDialog.E
                 String tmp = response.body().toString();
                 ProfilActivity.this.textview_forum.setText(tmp);
             }
-
             @Override
             public void onFailure(Call<String> call, Throwable t) {
-
             }
         });
-
         Call<User> callUpdate2 = ProfilActivity.apiInterface.performGetProfile(ProfilActivity.prefConfig.readName());
         callUpdate2.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
-                if (response.body().getResponse().equals("success")) { //Status Ok es kann sich eingeloggt werden
+                if (response.body().getResponse().equals("success")) { // Status Ok es kann sich eingeloggt werden
                     ProfilActivity.prefConfig.writeName(response.body().getU_name());
                     ProfilActivity.prefConfig.writeEmail(response.body().getU_email());
                     ProfilActivity.prefConfig.writeLikes(response.body().getU_like());
                     ProfilActivity.prefConfig.writeFavorites(response.body().getU_favorites());
                     ProfilActivity.prefConfig.writeDiscription(response.body().getU_discription());
 
-                } else if (response.body().getResponse().equals("no data")) {    //Status Fehler ein einloggen ist nicht möglich
+                } else if (response.body().getResponse().equals("no data")) { // Status Fehler ein einloggen ist nicht möglich
                     ProfilActivity.prefConfig.displayToast("User name oder Passwort ist falsch");
                 } else if (response.body().getResponse().equals("missing argument")) {
                     ProfilActivity.prefConfig.displayToast("Beide felder müssen ausgefüllt sein");
@@ -163,10 +176,8 @@ public class ProfilActivity extends AppCompatActivity implements ExampleDialog.E
                     ProfilActivity.prefConfig.displayToast("Fehlerhafter request debugging message");
                 }
             }
-
             @Override
             public void onFailure(Call<User> call, Throwable t) {
-
             }
         });
     }

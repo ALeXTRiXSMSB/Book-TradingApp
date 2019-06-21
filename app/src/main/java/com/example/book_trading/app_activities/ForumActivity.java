@@ -147,7 +147,7 @@ public class ForumActivity extends AppCompatActivity {
 
     /**
      * @param menu
-     * für den Logout
+     * Menu für den Logout
      */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
