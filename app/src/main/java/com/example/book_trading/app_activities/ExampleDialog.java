@@ -16,8 +16,15 @@ import com.example.book_trading.R;
  */
 public class ExampleDialog extends AppCompatDialogFragment {
     private EditText editTextInfo, editTextMail, editTextBuch;
+    private String prefInfo,prefBuch,prefMail;
 
     ExampleDialogListener listener;
+
+    public ExampleDialog(String info,String buch, String mail){
+        this.prefInfo = info;
+        this.prefBuch = buch;
+        this.prefMail = mail;
+    }
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -40,6 +47,15 @@ public class ExampleDialog extends AppCompatDialogFragment {
                         String info = editTextInfo.getText().toString();
                         String mail = editTextMail.getText().toString();
                         String buch = editTextBuch.getText().toString();
+                        if(info.isEmpty()){
+                            info = prefInfo;
+                        }
+                        if(mail.isEmpty()){
+                            mail = prefMail;
+                        }
+                        if(buch.isEmpty()){
+                            buch = prefMail;
+                        }
                         listener.applyTexts(info,mail,buch);
                     }
                 });

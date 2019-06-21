@@ -27,6 +27,9 @@ public class ProfilActivity extends AppCompatActivity implements ExampleDialog.E
     public static PrefConfig prefConfig;
     public static ApiInterface apiInterface;
     public TextView textViewInfo, textViewMail, textViewBuch, textViewForum,textViewBearbeiten,textviewLike,user,textview_forum;
+    public String prefinfo;
+    public String prefbuch;
+    public String prefmail;
 
     /**
      * diese Methode wird beim Start der Activity aufgerufen
@@ -125,7 +128,9 @@ public class ProfilActivity extends AppCompatActivity implements ExampleDialog.E
      * Methode um das Dialogfenster zu öffnen
      */
     private void openDialog() {
-        ExampleDialog exampleDialog = new ExampleDialog();
+        ExampleDialog exampleDialog = new ExampleDialog(textViewInfo.getText().toString(),
+                textViewBuch.getText().toString(),
+                textViewMail.getText().toString());
         exampleDialog.show(getSupportFragmentManager(), "example dialog");
     }
 
@@ -140,6 +145,19 @@ public class ProfilActivity extends AppCompatActivity implements ExampleDialog.E
         textViewInfo.setText(info);
         textViewMail.setText(mail);
         textViewBuch.setText(buch);
+
+        Call<User> call = ProfilActivity.apiInterface.performEditProfile(mail,info,buch,ProfilActivity.prefConfig.readName());
+        call.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                update();
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+
+            }
+        });
     }
 
     /**
@@ -167,6 +185,10 @@ public class ProfilActivity extends AppCompatActivity implements ExampleDialog.E
                     ProfilActivity.prefConfig.writeLikes(response.body().getU_like());
                     ProfilActivity.prefConfig.writeFavorites(response.body().getU_favorites());
                     ProfilActivity.prefConfig.writeDiscription(response.body().getU_discription());
+                    ProfilActivity.this.textViewMail.setText(ProfilActivity.prefConfig.readEmail());
+                    ProfilActivity.this.textViewInfo.setText(ProfilActivity.prefConfig.readDiscription());
+                    ProfilActivity.this.textViewBuch.setText(ProfilActivity.prefConfig.readFavorites());
+                    ProfilActivity.this.textviewLike.setText(ProfilActivity.prefConfig.readLikes());
 
                 } else if (response.body().getResponse().equals("no data")) { // Status Fehler ein einloggen ist nicht möglich
                     ProfilActivity.prefConfig.displayToast("User name oder Passwort ist falsch");
