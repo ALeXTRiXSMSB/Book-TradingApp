@@ -165,14 +165,14 @@ public class chat_uebersichtActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main_layout, menu);
+        getMenuInflater().inflate(R.menu.chatuebersicht_navigation, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.logout:
+            case R.id.logout2:
                 stopService(new Intent(getApplicationContext(), xmppService.class)); //Xmpp wird beim ausloggen disconnectet,
                 // somit können Nachrichten die nicht empfangen wurden zum späteren Zeitpunkt abgefragt werden
 
@@ -180,6 +180,9 @@ public class chat_uebersichtActivity extends AppCompatActivity {
                 ForumActivity.prefConfig.writeLoginStatus(false);
                 startActivity(logout);
                 return true;
+            case R.id.chat_loeschen:
+                chatNachrichtDAO.deleteAll();
+                buildChatArrayAdapter();
             default:
                 return super.onOptionsItemSelected(item);
         }

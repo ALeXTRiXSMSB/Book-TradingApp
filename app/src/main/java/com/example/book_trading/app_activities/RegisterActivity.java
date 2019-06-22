@@ -101,6 +101,8 @@ public class RegisterActivity extends AppCompatActivity {
                     chatLogin login = new chatLogin(username, password, false, getApplicationContext());
                     LoginActivity.prefConfig.displayToast("Alles Richtig"); // Registrierung hat funktioniert
                     RegisterActivity.this.accept = true;
+                    startActivity(new Intent(getApplicationContext(),LoginActivity.class));
+
                 } else if (response.body().getResponse().equals("user exists")) {
                     LoginActivity.prefConfig.displayToast("User existiert bereits..."); // es gibt bereits einen User mit gleichem Username
                 }
