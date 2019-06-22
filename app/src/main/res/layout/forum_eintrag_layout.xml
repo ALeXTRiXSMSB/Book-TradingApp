@@ -3,8 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:layout_marginLeft="20dp"
-    android:layout_marginRight="20dp">
+    >
 
 
 
@@ -12,7 +11,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Name des Buches"
-        android:layout_marginTop="30dp">
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp">
 
         <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/nameEingabe"
@@ -20,7 +21,8 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
-        android:textColor="@android:color/black"/>
+        android:textColor="@android:color/black"
+        />
     </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -28,14 +30,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="ISBN"
-        android:layout_marginTop="20dp">
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp">
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/isbnEingabe"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
-        android:textColor="@android:color/black" />
+        android:textColor="@android:color/black"
+        />
     </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -46,21 +51,26 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Zustand"
-        android:layout_marginTop="20dp">
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp">
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/zustandEingabe"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
-        android:textColor="@android:color/black" />
+        android:textColor="@android:color/black"
+        />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Beschreibung"
-        android:layout_marginTop="20dp">
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/beschreibungEingabe"
@@ -68,7 +78,8 @@
             android:layout_height="100sp"
             android:ems="10"
             android:inputType="textMultiLine"
-            android:textColor="@android:color/black"/>
+            android:textColor="@android:color/black"
+            />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -81,14 +92,14 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp">
 
         <Button
             android:id="@+id/abbruchBtn"
             android:layout_width="70dp"
             android:layout_height="70dp"
-
-
             android:background="@drawable/ic_indeterminate_check_box_black_24dp"
             android:onClick="onDeleteClick" />
 
@@ -103,7 +114,6 @@
             android:layout_height="70dp"
             android:background="@drawable/ic_add_box_black_24dp"
             android:onClick="onSaveClick"
-
 
             />
     </LinearLayout>
